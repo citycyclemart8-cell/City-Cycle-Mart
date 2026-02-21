@@ -2,7 +2,7 @@ const products = [
     {
         id: 1,
         name: "Alpha Tokyo 26 PB",
-        category: "Non Gearable",
+        category: "Single Speed",
         brand: "Alpha",
         mrp: 8499,
         price: 6999,
@@ -17,7 +17,6 @@ const products = [
             "Power Brakes for superior stopping power",
             "High-Tensile Steel MIG Welded Frame",
             "26 x 2.40 Wide Fat Tires for excellent grip",
-            "Front Suspension Fork for a comfortable ride",
             "Single Speed / Hassle-free Multi-terrain driving",
             "Includes Mudguards, Sipper with Bottle Case, and Reflector Set"
         ],
@@ -26,7 +25,7 @@ const products = [
             "Wheel Size": "26 Inches",
             "Braking": "Power Brakes",
             "Tires": "26 x 2.40 Cotton Tires",
-            "Suspension": "Front Suspension",
+            "Suspension": "Rigid",
             "Speed": "Single Speed",
             "Handlebar": "Steel MTB Handlebar",
             "Material": "Alloy Steel / Hi-Ten"

@@ -500,6 +500,88 @@ nav {
     font-size: 3.5rem;
 }
 
+/* Advanced Filters UI */
+.filter-select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background-color: var(--white);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.filter-select:hover {
+    border-color: var(--primary-color);
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(139, 195, 74, 0.2);
+}
+
+/* Consolidated Filter Menu Styles */
+.dropdown-menu {
+    border: 1px solid #eee;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.filter-group label {
+    color: #333;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-controls {
+        flex-direction: row;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px;
+    }
+
+    .filter-dropdown-container,
+    #sort-products {
+        width: auto;
+        flex: 1;
+    }
+
+    #sort-products {
+        max-width: calc(100% - 100px);
+        /* Leave room for filter button */
+    }
+
+    #filter-toggle-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .dropdown-menu {
+        width: 250px;
+        left: 0;
+        right: auto !important;
+    }
+}
+
 .fa-stack-text {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
