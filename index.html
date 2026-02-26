@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Cycle Mart - Premium Bicycles</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/brands.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                    <div class="cart-icon" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slide active">
+                <div class="slide-image"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1920');">
+                </div>
+                <div class="hero-content">
+                    <h1>Ride the City in Style</h1>
+                    <p>Premium bikes for the modern commuter</p>
+                    <a href="products.html" class="btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/img_3291.jpg');">
+                </div>
+                <div class="hero-content">
+                    <h1>Premium Accessories</h1>
+                    <p>Gear up with top-quality bicycle parts and gear</p>
+                    <a href="accessories.html" class="btn">Accessories</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?auto=format&fit=crop&q=80&w=1920');">
+                </div>
+                <div class="hero-content">
+                    <h1>Explore New Horizons</h1>
+                    <p>Built for adventure and performance</p>
+                    <a href="about.html" class="btn">About Us</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Brand Showcase -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Premium Brands</h2>
+            <div class="brand-grid">
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Caya'" style="cursor: pointer;">
+                    <!-- Caya: Used placeholder matching brand color -->
+                    <img src="images/caya_logo.png" alt="Caya">
+                    <h3>Caya</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Hero'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/img_3186.png" alt="Hero">
+                    <h3>Hero</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Hercules'"
+                    style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20260209_204820.png"
+                        alt="Hercules">
+                    <h3>Hercules</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Alpha'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/photoroom_20251108_215339-9.jpg"
+                        alt="Alpha">
+                    <h3>Alpha</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Addo-India'"
+                    style="cursor: pointer;">
+                    <img src="images/addo_india_logo.png" alt="Addo-India">
+                    <h3>Addo-India</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Avrox'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/img_8992.png" alt="Avrox">
+                    <h3>Avrox</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Lotus'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/img_8993.png" alt="Lotus">
+                    <h3>Lotus</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Bruce'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/img_8994.jpg" alt="Bruce">
+                    <h3>Bruce</h3>
+                </div>
+                <div class="brand-card" onclick="window.location.href='brand.html?name=Coco'" style="cursor: pointer;">
+                    <img src="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/img_8996.jpg" alt="Coco">
+                    <h3>Coco</h3>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="products.html" class="btn">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2 class="section-title wcu-title">Why Choose Us ?</h2>
+            <div class="wcu-container">
+                <div class="wcu-item">
+                    <div class="wcu-icon"><i class="fas fa-bicycle"></i></div>
+                    <div class="wcu-text">WIDE RANGE<br>OF CYCLES</div>
+                    <p class="wcu-description">Explore a diverse collection of bikes and professional gear for every
+                        rider.</p>
+                </div>
+                <div class="wcu-item">
+                    <div class="wcu-icon"><i class="fas fa-tags"></i></div>
+                    <div class="wcu-text">COMPETITIVE<br>PRICING</div>
+                    <p class="wcu-description">Get the best value for your money with our transparent and fair pricing.
+                    </p>
+                </div>
+                <div class="wcu-item">
+                    <div class="wcu-icon" style="position: relative;">
+                        <i class="fas fa-certificate"></i>
+                        <span class="fa-stack-text">100%</span>
+                    </div>
+                    <div class="wcu-text">100% GENUINE<br>PRODUCTS</div>
+                    <p class="wcu-description">Guaranteed authenticity with original brand certifications and
+                        warranties.</p>
+                </div>
+                <div class="wcu-item">
+                    <div class="wcu-icon"><i class="fas fa-credit-card"></i></div>
+                    <div class="wcu-text">SECURE PREPAID<br>PAYMENTS</div>
+                    <p class="wcu-description">Shop safely with our encrypted payment gateways and safe protocols.</p>
+                </div>
+                <div class="wcu-item">
+                    <div class="wcu-icon"><i class="fas fa-truck-fast"></i></div>
+                    <div class="wcu-text">FAST & SAFE<br>DELIVERY</div>
+                    <p class="wcu-description">Reliable doorstep delivery with specialized packaging for bike safety.
+                    </p>
+                </div>
+                <div class="wcu-item">
+                    <div class="wcu-icon"><i class="fas fa-wrench"></i></div>
+                    <div class="wcu-text">80% ASSEMBLED<br>CYCLES</div>
+                    <p class="wcu-description">Professional pre-assembly to save you time—ride almost instantly.</p>
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>City Cycle Mart</h3>
+                    <p>City Cycle Mart</p>
+                    <p>Velliyode</p>
+                    <P>Kallachi – Vilangad Road</P>
+                    <p>Velliyode Juma Masjid </p>
+                    <p>Kozhikode, Kerala – 673506
+                        India</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/917511103323" target="_blank" class="social-icon whatsapp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&utm_source=qr"
+                            target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
+                            class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Phone: +918590858064</p>
+                    <p>Email: citycyclemart8@gmail.com</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
+                <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        // Home Page Specific Logic
+        // Brands are static layout
+    </script>
+</body>
+
+</html>

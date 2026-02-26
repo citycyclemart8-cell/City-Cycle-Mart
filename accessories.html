@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessories - City Cycle Mart</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .filters {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            background: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                    <div class="cart-icon" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Bicycles</a></li>
+                    <li><a href="accessories.html" class="active">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1 class="section-title">Bicycle Accessories</h1>
+
+            <!-- Accessory Category Filters -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All Accessories</button>
+                <button class="filter-btn" data-filter="Essential">Essential</button>
+                <button class="filter-btn" data-filter="Safety">Safety</button>
+                <button class="filter-btn" data-filter="Storage">Storage</button>
+                <button class="filter-btn" data-filter="Comfort">Comfort</button>
+            </div>
+
+            <div id="product-list" class="product-grid">
+                <!-- Products injected here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>City Cycle Mart</h3>
+                    <p>City Cycle Mart</p>
+                    <p>Velliyode</p>
+                    <P>Kallachi – Vilangad Road</P>
+                    <p>Velliyode Juma Masjid </p>
+                    <p>Kozhikode, Kerala – 673506
+                        India</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/917511103323" target="_blank" class="social-icon whatsapp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&utm_source=qr"
+                            target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
+                            class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Phone: +918590858064</p>
+                    <p>Email: citycyclemart8@gmail.com</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
+                <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productList = document.getElementById('product-list');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            let currentCategory = 'all';
+
+            function renderAccessories() {
+                productList.innerHTML = '';
+
+                // Categories for accessories are "Essential", "Safety", "Storage", and "Comfort"
+                const accessoryCategories = ['Essential', 'Safety', 'Storage', 'Comfort'];
+                let filtered = products.filter(p => accessoryCategories.includes(p.category));
+
+                if (currentCategory !== 'all') {
+                    filtered = filtered.filter(p => p.category === currentCategory);
+                }
+
+                if (filtered.length === 0) {
+                    productList.innerHTML = '<p style="text-align: center; width: 100%; grid-column: 1 / -1; padding: 40px;">No accessories found in this category.</p>';
+                } else {
+                    filtered.forEach(product => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                            <div class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <a href="product-detail.html?id=${product.id}">
+                                <img src="${product.image}" alt="${product.name}" class="product-image">
+                                <div class="product-info">
+                                    <div class="product-category">${product.category}</div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <div class="product-price">₹${product.price}</div>
+                                    <button onclick="Cart.addItem(products.find(p => p.id === ${product.id})); event.preventDefault();" class="btn" style="width: 100%;">Add to Cart</button>
+                                </div>
+                            </a>
+                        `;
+                        productList.appendChild(card);
+                    });
+                }
+            }
+
+            // Initial Render
+            renderAccessories();
+
+            // Event Listeners for Filter Buttons
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.dataset.filter;
+                    renderAccessories();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
