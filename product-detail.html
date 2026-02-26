@@ -238,6 +238,7 @@
                         <div class="detail-info">
                             <div class="detail-category">${product.brand} | ${product.category}</div>
                             <h1 class="detail-title">${product.name}</h1>
+                            ${product.code ? `<div class="product-code" style="margin-top: -15px; margin-bottom: 20px; color: #777; font-size: 0.9rem; font-weight: 500;">Product Code: ${product.code}</div>` : ''}
                             <p class="detail-description">${product.description}</p>
                             
                             <div class="features-list" style="margin-bottom: 30px;">
