@@ -101,6 +101,8 @@
                             target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
                             class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
+                                class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -142,6 +144,9 @@
                         const card = document.createElement('div');
                         card.className = 'product-card';
                         card.innerHTML = `
+                            <div class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
                             <a href="product-detail.html?id=${product.id}">
                                 <img src="${product.image}" alt="${product.name}" class="product-image">
                                 <div class="product-info">

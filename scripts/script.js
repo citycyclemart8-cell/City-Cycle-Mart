@@ -129,3 +129,146 @@ if (typeof products !== 'undefined') {
 function formatCurrency(amount) {
     return '₹' + amount.toLocaleString('en-IN');
 }
+
+// Share Functionality
+const Share = {
+    init() {
+        this.createShareMenu();
+    },
+
+    createShareMenu() {
+        if (document.getElementById('share-menu')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'share-overlay';
+        overlay.className = 'share-menu-overlay';
+        overlay.onclick = () => this.hideMenu();
+
+        const menu = document.createElement('div');
+        menu.id = 'share-menu';
+        menu.className = 'share-menu';
+        menu.innerHTML = `
+            <div class="share-close" onclick="Share.hideMenu()"><i class="fas fa-times"></i></div>
+            <h3>Share Product</h3>
+            <div class="share-options">
+                <div class="share-option wa" onclick="Share.toPlatform('whatsapp')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </div>
+                <div class="share-option tg" onclick="Share.toPlatform('telegram')">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Telegram</span>
+                </div>
+                <div class="share-option ig" onclick="Share.toPlatform('instagram')">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="share-option copy" onclick="Share.copyLink()">
+                    <i class="fas fa-link"></i>
+                    <span>Copy Link</span>
+                </div>
+                <div class="share-option more" onclick="Share.nativeShare()">
+                    <i class="fas fa-share-alt" style="background-color: #3498db;"></i>
+                    <span>More</span>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(menu);
+        this.overlay = overlay;
+        this.menu = menu;
+    },
+
+    currentProduct: null,
+
+    product(product, event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        this.currentProduct = product;
+
+        // Use Web Share API if available and on mobile
+        if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            this.nativeShare();
+        } else {
+            this.showMenu();
+        }
+    },
+
+    showMenu() {
+        this.overlay.classList.add('active');
+        this.menu.classList.add('active');
+    },
+
+    hideMenu() {
+        this.overlay.classList.remove('active');
+        this.menu.classList.remove('active');
+    },
+
+    getUrl() {
+        const baseUrl = 'https://citycyclemart8-cell.github.io/City-Cycle-Mart/';
+        return `${baseUrl}product-detail.html?id=${this.currentProduct.id}`;
+    },
+
+    getText() {
+        return `Check out this ${this.currentProduct.name} at City Cycle Mart! Only ₹${this.currentProduct.price}`;
+    },
+
+    toPlatform(platform) {
+        const url = encodeURIComponent(this.getUrl());
+        const text = encodeURIComponent(this.getText());
+        let shareUrl = '';
+
+        switch (platform) {
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${text}%20${url}`;
+                break;
+            case 'telegram':
+                shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+                break;
+            case 'instagram':
+                // Instagram doesn't support direct URL sharing via link, usually just opens app.
+                // We'll copy link and alert user.
+                this.copyLink();
+                alert('Link copied to clipboard! You can now paste it in your Instagram Story or DM.');
+                this.hideMenu();
+                return;
+        }
+
+        if (shareUrl) {
+            window.open(shareUrl, '_blank');
+            this.hideMenu();
+        }
+    },
+
+    copyLink() {
+        const url = this.getUrl();
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link copied to clipboard!');
+            this.hideMenu();
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    },
+
+    nativeShare() {
+        if (navigator.share) {
+            navigator.share({
+                title: this.currentProduct.name,
+                text: this.getText(),
+                url: this.getUrl(),
+            }).catch((error) => console.log('Error sharing', error));
+        } else {
+            alert('Sharing is not supported on this browser. Try copying the link!');
+        }
+        this.hideMenu();
+    }
+};
+
+// Initialize Share
+document.addEventListener('DOMContentLoaded', () => {
+    Share.init();
+});

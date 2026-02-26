@@ -190,6 +190,8 @@
                             target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
                             class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
+                                class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -264,11 +266,14 @@
                                 <span class="sale-price" style="font-size: 2rem; color: var(--text-color); font-weight: 700;">Our Price: ₹${product.price}</span>
                             </div>
 
-                            <div style="display: flex; gap: 15px;">
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                                 <button onclick="Cart.addItem(products.find(p => p.id === ${product.id}))" class="btn">Add to Cart</button>
                                 <a href="checkout.html?id=${product.id}" class="btn whatsapp-btn">
                                     Order Now
                                 </a>
+                                <button onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn" style="background-color: var(--text-color);">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
                             </div>
                         </div>
                     </div>
