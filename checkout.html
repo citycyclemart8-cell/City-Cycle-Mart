@@ -369,16 +369,12 @@
                                     </div>
                                     <div class="option-content">
                                         <div style="background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                                            <p style="margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
                                                 <span>UPI ID: <b class="upi-id">nihalkaloor8@okhdfcbank</b></span>
                                                 <button type="button" onclick="copyText('nihalkaloor8@okhdfcbank')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
                                             </p>
-                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
-                                                <span>UPI Number: <b>8590858064</b></span>
-                                                <button type="button" onclick="copyText('8590858064')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
-                                            </p>
                                         </div>
-                                        <a href="#" onclick="handleUPIPayment('GPay'); return false;" class="btn pay-now-btn" style="background: #1a73e8; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via Google Pay</a>
+                                        <a href="#" onclick="handleUPIPayment(event, 'GPay'); return false;" class="btn pay-now-btn" style="background: #1a73e8; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via Google Pay</a>
                                     </div>
                                 </label>
                                 
@@ -391,16 +387,12 @@
                                     </div>
                                     <div class="option-content">
                                         <div style="background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                                            <p style="margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
                                                 <span>UPI ID: <b class="upi-id">8590858064@yb</b></span>
                                                 <button type="button" onclick="copyText('8590858064@yb')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
                                             </p>
-                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
-                                                <span>UPI Number: <b>8590858064</b></span>
-                                                <button type="button" onclick="copyText('8590858064')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
-                                            </p>
                                         </div>
-                                        <a href="#" onclick="handleUPIPayment('PhonePe'); return false;" class="btn pay-now-btn" style="background: #5f259f; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via PhonePe</a>
+                                        <a href="#" onclick="handleUPIPayment(event, 'PhonePe'); return false;" class="btn pay-now-btn" style="background: #5f259f; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via PhonePe</a>
                                     </div>
                                 </label>
 
@@ -413,16 +405,12 @@
                                     </div>
                                     <div class="option-content">
                                         <div style="background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                                            <p style="margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
                                                 <span>UPI ID: <b class="upi-id">8590858064@ptyes</b></b></span>
                                                 <button type="button" onclick="copyText('8590858064@ptyes')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
                                             </p>
-                                            <p style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
-                                                <span>UPI Number: <b>8590858064</b></span>
-                                                <button type="button" onclick="copyText('8590858064')" style="background: #eee; border: none; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">Copy</button>
-                                            </p>
                                         </div>
-                                        <a href="#" onclick="handleUPIPayment('Paytm'); return false;" class="btn pay-now-btn" style="background: #00baf2; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via Paytm</a>
+                                        <a href="#" onclick="handleUPIPayment(event, 'Paytm'); return false;" class="btn pay-now-btn" style="background: #00baf2; margin-top: 5px; width: 100%; text-decoration: none; display: block; text-align: center;">Pay Now via Paytm</a>
                                     </div>
                                 </label>
 
@@ -438,9 +426,8 @@
                                             <label for="customer-upi-id" style="color: #333;">Enter your UPI ID</label>
                                             <input type="text" id="customer-upi-id" placeholder="e.g. yourname@bank">
                                         </div>
-                                        <p style="margin-bottom: 2px; font-weight: 500;">Our UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <p style="margin-bottom: 5px; font-size: 0.9rem; color: #666;">Our UPI Number: <b>8590858064</b></p>
-                                        <a href="#" onclick="handleUPIPayment('Other'); return false;" class="btn pay-now-btn" style="background: var(--primary-color); margin-top: 15px; width: 100%; text-decoration: none; display: block; text-align: center;">Open UPI App to Pay</a>
+                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <a href="#" onclick="handleUPIPayment(event, 'Other'); return false;" class="btn pay-now-btn" style="background: var(--primary-color); margin-top: 15px; width: 100%; text-decoration: none; display: block; text-align: center;">Open UPI App to Pay</a>
                                         <p class="scan-text" style="font-size: 0.8rem; margin-top: 10px;">This will open your default UPI app on your phone.</p>
                                     </div>
                                 </label>
@@ -514,8 +501,6 @@
             let total = 0;
             let deliveryCharge = 0;
             let calculatedDistance = 0;
-            let roundOff = Math.floor(total / 5) * 5 - total;
-            let finalTotal = total + roundOff;
 
             if (productId) {
                 // Direct checkout
@@ -539,6 +524,10 @@
                 }));
                 total = Cart.getTotal();
             }
+
+            // Calculate final total correctly from the start
+            let roundOff = Math.floor(total / 5) * 5 - total;
+            let finalTotal = total + roundOff;
 
             if (orderItems.length === 0) {
                 window.location.href = 'index.html';
@@ -868,24 +857,40 @@
             };
 
             // Global UPI Payment Handler
-            window.handleUPIPayment = function(app) {
+            window.handleUPIPayment = function(event, app) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
                 let pa = "nihalkaloor8@okhdfcbank";
                 const pn = "Muhammed Nihal K";
                 const am = finalTotal;
                 const tn = encodeURIComponent("Order from City Cycle Mart");
                 
-                // App-specific overrides for forcing specific apps or using specific IDs
+                // App-specific overrides
                 if (app === "PhonePe") {
                     pa = "8590858064@yb";
                 } else if (app === "Paytm") {
                     pa = "8590858064@ptyes";
                 }
                 
-                // Universal UPI URI format with Note (tn)
+                // Universal UPI URI format
                 let url = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR&tn=${tn}`;
                 
                 console.log("Opening UPI Link:", url);
+                
+                // Try opening in current window (most reliable for deep links)
                 window.location.href = url;
+                
+                // Fallback for some browsers
+                setTimeout(() => {
+                    if (document.hasFocus()) {
+                        console.log("Link might not have opened, try window.open");
+                        // Sometimes window.open helps if window.location didn't trigger
+                        // window.open(url, '_blank'); // Usually blocked by pop-ups, but can be tried
+                    }
+                }, 1500);
             };
         });
     </script>
