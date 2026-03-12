@@ -357,50 +357,68 @@
 
                         <!-- Prepaid Block -->
                         <div id="prepaid-block" style="display: none;">
-                            <h4 style="margin-bottom: 20px; color: #333; font-weight: 700; text-align: center; font-size: 1.4rem;">Complete Your Prepaid Payment</h4>
+                            <h4 style="margin-bottom: 15px; color: #333; font-weight: 600; text-align: left;">Select UPI App</h4>
                             
-                            <div class="prepaid-card" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid #eaeaea; margin-bottom: 20px;">
+                            <div class="payment-options">
+                                <!-- Option 1: Google Pay -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Google Pay" checked>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="app-logo">
+                                        <span class="app-name">Google Pay</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="tez://upi/pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #1a73e8; margin-top: 15px; width: 100%;">Pay Now via Google Pay</button>
+                                    </div>
+                                </label>
                                 
-                                <div style="text-align: center; margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;">
-                                    <h5 style="font-size: 1.2rem; color: #2c3e50; margin-bottom: 5px;">Business Name: <span style="font-weight: 700; color: var(--primary-color);">City Cycle Mart</span></h5>
-                                    <p style="font-size: 1rem; color: #555;">UPI ID: <span style="font-weight: 600; color: #333;">nihalkaloor8@okhdfcbank</span></p>
-                                </div>
+                                <!-- Option 2: PhonePe -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="PhonePe">
+                                        <img src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png" alt="PhonePe" class="app-logo" style="transform: scale(1.5);">
+                                        <span class="app-name">PhonePe</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="phonepe://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #5f259f; margin-top: 15px; width: 100%;">Pay Now via PhonePe</button>
+                                    </div>
+                                </label>
 
-                                <div class="upi-buttons-grid" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
-                                    <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #ffffff; color: #333; border: 2px solid #e0e0e0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 1.1rem; padding: 12px; width: 100%; transition: all 0.3s ease;">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" style="height: 24px;"> Pay with Google Pay
-                                    </button>
-                                    
-                                    <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #ffffff; color: #333; border: 2px solid #e0e0e0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 1.1rem; padding: 12px; width: 100%; transition: all 0.3s ease;">
-                                        <img src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png" alt="PhonePe" style="height: 34px; object-fit: contain;"> Pay with PhonePe
-                                    </button>
-                                    
-                                    <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #ffffff; color: #333; border: 2px solid #e0e0e0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 1.1rem; padding: 12px; width: 100%; transition: all 0.3s ease;">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" style="height: 24px;"> Pay with Paytm
-                                    </button>
+                                <!-- Option 3: Paytm -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Paytm">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" class="app-logo">
+                                        <span class="app-name">Paytm</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="paytmmp://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: #00baf2; margin-top: 15px; width: 100%;">Pay Now via Paytm</button>
+                                    </div>
+                                </label>
 
-                                    <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 1.1rem; padding: 12px; width: 100%; transition: all 0.3s ease; border: none;">
-                                        <i class="fas fa-mobile-alt"></i> Pay with any UPI App
-                                    </button>
-                                </div>
-
-                                <div class="qr-placeholder" style="text-align: center; margin-bottom: 25px; padding: 20px; background: #fafafa; border-radius: 8px; border: 1px dashed #ccc;">
-                                    <i class="fas fa-qrcode" style="font-size: 3rem; color: #95a5a6; margin-bottom: 15px;"></i>
-                                    <p style="font-size: 1rem; font-weight: 600; color: #444;">“Scan & Pay using any UPI App”</p>
-                                </div>
-
-                                <div class="payment-instructions" style="background: #f8fcf8; padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
-                                    <h5 style="font-size: 1.1rem; color: #2c3e50; margin-bottom: 12px;"><i class="fas fa-info-circle"></i> Payment Instructions</h5>
-                                    <ol style="padding-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-                                        <li style="margin-bottom: 8px;"><b>Complete the payment</b> using any UPI app above.</li>
-                                        <li style="margin-bottom: 8px;"><b>Take a screenshot</b> of the successful payment.</li>
-                                        <li><b>Send the screenshot</b> to our WhatsApp for order confirmation.</li>
-                                    </ol>
-                                </div>
-
+                                <!-- Option 4: Other UPI App -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Other UPI">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2852/2852150.png" alt="Other UPI" class="app-logo">
+                                        <span class="app-name">Other UPI App</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <div class="form-group" style="text-align: left; margin-bottom: 15px;">
+                                            <label for="customer-upi-id" style="color: #333;">Enter your UPI ID</label>
+                                            <input type="text" id="customer-upi-id" placeholder="e.g. yourname@bank">
+                                        </div>
+                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: var(--primary-color); margin-top: 15px; width: 100%;">Open UPI App to Pay</button>
+                                        <p class="scan-text" style="font-size: 0.8rem; margin-top: 10px;">This will open your default UPI app on your phone.</p>
+                                    </div>
+                                </label>
                             </div>
 
-                            <div class="transaction-section" style="margin-top: 20px;">
+                            <div class="transaction-section">
                                 <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above to pay the total amount. Once paid, enter the transaction ID below.</p>
                                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                                     <label for="transaction-id" style="color: #333;">Transaction ID / UTR *</label>
@@ -498,6 +516,10 @@
                 window.location.href = 'index.html';
                 return;
             }
+
+            // Calculate initial totals
+            roundOff = Math.floor(total / 5) * 5 - total;
+            finalTotal = total + roundOff;
 
             // Render summary
             orderItems.forEach(item => {
@@ -764,7 +786,12 @@
                 message += `*Payment Details:*\n`;
                 message += `Payment Method: ${payment}\n`;
                 if (payment !== "Cash on Delivery" && transactionId) {
-                    message += `Payment Method: Prepaid (UPI)\n`;
+                    const upiApp = document.querySelector('input[name="upi_app"]:checked').value;
+                    message += `UPI App Used: ${upiApp}\n`;
+                    if (upiApp === "Other UPI") {
+                        const customerUpiId = document.getElementById('customer-upi-id').value;
+                        if (customerUpiId) message += `Customer UPI ID: ${customerUpiId}\n`;
+                    }
                     message += `Transaction ID: ${transactionId}\n`;
                 }
 
@@ -818,7 +845,22 @@
                     const pn = btn.getAttribute('data-pn');
                     const am = finalTotal;
                     
-                    const url = `${scheme}?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
+                    let baseUrl = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
+                    let url = baseUrl;
+
+                    // Force specific apps on Android using Intents if possible
+                    if (/Android/i.test(navigator.userAgent)) {
+                        if (scheme.includes('tez')) {
+                            url = `intent://${baseUrl.replace('upi://', '')}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+                        } else if (scheme.includes('phonepe')) {
+                            url = `intent://${baseUrl.replace('upi://', '')}#Intent;scheme=upi;package=com.mobile.phonepe;end`;
+                        } else if (scheme.includes('paytmmp')) {
+                            url = `intent://${baseUrl.replace('upi://', '')}#Intent;scheme=upi;package=net.one97.paytm;end`;
+                        }
+                    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                        // iOS usually respects the custom schemes better
+                        url = `${scheme}?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
+                    }
                     
                     // Create an invisible anchor tag for higher reliability on mobile browsers
                     const link = document.createElement('a');
