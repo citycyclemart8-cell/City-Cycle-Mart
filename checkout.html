@@ -834,18 +834,23 @@
             document.querySelectorAll('.pay-now-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // Optional: stop propagation if they are inside labels, so clicking btn doesn't re-trigger label click
                     e.stopPropagation();
 
                     const scheme = btn.getAttribute('data-scheme');
                     const pa = btn.getAttribute('data-pa');
                     const pn = btn.getAttribute('data-pn');
-                    // Ensure tracking round off
                     const am = finalTotal;
                     
-                    // Construct deep link URI
                     const url = `${scheme}?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
-                    window.location.href = url;
+                    
+                    // Create an invisible anchor tag for higher reliability on mobile browsers
+                    const link = document.createElement('a');
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    setTimeout(() => {
+                        document.body.removeChild(link);
+                    }, 100);
                 });
             });
         });
