@@ -101,6 +101,31 @@ const products = [
         catalogLink: "https://wa.me/p/24692556573780654/917511103323",
         code: "CM147",
         featured: true
+    },
+    {
+        id: 4,
+        name: "Premium Chrome Bell",
+        category: "Essential",
+        brand: "City Cycle Mart",
+        mrp: 149,
+        price: 1,
+        image: "images/premium_chrome_bell.png",
+        slides: [
+            "images/premium_chrome_bell.png"
+        ],
+        description: "A loud and clear classic chrome bell for safety and style on the road.",
+        features: [
+            "Classic chrome finish",
+            "Crisp, loud ring",
+            "Universal mountain bracket"
+        ],
+        specs: {
+            "Type": "Bell",
+            "Material": "Chrome Steel"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "ACC001",
+        featured: true
     }
 ];
 

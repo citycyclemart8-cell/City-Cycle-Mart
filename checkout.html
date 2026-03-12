@@ -266,20 +266,22 @@
                                 <input type="text" id="landmark" placeholder="e.g. Near Masjid">
                             </div>
                         </div>
-                        <div class="form-group" style="margin-bottom: 10px;">
-                            <input type="checkbox" id="share-location" style="width: auto;">
-                            <label for="share-location" style="margin-bottom: 0;">Share location on map (via
-                                WhatsApp)</label>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" id="get-location" class="btn"
-                                style="background-color: #3498db; width: 100%; border-radius: 8px; padding: 10px;">
-                                <i class="fas fa-map-marker-alt"></i> Get GPS Location
-                            </button>
-                            <p id="location-status"
-                                style="font-size: 0.85rem; margin-top: 5px; color: var(--primary-color);">Click button
-                                above or tap on map below to pin location</p>
-                            <div id="map"></div>
+                        <div id="location-section">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <input type="checkbox" id="share-location" style="width: auto;">
+                                <label for="share-location" style="margin-bottom: 0;">Share location on map (via
+                                    WhatsApp)</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" id="get-location" class="btn"
+                                    style="background-color: #3498db; width: 100%; border-radius: 8px; padding: 10px;">
+                                    <i class="fas fa-map-marker-alt"></i> Get GPS Location
+                                </button>
+                                <p id="location-status"
+                                    style="font-size: 0.85rem; margin-top: 5px; color: var(--primary-color);">Click button
+                                    above or tap on map below to pin location</p>
+                                <div id="map"></div>
+                            </div>
                         </div>
                         <button type="submit" id="next-step" class="btn" style="width: 100%;">Next</button>
                     </form>
@@ -308,7 +310,10 @@
                             <span>Total</span>
                             <span id="summary-total-price">₹0.00</span>
                         </div>
-                        <p
+                        <div id="accessory-note" style="display: none; color: #e67e22; font-size: 0.9rem; margin-top: 10px; font-weight: 600; background: #fff8f0; padding: 8px; border-radius: 4px; border-left: 4px solid #e67e22;">
+                            <i class="fas fa-shipping-fast"></i> Note: Courier charges will be taken later
+                        </div>
+                        <p id="delivery-info-text"
                             style="font-size: 0.8rem; color: #666; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
                             * Delivery charges calculated at ₹5/km from our shop.
                         </p>
@@ -323,21 +328,7 @@
                                 <option value="UPI / Online Transfer">UPI / Online Transfer</option>
                             </select>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button type="button" id="prev-step" class="btn"
-                                style="background-color: #95a5a6;">Back</button>
-                            <button type="submit" class="btn whatsapp-btn" style="flex: 1;">Order Now</button>
-                        </div>
-                    </form>
-                </div>
 
-                <!-- Step 3: Payment Confirmation -->
-                <div id="step-3" style="display: none;">
-                    <h3 id="step-3-title"
-                        style="margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px;">
-                        Step 3: Confirm Order</h3>
-
-                    <form id="confirmation-form">
                         <!-- COD Block -->
                         <div id="cod-block" style="display: none;">
                             <div
@@ -399,36 +390,65 @@
                                     </div>
                                 </label>
 
-                                <!-- Option 4: Other UPI App -->
+                                <!-- Option 4: Scan & Pay -->
                                 <label class="payment-option">
                                     <div class="option-header">
-                                        <input type="radio" name="upi_app" value="Other UPI">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/2852/2852150.png" alt="Other UPI" class="app-logo">
-                                        <span class="app-name">Other UPI App</span>
+                                        <input type="radio" name="upi_app" value="Scan & Pay">
+                                        <i class="fas fa-qrcode" style="font-size: 24px; color: #444; width: 40px; text-align: center;"></i>
+                                        <span class="app-name">Scan & Pay</span>
                                     </div>
                                     <div class="option-content">
-                                        <div class="form-group" style="text-align: left; margin-bottom: 15px;">
-                                            <label for="customer-upi-id" style="color: #333;">Enter your UPI ID</label>
-                                            <input type="text" id="customer-upi-id" placeholder="e.g. yourname@bank">
+                                        <div style="text-align: center; margin-bottom: 20px;">
+                                            <img id="dynamic-qr" src="" alt="Payment QR Code" class="qr-code" style="display: inline-block; margin: 0 auto;">
+                                            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Scan this QR with any UPI app to pay</p>
                                         </div>
-                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: var(--primary-color); margin-top: 15px; width: 100%;">Open UPI App to Pay</button>
-                                        <p class="scan-text" style="font-size: 0.8rem; margin-top: 10px;">This will open your default UPI app on your phone.</p>
+                                        
+                                        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 10px; text-align: left;">
+                                            <div style="margin-bottom: 12px;">
+                                                <span style="font-size: 0.9rem; color: #666; display: block;">Name</span>
+                                                <strong style="font-size: 1.05rem; color: #333;">Muhammed Nihal k</strong>
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                                                <div>
+                                                    <span style="font-size: 0.9rem; color: #666; display: block;">UPI ID</span>
+                                                    <strong style="font-size: 1.05rem; color: #333;" id="copy-upi-id">nihalkaloor8@okhdfcbank</strong>
+                                                </div>
+                                                <button type="button" class="btn copy-btn" data-copy="copy-upi-id" style="background: transparent; border: 1px solid #ccc; color: #333; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
+                                                    <i class="far fa-copy"></i> Copy
+                                                </button>
+                                            </div>
+                                            
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <div>
+                                                    <span style="font-size: 0.9rem; color: #666; display: block;">Phone Number</span>
+                                                    <strong style="font-size: 1.05rem; color: #333;" id="copy-phone">+918590858064</strong>
+                                                </div>
+                                                <button type="button" class="btn copy-btn" data-copy="copy-phone" style="background: transparent; border: 1px solid #ccc; color: #333; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
+                                                    <i class="far fa-copy"></i> Copy
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </label>
                             </div>
 
                             <div class="transaction-section">
-                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above to pay the total amount. Once paid, enter the transaction ID below.</p>
-                                <div class="form-group" style="text-align: left; margin-bottom: 0;">
-                                    <label for="transaction-id" style="color: #333;">Transaction ID / UTR *</label>
+                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above to pay the total amount. Once paid, enter the transaction ID <b>OR</b> upload a screenshot below.</p>
+                                <div class="form-group" style="text-align: left; margin-bottom: 15px;">
+                                    <label for="transaction-id" style="color: #333;">Transaction ID / UTR</label>
                                     <input type="text" id="transaction-id" placeholder="e.g. 123456789012">
+                                </div>
+                                <div style="text-align: center; margin: 10px 0; color: #888; font-weight: 600; font-size: 0.8rem;">— OR —</div>
+                                <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                                    <label for="payment-screenshot" style="color: #333;">Upload Payment Screenshot</label>
+                                    <input type="file" id="payment-screenshot" accept="image/*" style="padding: 8px; border: 1px dashed #ccc; background: #fff;">
                                 </div>
                             </div>
                         </div>
 
                         <div style="display: flex; gap: 10px;">
-                            <button type="button" id="prev-step-3" class="btn"
+                            <button type="button" id="prev-step" class="btn"
                                 style="background-color: #95a5a6;">Back</button>
                             <button type="submit" class="btn whatsapp-btn" style="flex: 1;">Complete Order</button>
                         </div>
@@ -512,6 +532,19 @@
                 total = Cart.getTotal();
             }
 
+            // Detect if order is accessory-only
+            const accessoryCategories = ['Essential', 'Safety', 'Storage', 'Comfort'];
+            const isAccessoryOnly = orderItems.every(item => {
+                const product = products.find(p => p.name === item.name);
+                return product && accessoryCategories.includes(product.category);
+            });
+
+            if (isAccessoryOnly) {
+                document.getElementById('accessory-note').style.display = 'block';
+                document.getElementById('delivery-info-text').style.display = 'none';
+                document.getElementById('location-section').style.display = 'none';
+            }
+
             if (orderItems.length === 0) {
                 window.location.href = 'index.html';
                 return;
@@ -528,7 +561,6 @@
                 summaryItems.appendChild(el);
             });
 
-            // Initial summary state
             function updateSummaryUI() {
                 const roundOffRow = document.getElementById('round-off-row');
                 if (Math.abs(roundOff) > 0.001) {
@@ -539,6 +571,9 @@
                 }
                 summaryTotalPrice.textContent = '₹' + finalTotal.toLocaleString('en-IN');
             }
+            
+            // Set initial state
+            finalTotal = total; 
             updateSummaryUI();
 
             // Delivery Charge Logic
@@ -591,12 +626,30 @@
                 document.getElementById('distance-val').textContent = calculatedDistance;
                 document.getElementById('delivery-price').textContent = '₹' + deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-                const rawTotal = total + deliveryCharge;
+                const rawTotal = isAccessoryOnly ? total : (total + deliveryCharge);
                 finalTotal = Math.floor(rawTotal / 5) * 5;
                 roundOff = finalTotal - rawTotal;
 
                 updateSummaryUI();
+                updateDynamicQR();
             }
+
+            function updateDynamicQR() {
+                const qrImg = document.getElementById('dynamic-qr');
+                if (!qrImg) return;
+                
+                const pa = "nihalkaloor8@okhdfcbank";
+                const pn = "Muhammed Nihal k";
+                const am = finalTotal;
+                const cu = "INR";
+                
+                // Using QuickChart API for better reliability
+                const upiUrl = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=${cu}`;
+                qrImg.src = `https://quickchart.io/qr?text=${encodeURIComponent(upiUrl)}&size=200`;
+            }
+
+            // Also call it during initial setup
+            updateDynamicQR();
 
             // Interactive Map Logic (Leaflet)
             const mapContainer = document.getElementById('map');
@@ -677,12 +730,9 @@
             const bridge = {
                 step1: document.getElementById('step-1'),
                 step2: document.getElementById('step-2'),
-                step3: document.getElementById('step-3'),
                 addressForm: document.getElementById('address-form'),
                 paymentForm: document.getElementById('payment-form'),
-                confirmationForm: document.getElementById('confirmation-form'),
-                prevBtn: document.getElementById('prev-step'),
-                prevBtn3: document.getElementById('prev-step-3')
+                prevBtn: document.getElementById('prev-step')
             };
 
             let generatedCaptcha = "";
@@ -706,24 +756,13 @@
                 window.scrollTo(0, 0);
             });
 
-            bridge.prevBtn3.addEventListener('click', () => {
-                bridge.step3.style.display = 'none';
-                bridge.step2.style.display = 'block';
-                window.scrollTo(0, 0);
-            });
-
-            // Form Transition to Step 3
-            bridge.paymentForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const payment = document.getElementById('payment').value;
+            // Display details dynamically based on payment method
+            document.getElementById('payment').addEventListener('change', (e) => {
+                const payment = e.target.value;
                 const codBlock = document.getElementById('cod-block');
                 const prepaidBlock = document.getElementById('prepaid-block');
                 const captchaInput = document.getElementById('captcha-input');
                 const transactionIdInput = document.getElementById('transaction-id');
-
-                bridge.step2.style.display = 'none';
-                bridge.step3.style.display = 'block';
 
                 if (payment === "Cash on Delivery") {
                     codBlock.style.display = 'block';
@@ -731,19 +770,15 @@
                     generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
                     document.getElementById('captcha-display').textContent = generatedCaptcha;
                     captchaInput.required = true;
-                    transactionIdInput.required = false;
-                } else {
+                } else if (payment === "UPI / Online Transfer") {
                     codBlock.style.display = 'none';
                     prepaidBlock.style.display = 'block';
                     captchaInput.required = false;
-                    transactionIdInput.required = true;
                 }
-
-                window.scrollTo(0, 0);
             });
 
             // Final Form Submission (Confirmation Form)
-            bridge.confirmationForm.addEventListener('submit', (e) => {
+            bridge.paymentForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
                 const payment = document.getElementById('payment').value;
@@ -760,6 +795,12 @@
                 }
 
                 const transactionId = document.getElementById('transaction-id').value;
+                const screenshotFile = document.getElementById('payment-screenshot').files[0];
+
+                if (payment === "UPI / Online Transfer" && !transactionId && !screenshotFile) {
+                    alert("Please provide either a Transaction ID or upload a payment screenshot.");
+                    return;
+                }
 
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
@@ -781,14 +822,15 @@
 
                 message += `*Payment Details:*\n`;
                 message += `Payment Method: ${payment}\n`;
-                if (payment !== "Cash on Delivery" && transactionId) {
+                if (payment !== "Cash on Delivery") {
                     const upiApp = document.querySelector('input[name="upi_app"]:checked').value;
                     message += `UPI App Used: ${upiApp}\n`;
-                    if (upiApp === "Other UPI") {
-                        const customerUpiId = document.getElementById('customer-upi-id').value;
-                        if (customerUpiId) message += `Customer UPI ID: ${customerUpiId}\n`;
+                    if (transactionId) {
+                        message += `Transaction ID: ${transactionId}\n`;
                     }
-                    message += `Transaction ID: ${transactionId}\n`;
+                    if (screenshotFile) {
+                        message += `Note: Screenshot uploaded (Customer will send it manually)\n`;
+                    }
                 }
 
                 if (shareLocation) {
@@ -812,9 +854,16 @@
                 });
 
                 message += `\n*Subtotal: ₹${total.toLocaleString('en-IN')}*\n`;
-                if (deliveryCharge > 0) message += `*Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
+                if (deliveryCharge > 0) {
+                    if (isAccessoryOnly) {
+                        message += `*Calculated Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
+                        message += `(Note: Courier charges will be taken later)\n`;
+                    } else {
+                        message += `*Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
+                    }
+                }
                 if (Math.abs(roundOff) > 0.001) message += `*Round Off: ${(roundOff > 0 ? '+' : '')}${roundOff.toFixed(2)}*\n`;
-                message += `*TOTAL: ₹${finalTotal.toLocaleString('en-IN')}*\n`;
+                message += `*TOTAL PAYABLE: ₹${finalTotal.toLocaleString('en-IN')}*\n`;
                 message += `\nPlease confirm my order.`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
@@ -851,6 +900,31 @@
                     setTimeout(() => {
                         document.body.removeChild(link);
                     }, 100);
+                });
+            });
+
+            // Copy to clipboard functionality
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const elementId = btn.getAttribute('data-copy');
+                    const textToCopy = document.getElementById(elementId).innerText;
+                    
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const originalHtml = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        btn.style.color = '#25D366';
+                        btn.style.borderColor = '#25D366';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalHtml;
+                            btn.style.color = '#333';
+                            btn.style.borderColor = '#ccc';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
                 });
             });
         });
