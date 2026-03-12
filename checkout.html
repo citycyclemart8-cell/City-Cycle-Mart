@@ -778,7 +778,7 @@
             });
 
             // Final Form Submission (Confirmation Form)
-            bridge.paymentForm.addEventListener('submit', (e) => {
+            bridge.paymentForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
                 const payment = document.getElementById('payment').value;
@@ -829,7 +829,7 @@
                         message += `Transaction ID: ${transactionId}\n`;
                     }
                     if (screenshotFile) {
-                        message += `Note: Screenshot uploaded (Customer will send it manually)\n`;
+                        message += `Note: Screenshot attached\n`;
                     }
                 }
 
@@ -866,17 +866,41 @@
                 message += `*TOTAL PAYABLE: ₹${finalTotal.toLocaleString('en-IN')}*\n`;
                 message += `\nPlease confirm my order.`;
 
-                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
+                const shareData = {
+                    title: 'City Cycle Mart Order',
+                    text: message,
+                };
 
-                // Clear cart if it was a cart checkout
-                if (!productId) {
-                    Cart.items = [];
-                    Cart.save();
-                    Cart.updateCartCount();
+                // Check if browser supports sharing files
+                const canShareFiles = navigator.canShare && screenshotFile && navigator.canShare({ files: [screenshotFile] });
+
+                if (canShareFiles) {
+                    try {
+                        shareData.files = [screenshotFile];
+                        await navigator.share(shareData);
+                        finalizeOrder();
+                    } catch (err) {
+                        console.error("Sharing failed:", err);
+                        // Fallback to text only if permission denied or other error
+                        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
+                        finalizeOrder();
+                    }
+                } else {
+                    // Fallback for browsers that don't support file sharing
+                    window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
+                    finalizeOrder();
                 }
 
-                alert("Your order is being sent to WhatsApp. The cart has been cleared.");
-                window.location.href = 'index.html';
+                function finalizeOrder() {
+                    // Clear cart if it was a cart checkout
+                    if (!productId) {
+                        Cart.items = [];
+                        Cart.save();
+                        Cart.updateCartCount();
+                    }
+                    alert("Your order is being sent to WhatsApp. The cart has been cleared.");
+                    window.location.href = 'index.html';
+                }
             });
 
             // Deep Link Generation for Pay Now Buttons
