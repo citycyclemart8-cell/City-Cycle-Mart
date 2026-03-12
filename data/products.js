@@ -5,7 +5,7 @@ const products = [
         category: "Single Speed",
         brand: "Alpha",
         mrp: 8499,
-        price: 6999,
+        price: 5999,
         image: "https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/photoroom_20251017_094110.jpeg",
         slides: [
             "https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/photoroom_20251017_094110.jpeg",
@@ -24,7 +24,7 @@ const products = [
             "Frame": "Hi-Tensile Steel",
             "Wheel Size": "26 Inches",
             "Braking": "Power Brakes",
-            "Tires": "26 x 2.40 Cotton Tires",
+            "Tires": "26 x 2.40 Alpha Naylon Tires",
             "Suspension": "Rigid",
             "Speed": "Single Speed",
             "Handlebar": "Steel MTB Handlebar",
@@ -40,14 +40,14 @@ const products = [
         category: "Junior",
         brand: "Addo-India",
         mrp: 6499,
-        price: 4649,
+        price: 4399,
         image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_141307.jpg",
         slides: [
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_141307.jpg",
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_144755.jpg",
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_144719.jpg"
         ],
-        description: "The Addo-India Jessica 16 is a charming and durable junior bicycle designed specifically for young riders. Featuring a robust tensile steel frame and a comfortable padded saddle, it ensures a safe and enjoyable riding experience. \n\n**Price Comparison:** \n- Market MRP: ₹6,499\n- Typical Retail Price: ₹5,200 - ₹5,800\n- **City Cycle Mart Price: ₹4,649** (Save up to 28%!)",
+        description: "The Addo-India Jessica 16 is a charming and durable junior bicycle designed specifically for young riders. Featuring a robust tensile steel frame and a comfortable padded saddle, it ensures a safe and enjoyable riding experience. \n\n**Price Comparison:** \n- Market MRP: ₹6,499\n- Typical Retail Price: ₹5,200 - ₹5,800\n- **City Cycle Mart Price: ₹4,399** (Save up to 28%!)",
         features: [
             "Caliper Brake for reliable stopping",
             "Front Basket for carrying toys",
@@ -59,7 +59,7 @@ const products = [
             "Frame": "Hi-Tensile Steel",
             "Wheel Size": "16 Inches",
             "Braking": "Caliper Brakes",
-            "Tires": "16 x 2.40 EVA/Tubeless",
+            "Tires": "16 x 2.40 EVA/Tube Tire",
             "Suspension": "Rigid",
             "Speed": "Single Speed",
             "Accessories": "Basket, Back Rest, Carrier, Support Wheels"
@@ -74,14 +74,14 @@ const products = [
         category: "Junior",
         brand: "Alpha",
         mrp: 7499,
-        price: 5499,
+        price: 5349,
         image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152239.jpg",
         slides: [
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152239.jpg",
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152321.jpg",
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152409.jpg"
         ],
-        description: "The Alpha Candy Floss 16 is a vibrant and charming bicycle designed for young adventurers. Built with a sturdy Hi-Tensile steel frame and finished with non-toxic paint, it offers a safe and stylish ride. \n\n**Price Comparison:** \n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,100 - ₹6,800\n- **City Cycle Mart Price: ₹5,499** (Unbeatable Value!)",
+        description: "The Alpha Candy Floss 16 is a vibrant and charming bicycle designed for young adventurers. Built with a sturdy Hi-Tensile steel frame and finished with non-toxic paint, it offers a safe and stylish ride. \n\n**Price Comparison:** \n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,100 - ₹6,800\n- **City Cycle Mart Price: ₹5,349** (Unbeatable Value!)",
         features: [
             "Reliable Caliper Brakes for safety",
             "Charming Front Basket",

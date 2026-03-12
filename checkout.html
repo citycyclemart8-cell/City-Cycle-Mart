@@ -90,6 +90,110 @@
             border: 1px solid #ddd;
             display: none;
         }
+
+        /* Payment Options Accordion */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .payment-option:has(input[type="radio"]:checked) {
+            border-color: var(--primary-color);
+            background: #f9fff9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .option-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 15px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .payment-option:has(input[type="radio"]:checked) .option-header {
+            border-bottom-color: #eee;
+        }
+
+        .option-header input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .app-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .app-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .option-content {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .payment-option input[type="radio"]:checked ~ .option-content {
+            display: block;
+            border-top: 1px solid #eee;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .upi-id {
+            font-weight: 700;
+            color: #333;
+            user-select: all;
+            background: #f1f1f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 1.05rem;
+        }
+
+        .scan-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .transaction-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -223,6 +327,116 @@
                             <button type="button" id="prev-step" class="btn"
                                 style="background-color: #95a5a6;">Back</button>
                             <button type="submit" class="btn whatsapp-btn" style="flex: 1;">Order Now</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 3: Payment Confirmation -->
+                <div id="step-3" style="display: none;">
+                    <h3 id="step-3-title"
+                        style="margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px;">
+                        Step 3: Confirm Order</h3>
+
+                    <form id="confirmation-form">
+                        <!-- COD Block -->
+                        <div id="cod-block" style="display: none;">
+                            <div
+                                style="background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px dashed #ccc;">
+                                <p style="margin-bottom: 10px; font-weight: 500;">To prevent spam orders, please enter
+                                    the CAPTCHA code below:</p>
+                                <div style="font-size: 2rem; font-weight: bold; letter-spacing: 5px; color: var(--primary-color); background: #eee; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 15px;"
+                                    id="captcha-display">
+                                    1234
+                                </div>
+                                <div class="form-group" style="max-width: 200px; margin: 0 auto;">
+                                    <input type="text" id="captcha-input" placeholder="Enter code here"
+                                        style="text-align: center; font-size: 1.2rem; font-weight: bold;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prepaid Block -->
+                        <div id="prepaid-block" style="display: none;">
+                            <h4 style="margin-bottom: 15px; color: #333; font-weight: 600; text-align: left;">Select UPI App</h4>
+                            
+                            <div class="payment-options">
+                                <!-- Option 1: Google Pay -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Google Pay" checked>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="app-logo">
+                                        <span class="app-name">Google Pay</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <img src="images/gpay-qr.jpg" alt="Google Pay QR Code" class="qr-code">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <p class="scan-text">Scan to pay with Google Pay</p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #1a73e8; margin-top: 15px; width: 100%;">Pay Now via Google Pay</button>
+                                    </div>
+                                </label>
+                                
+                                <!-- Option 2: PhonePe -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="PhonePe">
+                                        <img src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png" alt="PhonePe" class="app-logo" style="transform: scale(1.5);">
+                                        <span class="app-name">PhonePe</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <img src="images/phonepe-qr.jpg" alt="PhonePe QR Code" class="qr-code">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">8590858064@yb</span></p>
+                                        <p class="scan-text">Scan to pay with PhonePe</p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@yb" data-pn="Muhammed Nihal K" style="background: #5f259f; margin-top: 15px; width: 100%;">Pay Now via PhonePe</button>
+                                    </div>
+                                </label>
+
+                                <!-- Option 3: Paytm -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Paytm">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" class="app-logo">
+                                        <span class="app-name">Paytm</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <img src="images/paytm-qr.jpg" alt="Paytm QR Code" class="qr-code">
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">8590858064@ptyes</span></p>
+                                        <p class="scan-text">Scan to pay with Paytm</p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@ptyes" data-pn="Muhammed Nihal K" style="background: #00baf2; margin-top: 15px; width: 100%;">Pay Now via Paytm</button>
+                                    </div>
+                                </label>
+
+                                <!-- Option 4: Other UPI App -->
+                                <label class="payment-option">
+                                    <div class="option-header">
+                                        <input type="radio" name="upi_app" value="Other UPI">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2852/2852150.png" alt="Other UPI" class="app-logo">
+                                        <span class="app-name">Other UPI App</span>
+                                    </div>
+                                    <div class="option-content">
+                                        <div class="form-group" style="text-align: left; margin-bottom: 15px;">
+                                            <label for="customer-upi-id" style="color: #333;">Enter your UPI ID</label>
+                                            <input type="text" id="customer-upi-id" placeholder="e.g. yourname@bank">
+                                        </div>
+                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">8590858064@ybl</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@ybl" data-pn="City Cycle Mart" style="background: var(--primary-color); margin-top: 15px; width: 100%;">Open UPI App to Pay</button>
+                                        <p class="scan-text" style="font-size: 0.8rem; margin-top: 10px;">This will open your default UPI app on your phone.</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="transaction-section">
+                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above or scan the QR code to pay the total amount. Once paid, enter the transaction ID below.</p>
+                                <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                                    <label for="transaction-id" style="color: #333;">Transaction ID / UTR *</label>
+                                    <input type="text" id="transaction-id" placeholder="e.g. 123456789012">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" id="prev-step-3" class="btn"
+                                style="background-color: #95a5a6;">Back</button>
+                            <button type="submit" class="btn whatsapp-btn" style="flex: 1;">Complete Order</button>
                         </div>
                     </form>
                 </div>
@@ -469,10 +683,15 @@
             const bridge = {
                 step1: document.getElementById('step-1'),
                 step2: document.getElementById('step-2'),
+                step3: document.getElementById('step-3'),
                 addressForm: document.getElementById('address-form'),
                 paymentForm: document.getElementById('payment-form'),
-                prevBtn: document.getElementById('prev-step')
+                confirmationForm: document.getElementById('confirmation-form'),
+                prevBtn: document.getElementById('prev-step'),
+                prevBtn3: document.getElementById('prev-step-3')
             };
+
+            let generatedCaptcha = "";
 
             bridge.addressForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -493,9 +712,60 @@
                 window.scrollTo(0, 0);
             });
 
-            // Form Submission (Payment Form)
+            bridge.prevBtn3.addEventListener('click', () => {
+                bridge.step3.style.display = 'none';
+                bridge.step2.style.display = 'block';
+                window.scrollTo(0, 0);
+            });
+
+            // Form Transition to Step 3
             bridge.paymentForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+
+                const payment = document.getElementById('payment').value;
+                const codBlock = document.getElementById('cod-block');
+                const prepaidBlock = document.getElementById('prepaid-block');
+                const captchaInput = document.getElementById('captcha-input');
+                const transactionIdInput = document.getElementById('transaction-id');
+
+                bridge.step2.style.display = 'none';
+                bridge.step3.style.display = 'block';
+
+                if (payment === "Cash on Delivery") {
+                    codBlock.style.display = 'block';
+                    prepaidBlock.style.display = 'none';
+                    generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+                    document.getElementById('captcha-display').textContent = generatedCaptcha;
+                    captchaInput.required = true;
+                    transactionIdInput.required = false;
+                } else {
+                    codBlock.style.display = 'none';
+                    prepaidBlock.style.display = 'block';
+                    captchaInput.required = false;
+                    transactionIdInput.required = true;
+                }
+
+                window.scrollTo(0, 0);
+            });
+
+            // Final Form Submission (Confirmation Form)
+            bridge.confirmationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const payment = document.getElementById('payment').value;
+
+                if (payment === "Cash on Delivery") {
+                    const userCaptcha = document.getElementById('captcha-input').value;
+                    if (userCaptcha !== generatedCaptcha) {
+                        alert("Incorrect CAPTCHA. Please try again.");
+                        generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+                        document.getElementById('captcha-display').textContent = generatedCaptcha;
+                        document.getElementById('captcha-input').value = "";
+                        return;
+                    }
+                }
+
+                const transactionId = document.getElementById('transaction-id').value;
 
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
@@ -504,7 +774,6 @@
                 const pincode = document.getElementById('pincode').value;
                 const landmark = document.getElementById('landmark').value;
                 const shareLocation = document.getElementById('share-location').checked;
-                const payment = document.getElementById('payment').value;
 
                 const phoneNumber = "917511103323";
                 let message = `*New Order from City Cycle Mart*\n\n`;
@@ -515,15 +784,27 @@
                 message += `Address: ${address}\n`;
                 message += `Pincode: ${pincode}\n`;
                 if (landmark) message += `Landmark: ${landmark}\n`;
-                message += `Payment: ${payment}\n`;
+
+                message += `*Payment Details:*\n`;
+                message += `Payment Method: ${payment}\n`;
+                if (payment !== "Cash on Delivery" && transactionId) {
+                    const upiApp = document.querySelector('input[name="upi_app"]:checked').value;
+                    message += `UPI App Used: ${upiApp}\n`;
+                    if (upiApp === "Other UPI") {
+                        const customerUpiId = document.getElementById('customer-upi-id').value;
+                        if (customerUpiId) message += `Customer UPI ID: ${customerUpiId}\n`;
+                    }
+                    message += `Transaction ID: ${transactionId}\n`;
+                }
 
                 if (shareLocation) {
                     if (locationUrl) {
-                        message += `*Distance:* ${calculatedDistance} km\n`;
-                        message += `*Delivery Charge:* ₹${deliveryCharge}\n`;
-                        message += `*Location (Map):* ${locationUrl}\n`;
+                        message += `\n*Delivery & Location*\n`;
+                        message += `Distance: ${calculatedDistance} km\n`;
+                        message += `Delivery Charge: ₹${deliveryCharge}\n`;
+                        message += `Location (Map): ${locationUrl}\n`;
                     } else {
-                        message += `*Note: Customer will share live location manually*\n`;
+                        message += `\n*Note: Customer will share live location manually*\n`;
                     }
                 }
                 message += `\n`;
@@ -553,6 +834,25 @@
 
                 alert("Your order is being sent to WhatsApp. The cart has been cleared.");
                 window.location.href = 'index.html';
+            });
+
+            // Deep Link Generation for Pay Now Buttons
+            document.querySelectorAll('.pay-now-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Optional: stop propagation if they are inside labels, so clicking btn doesn't re-trigger label click
+                    e.stopPropagation();
+
+                    const scheme = btn.getAttribute('data-scheme');
+                    const pa = btn.getAttribute('data-pa');
+                    const pn = btn.getAttribute('data-pn');
+                    // Ensure tracking round off
+                    const am = finalTotal;
+                    
+                    // Construct deep link URI
+                    const url = `${scheme}?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
+                    window.location.href = url;
+                });
             });
         });
     </script>
