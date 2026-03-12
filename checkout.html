@@ -155,7 +155,7 @@
             background: #fff;
         }
 
-        .payment-option input[type="radio"]:checked ~ .option-content {
+        .payment-option:has(input[type="radio"]:checked) .option-content {
             display: block;
             border-top: 1px solid #eee;
         }
@@ -368,9 +368,7 @@
                                         <span class="app-name">Google Pay</span>
                                     </div>
                                     <div class="option-content">
-                                        <img src="images/gpay-qr.jpg" alt="Google Pay QR Code" class="qr-code">
                                         <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <p class="scan-text">Scan to pay with Google Pay</p>
                                         <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #1a73e8; margin-top: 15px; width: 100%;">Pay Now via Google Pay</button>
                                     </div>
                                 </label>
@@ -383,10 +381,8 @@
                                         <span class="app-name">PhonePe</span>
                                     </div>
                                     <div class="option-content">
-                                        <img src="images/phonepe-qr.jpg" alt="PhonePe QR Code" class="qr-code">
-                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">8590858064@yb</span></p>
-                                        <p class="scan-text">Scan to pay with PhonePe</p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@yb" data-pn="Muhammed Nihal K" style="background: #5f259f; margin-top: 15px; width: 100%;">Pay Now via PhonePe</button>
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #5f259f; margin-top: 15px; width: 100%;">Pay Now via PhonePe</button>
                                     </div>
                                 </label>
 
@@ -398,10 +394,8 @@
                                         <span class="app-name">Paytm</span>
                                     </div>
                                     <div class="option-content">
-                                        <img src="images/paytm-qr.jpg" alt="Paytm QR Code" class="qr-code">
-                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">8590858064@ptyes</span></p>
-                                        <p class="scan-text">Scan to pay with Paytm</p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@ptyes" data-pn="Muhammed Nihal K" style="background: #00baf2; margin-top: 15px; width: 100%;">Pay Now via Paytm</button>
+                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #00baf2; margin-top: 15px; width: 100%;">Pay Now via Paytm</button>
                                     </div>
                                 </label>
 
@@ -417,15 +411,15 @@
                                             <label for="customer-upi-id" style="color: #333;">Enter your UPI ID</label>
                                             <input type="text" id="customer-upi-id" placeholder="e.g. yourname@bank">
                                         </div>
-                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">8590858064@ybl</span></p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="8590858064@ybl" data-pn="City Cycle Mart" style="background: var(--primary-color); margin-top: 15px; width: 100%;">Open UPI App to Pay</button>
+                                        <p style="margin-bottom: 5px; font-weight: 500;">Our UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
+                                        <button type="button" class="btn pay-now-btn" data-scheme="upi://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="City Cycle Mart" style="background: var(--primary-color); margin-top: 15px; width: 100%;">Open UPI App to Pay</button>
                                         <p class="scan-text" style="font-size: 0.8rem; margin-top: 10px;">This will open your default UPI app on your phone.</p>
                                     </div>
                                 </label>
                             </div>
 
                             <div class="transaction-section">
-                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above or scan the QR code to pay the total amount. Once paid, enter the transaction ID below.</p>
+                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above to pay the total amount. Once paid, enter the transaction ID below.</p>
                                 <div class="form-group" style="text-align: left; margin-bottom: 0;">
                                     <label for="transaction-id" style="color: #333;">Transaction ID / UTR *</label>
                                     <input type="text" id="transaction-id" placeholder="e.g. 123456789012">
