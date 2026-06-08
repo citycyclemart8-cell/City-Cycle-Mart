@@ -194,6 +194,55 @@
             border: 1px dashed #ccc;
             margin-bottom: 20px;
         }
+
+        .search-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .search-btn {
+            padding: 10px 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 8px 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
     </style>
 </head>
 
@@ -274,13 +323,21 @@
                             </div>
                             <div class="form-group">
                                 <button type="button" id="get-location" class="btn"
-                                    style="background-color: #3498db; width: 100%; border-radius: 8px; padding: 10px;">
-                                    <i class="fas fa-map-marker-alt"></i> Get GPS Location
+                                    style="background-color: #3498db; width: 100%; border-radius: 8px; padding: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <i class="fas fa-location-arrow"></i> Use My Live Location
                                 </button>
                                 <p id="location-status"
-                                    style="font-size: 0.85rem; margin-top: 5px; color: var(--primary-color);">Click button
-                                    above or tap on map below to pin location</p>
-                                <div id="map"></div>
+                                    style="font-size: 0.85rem; margin-top: 8px; color: #666; text-align: center; line-height: 1.4;">
+                                    Click above to auto-pin, or search/tap the map below.
+                                </p>
+                                <div id="location-search-box" style="position: relative; margin-top: 10px;">
+                                    <div class="search-container">
+                                        <input type="text" id="map-search-input" placeholder="Search area/city/street...">
+                                        <button type="button" id="map-search-btn" class="search-btn"><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div id="search-results" class="search-results"></div>
+                                </div>
+                                <div id="map" style="z-index: 1;"></div>
                             </div>
                         </div>
                         <button type="submit" id="next-step" class="btn" style="width: 100%;">Next</button>
@@ -329,8 +386,8 @@
                             </select>
                         </div>
 
-                        <!-- COD Block -->
-                        <div id="cod-block" style="display: none;">
+                        <!-- Captcha Block (Shared) -->
+                        <div id="captcha-block" style="display: none;">
                             <div
                                 style="background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px dashed #ccc;">
                                 <p style="margin-bottom: 10px; font-weight: 500;">To prevent spam orders, please enter
@@ -342,107 +399,6 @@
                                 <div class="form-group" style="max-width: 200px; margin: 0 auto;">
                                     <input type="text" id="captcha-input" placeholder="Enter code here"
                                         style="text-align: center; font-size: 1.2rem; font-weight: bold;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Prepaid Block -->
-                        <div id="prepaid-block" style="display: none;">
-                            <h4 style="margin-bottom: 15px; color: #333; font-weight: 600; text-align: left;">Select UPI App</h4>
-                            
-                            <div class="payment-options">
-                                <!-- Option 1: Google Pay -->
-                                <label class="payment-option">
-                                    <div class="option-header">
-                                        <input type="radio" name="upi_app" value="Google Pay" checked>
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="app-logo">
-                                        <span class="app-name">Google Pay</span>
-                                    </div>
-                                    <div class="option-content">
-                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="tez://upi/pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #1a73e8; margin-top: 15px; width: 100%;">Pay Now via Google Pay</button>
-                                    </div>
-                                </label>
-                                
-                                <!-- Option 2: PhonePe -->
-                                <label class="payment-option">
-                                    <div class="option-header">
-                                        <input type="radio" name="upi_app" value="PhonePe">
-                                        <img src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png" alt="PhonePe" class="app-logo" style="transform: scale(1.5);">
-                                        <span class="app-name">PhonePe</span>
-                                    </div>
-                                    <div class="option-content">
-                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="phonepe://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #5f259f; margin-top: 15px; width: 100%;">Pay Now via PhonePe</button>
-                                    </div>
-                                </label>
-
-                                <!-- Option 3: Paytm -->
-                                <label class="payment-option">
-                                    <div class="option-header">
-                                        <input type="radio" name="upi_app" value="Paytm">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" class="app-logo">
-                                        <span class="app-name">Paytm</span>
-                                    </div>
-                                    <div class="option-content">
-                                        <p style="margin-bottom: 5px;">UPI ID: <span class="upi-id">nihalkaloor8@okhdfcbank</span></p>
-                                        <button type="button" class="btn pay-now-btn" data-scheme="paytmmp://pay" data-pa="nihalkaloor8@okhdfcbank" data-pn="Muhammed Nihal K" style="background: #00baf2; margin-top: 15px; width: 100%;">Pay Now via Paytm</button>
-                                    </div>
-                                </label>
-
-                                <!-- Option 4: Scan & Pay -->
-                                <label class="payment-option">
-                                    <div class="option-header">
-                                        <input type="radio" name="upi_app" value="Scan & Pay">
-                                        <i class="fas fa-qrcode" style="font-size: 24px; color: #444; width: 40px; text-align: center;"></i>
-                                        <span class="app-name">Scan & Pay</span>
-                                    </div>
-                                    <div class="option-content">
-                                        <div style="text-align: center; margin-bottom: 20px;">
-                                            <img id="dynamic-qr" src="" alt="Payment QR Code" class="qr-code" style="display: inline-block; margin: 0 auto;">
-                                            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Scan this QR with any UPI app to pay</p>
-                                        </div>
-                                        
-                                        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 10px; text-align: left;">
-                                            <div style="margin-bottom: 12px;">
-                                                <span style="font-size: 0.9rem; color: #666; display: block;">Name</span>
-                                                <strong style="font-size: 1.05rem; color: #333;">Muhammed Nihal k</strong>
-                                            </div>
-                                            
-                                            <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-                                                <div>
-                                                    <span style="font-size: 0.9rem; color: #666; display: block;">UPI ID</span>
-                                                    <strong style="font-size: 1.05rem; color: #333;" id="copy-upi-id">nihalkaloor8@okhdfcbank</strong>
-                                                </div>
-                                                <button type="button" class="btn copy-btn" data-copy="copy-upi-id" style="background: transparent; border: 1px solid #ccc; color: #333; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
-                                                    <i class="far fa-copy"></i> Copy
-                                                </button>
-                                            </div>
-                                            
-                                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                                <div>
-                                                    <span style="font-size: 0.9rem; color: #666; display: block;">Phone Number</span>
-                                                    <strong style="font-size: 1.05rem; color: #333;" id="copy-phone">+918590858064</strong>
-                                                </div>
-                                                <button type="button" class="btn copy-btn" data-copy="copy-phone" style="background: transparent; border: 1px solid #ccc; color: #333; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
-                                                    <i class="far fa-copy"></i> Copy
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="transaction-section">
-                                <p style="font-size: 0.95rem; color: #444; margin-bottom: 15px; text-align: center;">Click the <b>"Pay Now"</b> button above to pay the total amount. Once paid, enter the transaction ID <b>OR</b> upload a screenshot below.</p>
-                                <div class="form-group" style="text-align: left; margin-bottom: 15px;">
-                                    <label for="transaction-id" style="color: #333;">Transaction ID / UTR</label>
-                                    <input type="text" id="transaction-id" placeholder="e.g. 123456789012">
-                                </div>
-                                <div style="text-align: center; margin: 10px 0; color: #888; font-weight: 600; font-size: 0.8rem;">— OR —</div>
-                                <div class="form-group" style="text-align: left; margin-bottom: 0;">
-                                    <label for="payment-screenshot" style="color: #333;">Upload Payment Screenshot</label>
-                                    <input type="file" id="payment-screenshot" accept="image/*" style="padding: 8px; border: 1px dashed #ccc; background: #fff;">
                                 </div>
                             </div>
                         </div>
@@ -631,25 +587,7 @@
                 roundOff = finalTotal - rawTotal;
 
                 updateSummaryUI();
-                updateDynamicQR();
             }
-
-            function updateDynamicQR() {
-                const qrImg = document.getElementById('dynamic-qr');
-                if (!qrImg) return;
-                
-                const pa = "nihalkaloor8@okhdfcbank";
-                const pn = "Muhammed Nihal k";
-                const am = finalTotal;
-                const cu = "INR";
-                
-                // Using QuickChart API for better reliability
-                const upiUrl = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=${cu}`;
-                qrImg.src = `https://quickchart.io/qr?text=${encodeURIComponent(upiUrl)}&size=200`;
-            }
-
-            // Also call it during initial setup
-            updateDynamicQR();
 
             // Interactive Map Logic (Leaflet)
             const mapContainer = document.getElementById('map');
@@ -701,29 +639,143 @@
                 updateMarker(e.latlng.lat, e.latlng.lng);
             });
 
-            // Geolocation Logic
+            // Add a "Locate Me" button control on the map
+            const LocateControl = L.Control.extend({
+                options: { position: 'topleft' },
+                onAdd: function(map) {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                    container.style.backgroundColor = 'white';
+                    container.style.width = '34px';
+                    container.style.height = '34px';
+                    container.style.cursor = 'pointer';
+                    container.style.display = 'flex';
+                    container.style.alignItems = 'center';
+                    container.style.justifyContent = 'center';
+                    container.innerHTML = '<i class="fas fa-location-arrow" style="color: #3498db; font-size: 16px;"></i>';
+                    container.title = "Center on my location";
+                    
+                    container.onclick = function(e) {
+                        e.stopPropagation();
+                        getLocationBtn.click();
+                    };
+                    return container;
+                }
+            });
+            map.addControl(new LocateControl());
+
+            // Geolocation Logic (Instant & Progressive)
             getLocationBtn.addEventListener('click', () => {
                 if (!navigator.geolocation) {
                     alert("Geolocation is not supported by your browser");
                     return;
                 }
 
-                locationStatus.textContent = "Fetching GPS...";
-                locationStatus.style.color = "var(--text-color)";
+                getLocationBtn.disabled = true;
+                getLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
+                locationStatus.textContent = "🚀 Starting instant location search...";
+                locationStatus.style.color = "#3498db";
 
+                let locationFound = false;
+                let foundBetterLocation = false;
+
+                function handleSuccess(lat, lng, source, accuracy) {
+                    if (source === 'Network' && foundBetterLocation) return;
+                    if (source === 'GPS') foundBetterLocation = true;
+                    locationFound = true;
+
+                    updateMarker(lat, lng);
+                    
+                    const accText = accuracy ? ` (±${Math.round(accuracy)}m)` : "";
+                    locationStatus.textContent = `✅ Found via ${source}${accText}. Pinning...`;
+                    locationStatus.style.color = "#27ae60";
+                    
+                    getLocationBtn.disabled = false;
+                    getLocationBtn.innerHTML = '<i class="fas fa-check"></i> Location Found';
+                    setTimeout(() => {
+                        getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
+                    }, 3000);
+                }
+
+                // 1. Parallel Path A: Instant Network Fallback (ipapi.co)
+                fetch('https://ipapi.co/json/')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.latitude && data.longitude) {
+                            handleSuccess(data.latitude, data.longitude, 'Network');
+                        }
+                    }).catch(() => {
+                        // Try secondary IP provider if first fails
+                        fetch('http://ip-api.com/json/')
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.lat && data.lon) handleSuccess(data.lat, data.lon, 'Network');
+                            }).catch(() => {});
+                    });
+
+                // 2. Parallel Path B: Precision GPS
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        updateMarker(lat, lng);
+                    (pos) => handleSuccess(pos.coords.latitude, pos.coords.longitude, 'GPS', pos.coords.accuracy),
+                    (err) => {
+                        console.warn("GPS Failed:", err);
+                        // Only show error if NO location (IP or GPS) has been found yet
+                        if (!locationFound) {
+                            locationStatus.textContent = "⚠️ Live location unavailable. Please use Search or tap Map.";
+                            locationStatus.style.color = "#e67e22";
+                            getLocationBtn.disabled = false;
+                            getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
+                        }
                     },
-                    (error) => {
-                        console.error(error);
-                        alert("Could not fetch GPS. Please tap on the map to pin your location manually.");
-                        locationStatus.textContent = "⚠️ GPS failed. Please tap on map below.";
-                        locationStatus.style.color = "#e67e22";
-                    }
+                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 }
                 );
+            });
+
+            // Map Search Logic
+            const searchInput = document.getElementById('map-search-input');
+            const searchBtn = document.getElementById('map-search-btn');
+            const resultsDiv = document.getElementById('search-results');
+
+            async function searchArea(query) {
+                if (!query || query.length < 3) return;
+                
+                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                try {
+                    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&countrycodes=in`);
+                    const data = await response.json();
+                    
+                    resultsDiv.innerHTML = '';
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'search-result-item';
+                            div.textContent = item.display_name;
+                            div.onclick = () => {
+                                const lat = parseFloat(item.lat);
+                                const lon = parseFloat(item.lon);
+                                updateMarker(lat, lon);
+                                resultsDiv.style.display = 'none';
+                                searchInput.value = item.display_name;
+                            };
+                            resultsDiv.appendChild(div);
+                        });
+                        resultsDiv.style.display = 'block';
+                    } else {
+                        alert("No results found. Try a different search term.");
+                    }
+                } catch (err) {
+                    console.error("Search Error:", err);
+                } finally {
+                    searchBtn.innerHTML = '<i class="fas fa-search"></i>';
+                }
+            }
+
+            searchBtn.onclick = () => searchArea(searchInput.value);
+            searchInput.onkeypress = (e) => { if (e.key === 'Enter') { e.preventDefault(); searchArea(searchInput.value); } };
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!resultsDiv.contains(e.target) && e.target !== searchInput) {
+                    resultsDiv.style.display = 'none';
+                }
             });
 
             // Navigation Logic
@@ -754,26 +806,22 @@
                 bridge.step2.style.display = 'none';
                 bridge.step1.style.display = 'block';
                 window.scrollTo(0, 0);
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
             });
 
             // Display details dynamically based on payment method
             document.getElementById('payment').addEventListener('change', (e) => {
                 const payment = e.target.value;
-                const codBlock = document.getElementById('cod-block');
-                const prepaidBlock = document.getElementById('prepaid-block');
+                const captchaBlock = document.getElementById('captcha-block');
                 const captchaInput = document.getElementById('captcha-input');
-                const transactionIdInput = document.getElementById('transaction-id');
 
-                if (payment === "Cash on Delivery") {
-                    codBlock.style.display = 'block';
-                    prepaidBlock.style.display = 'none';
+                if (payment) {
+                    captchaBlock.style.display = 'block';
                     generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
                     document.getElementById('captcha-display').textContent = generatedCaptcha;
                     captchaInput.required = true;
-                } else if (payment === "UPI / Online Transfer") {
-                    codBlock.style.display = 'none';
-                    prepaidBlock.style.display = 'block';
-                    captchaInput.required = false;
                 }
             });
 
@@ -783,22 +831,14 @@
 
                 const payment = document.getElementById('payment').value;
 
-                if (payment === "Cash on Delivery") {
-                    const userCaptcha = document.getElementById('captcha-input').value;
-                    if (userCaptcha !== generatedCaptcha) {
-                        alert("Incorrect CAPTCHA. Please try again.");
-                        generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
-                        document.getElementById('captcha-display').textContent = generatedCaptcha;
-                        document.getElementById('captcha-input').value = "";
-                        return;
-                    }
-                }
+                if (!payment) return;
 
-                const transactionId = document.getElementById('transaction-id').value;
-                const screenshotFile = document.getElementById('payment-screenshot').files[0];
-
-                if (payment === "UPI / Online Transfer" && !transactionId && !screenshotFile) {
-                    alert("Please provide either a Transaction ID or upload a payment screenshot.");
+                const userCaptcha = document.getElementById('captcha-input').value;
+                if (userCaptcha !== generatedCaptcha) {
+                    alert("Incorrect CAPTCHA. Please try again.");
+                    generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+                    document.getElementById('captcha-display').textContent = generatedCaptcha;
+                    document.getElementById('captcha-input').value = "";
                     return;
                 }
 
@@ -822,16 +862,6 @@
 
                 message += `*Payment Details:*\n`;
                 message += `Payment Method: ${payment}\n`;
-                if (payment !== "Cash on Delivery") {
-                    const upiApp = document.querySelector('input[name="upi_app"]:checked').value;
-                    message += `UPI App Used: ${upiApp}\n`;
-                    if (transactionId) {
-                        message += `Transaction ID: ${transactionId}\n`;
-                    }
-                    if (screenshotFile) {
-                        message += `Note: Screenshot attached\n`;
-                    }
-                }
 
                 if (shareLocation) {
                     if (locationUrl) {
@@ -871,25 +901,9 @@
                     text: message,
                 };
 
-                // Check if browser supports sharing files
-                const canShareFiles = navigator.canShare && screenshotFile && navigator.canShare({ files: [screenshotFile] });
-
-                if (canShareFiles) {
-                    try {
-                        shareData.files = [screenshotFile];
-                        await navigator.share(shareData);
-                        finalizeOrder();
-                    } catch (err) {
-                        console.error("Sharing failed:", err);
-                        // Fallback to text only if permission denied or other error
-                        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
-                        finalizeOrder();
-                    }
-                } else {
-                    // Fallback for browsers that don't support file sharing
-                    window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
-                    finalizeOrder();
-                }
+                // Fallback to text only since screenshots have been removed
+                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
+                finalizeOrder();
 
                 function finalizeOrder() {
                     // Clear cart if it was a cart checkout

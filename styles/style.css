@@ -377,6 +377,7 @@ nav {
     font-size: 1.1rem;
     color: #555;
     margin-bottom: 30px;
+    white-space: pre-line;
 }
 
 /* Back link */

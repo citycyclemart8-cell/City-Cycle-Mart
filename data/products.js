@@ -104,27 +104,138 @@ const products = [
     },
     {
         id: 4,
-        name: "Premium Chrome Bell",
-        category: "Essential",
-        brand: "City Cycle Mart",
-        mrp: 149,
-        price: 1,
-        image: "images/premium_chrome_bell.png",
+        name: "Caya Aviator 20",
+        category: "Teen",
+        brand: "Caya",
+        mrp: 7499,
+        price: 5799,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_123423-2.jpg",
         slides: [
-            "images/premium_chrome_bell.png"
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_123423-2.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_123616-3.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_123511-3.jpg"
         ],
-        description: "A loud and clear classic chrome bell for safety and style on the road.",
+        description: "The Caya Aviator 20 is a stylish, high-performance kids' bicycle designed for young riders. Featuring a robust Hi-Tensile steel frame, it is built to withstand adventures while offering maximum safety and control. Equipped with reliable Power Brakes, training wheels for beginners, a front basket, mudguards, a bell, and mirrors, it offers a fun and secure ride. Suitable for children aged 6 to 9 years.\n\n**Price Comparison:**\n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,300 - ₹6,800\n- **City Cycle Mart Price: ₹5,799** (Save up to 22%!)",
         features: [
-            "Classic chrome finish",
-            "Crisp, loud ring",
-            "Universal mountain bracket"
+            "Power Brakes for reliable stopping power",
+            "Front Basket for carrying toys or essentials",
+            "Sturdy Support Wheels for beginners",
+            "Flying Mudguards to protect from splashes",
+            "Included safety Bell and rear-view Mirror"
         ],
         specs: {
-            "Type": "Bell",
-            "Material": "Chrome Steel"
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "20 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "20 x 2.125 Wide Grip Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Basket, Support Wheels, Mudguards, Bell, Mirror"
         },
         catalogLink: "https://wa.me/p/24692556573780654/917511103323",
-        code: "ACC001",
+        code: "CM134",
+        featured: true
+    },
+    {
+        id: 5,
+        name: "Caya Colour Run 16",
+        category: "Junior",
+        brand: "Caya",
+        mrp: 7999,
+        price: 5999,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_191913.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_191913.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_192211.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_192117.jpg"
+        ],
+        description: "The Caya Colour Run 16 is a vibrant junior bicycle designed for young riders learning to build confidence and coordination. Built with a lightweight yet high-durability steel frame, it provides an upright riding position for excellent comfort and steering control. It features dependable Power Brakes, strong training wheels, reflectors, a bell, and safety mirrors.\n\n**Price Comparison:**\n- Market MRP: ₹7,999\n- Typical Retail Price: ₹6,600 - ₹7,100\n- **City Cycle Mart Price: ₹5,999** (Unbeatable value for premium quality!)",
+        features: [
+            "Power Brakes for responsive stopping control",
+            "Heavy-duty Support Wheels for learning balance",
+            "High-visibility Safety Reflectors",
+            "Upright riding posture for junior riders",
+            "Includes safety Bell and Mirror"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "16 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "16 x 2.125 High-Traction Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Bell, Reflectors, Mirror"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM113",
+        featured: true
+    },
+    {
+        id: 6,
+        name: "Caya Gold BMX 14",
+        category: "Kids",
+        brand: "Caya",
+        mrp: 6999,
+        price: 5399,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_145908.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_145908.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_150054.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_145946.jpg"
+        ],
+        description: "The Caya Gold BMX 14 brings a sporty and bold BMX design to young riders. Designed for kids aged 3 to 5 years, it features a sturdy steel frame with a low standover height to ensure easy mounting. Equipped with reliable Power Brakes, strong training wheels, front and rear mudguards, safety mirrors, and a loud bell, this cycle makes learning to ride safe and thrilling.\n\n**Price Comparison:**\n- Market MRP: ₹6,999\n- Typical Retail Price: ₹5,900 - ₹6,400\n- **City Cycle Mart Price: ₹5,399** (Get the best deal today!)",
+        features: [
+            "Sporty BMX-style steel frame with low standover height",
+            "Responsive Power Brakes for safety",
+            "Sturdy training Support Wheels",
+            "Sporty Mudguards to prevent mud splashes",
+            "Safety Bell and rear-view Mirror included"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "14 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "14 x 2.125 BMX Gripper Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Mudguards, Bell, Mirror"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM153",
+        featured: true
+    },
+    {
+        id: 7,
+        name: "Caya Rush 20 Alloy",
+        category: "Teen",
+        brand: "Caya",
+        mrp: 8999,
+        price: 6599,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121615.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121615.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121436.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121653.jpg"
+        ],
+        description: "The Caya Rush 20 Alloy is a premium version of the Rush series, featuring lightweight alloy rims and high-grade steel frame construction. Engineered for teens, it features a sporty geometry with height-adjustable BMX handlebars and wide, multi-terrain tyres. It comes loaded with responsive Power Brakes, support wheels, reflectors, mudguards, a bell, and mirrors.\n\n**Price Comparison:**\n- Market MRP: ₹8,999\n- Typical Retail Price: ₹7,200 - ₹7,800\n- **City Cycle Mart Price: ₹6,599** (Premium build at an unbeatable price!)",
+        features: [
+            "Lightweight double-wall Alloy Rims",
+            "Responsive Power Brakes for quick stopping",
+            "Wide, heavy-traction Tires for multi-terrain riding",
+            "Height-adjustable BMX Handlebars",
+            "Includes Support Wheels, Mudguards, Reflectors, Bell, and Mirror"
+        ],
+        specs: {
+            "Frame": "High-Grade Steel with Alloy Rims",
+            "Wheel Size": "20 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "20 x 2.125 Premium Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Mudguards, Reflectors, Bell, Mirror"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM120",
         featured: true
     }
 ];
