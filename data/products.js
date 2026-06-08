@@ -18,7 +18,8 @@ const products = [
             "High-Tensile Steel MIG Welded Frame",
             "26 x 2.40 Wide Fat Tires for excellent grip",
             "Single Speed / Hassle-free Multi-terrain driving",
-            "Includes Mudguards, Sipper with Bottle Case, and Reflector Set"
+            "Includes Mudguards, Sipper with Bottle Case, and Reflector Set",
+            "Includes Bell, Mirror, and Air Pump also"
         ],
         specs: {
             "Frame": "Hi-Tensile Steel",
@@ -74,20 +75,21 @@ const products = [
         category: "Junior",
         brand: "Alpha",
         mrp: 7499,
-        price: 5349,
-        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152239.jpg",
+        price: 5399,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_152239.jpg",
         slides: [
-            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152239.jpg",
-            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152321.jpg",
-            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/02/photoroom_20251007_152409.jpg"
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_152239.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_152321.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_152409.jpg"
         ],
-        description: "The Alpha Candy Floss 16 is a vibrant and charming bicycle designed for young adventurers. Built with a sturdy Hi-Tensile steel frame and finished with non-toxic paint, it offers a safe and stylish ride. \n\n**Price Comparison:** \n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,100 - ₹6,800\n- **City Cycle Mart Price: ₹5,349** (Unbeatable Value!)",
+        description: "The Alpha Candy Floss 16 is a vibrant and charming junior bicycle designed for young adventurers to ride in total comfort. Built with a sturdy Hi-Tensile steel frame and finished with premium non-toxic paint, it offers a safe, fun, and stylish ride. Complete with a front basket, a rear carrier, a comfortable back rest, and training wheels, it has everything a child needs to learn to ride safely.\n\n**Price Comparison:** \n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,100 - ₹6,800\n- **City Cycle Mart Price: ₹5,399** (Unbeatable Value!)",
         features: [
-            "Reliable Caliper Brakes for safety",
-            "Charming Front Basket",
-            "Comfortable Back Rest for extra support",
+            "Caliper Brake for reliable stopping",
+            "Front Basket for carrying toys",
+            "Comfortable Back Rest for support",
+            "Support Wheel for learning balance",
             "Sturdy Rear Carrier",
-            "Heavy-duty Support Wheels for beginners"
+            "Includes Mudguards, Water Bottle, Mirror, and Bell"
         ],
         specs: {
             "Frame": "Hi-Tensile Steel",
@@ -96,7 +98,8 @@ const products = [
             "Tires": "16 x 2.40 Hi-Traction Tires",
             "Suspension": "Rigid",
             "Speed": "Single Speed",
-            "Finish": "Non-Toxic Paint"
+            "Finish": "Non-Toxic Paint",
+            "Accessories": "Basket, Back Rest, Carrier, Support Wheels, Mudguards, Water Bottle, Mirror, Bell"
         },
         catalogLink: "https://wa.me/p/24692556573780654/917511103323",
         code: "CM147",
@@ -206,7 +209,7 @@ const products = [
     },
     {
         id: 7,
-        name: "Caya Rush 20 Alloy",
+        name: "Caya Rush 20",
         category: "Teen",
         brand: "Caya",
         mrp: 8999,
@@ -217,9 +220,9 @@ const products = [
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121436.jpg",
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_121653.jpg"
         ],
-        description: "The Caya Rush 20 Alloy is a premium version of the Rush series, featuring lightweight alloy rims and high-grade steel frame construction. Engineered for teens, it features a sporty geometry with height-adjustable BMX handlebars and wide, multi-terrain tyres. It comes loaded with responsive Power Brakes, support wheels, reflectors, mudguards, a bell, and mirrors.\n\n**Price Comparison:**\n- Market MRP: ₹8,999\n- Typical Retail Price: ₹7,200 - ₹7,800\n- **City Cycle Mart Price: ₹6,599** (Premium build at an unbeatable price!)",
+        description: "The Caya Rush 20 is a premium version of the Rush series, featuring lightweight alloy rims and high-grade steel frame construction. Engineered for teens, it features a sporty geometry with height-adjustable BMX handlebars and wide, multi-terrain tyres. It comes loaded with responsive Power Brakes, support wheels, reflectors, mudguards, a bell, and mirrors.\n\n**Price Comparison:**\n- Market MRP: ₹8,999\n- Typical Retail Price: ₹7,200 - ₹7,800\n- **City Cycle Mart Price: ₹6,599** (Premium build at an unbeatable price!)",
         features: [
-            "Lightweight double-wall Alloy Rims",
+            "Alloy Rims",
             "Responsive Power Brakes for quick stopping",
             "Wide, heavy-traction Tires for multi-terrain riding",
             "Height-adjustable BMX Handlebars",
@@ -236,6 +239,250 @@ const products = [
         },
         catalogLink: "https://wa.me/p/24692556573780654/917511103323",
         code: "CM120",
+        featured: true
+    },
+    {
+        id: 8,
+        name: "Caya Rush 14",
+        category: "Kids",
+        brand: "Caya",
+        mrp: 7499,
+        price: 5599,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7035.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7035.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7037.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7036.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7039.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7040.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7038.jpg"
+        ],
+        description: "The Caya Rush 14 is a robust and stylish kid's bicycle featuring an elegant low standover frame design, making it extremely easy for younger children to hop on and off. Built with a durable high-tensile steel frame and equipped with alloy rims for lightweight strength, it offers a remarkably smooth and safe ride. This product is available in two vibrant color options (Red and Blue). It comes equipped with training wheels, making it the perfect first bike for learning and building confidence.\n\n**Price Comparison:**\n- Market MRP: ₹7,499\n- Typical Retail Price: ₹6,000 - ₹6,500\n- **City Cycle Mart Price: ₹5,599** (Get premium styling for less!)",
+        features: [
+            "Alloy Rim",
+            "Power Brake for reliable stopping power",
+            "Front Basket for carrying toys",
+            "Comfortable Back Rest for extra rider support",
+            "Heavy-duty Support Wheels for beginners",
+            "Flying Mudguards to prevent water splashes",
+            "Includes Water Bottle, Mirror, and safety Bell"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "14 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "14 x 2.125 High-Traction Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Basket, Mudguards, Water Bottle, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM107",
+        featured: true
+    },
+    {
+        id: 9,
+        name: "Caya Drama 14",
+        category: "Kids",
+        brand: "Caya",
+        mrp: 6999,
+        price: 5099,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7042.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7042.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7043.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7041.jpg"
+        ],
+        description: "The Caya Drama 14 is an exceptionally designed kids' bicycle engineered to deliver high comfort and superior safety. It features a lightweight yet strong Hi-Tensile steel frame, full chain guard protection, and easy seat adjustment to grow with your child. Equipped with reliable power brakes and heavy-duty support wheels, it ensures a highly responsive and balanced riding experience on neighborhood paths.\n\n**Price Comparison:**\n- Market MRP: ₹6,999\n- Typical Retail Price: ₹5,500 - ₹6,000\n- **City Cycle Mart Price: ₹5,099** (Unbeatable savings for a premium brand!)",
+        features: [
+            "Power Brake for reliable stopping power",
+            "Front Basket for carrying toys",
+            "Comfortable Back Rest for extra rider support",
+            "Heavy-duty Support Wheels for beginners",
+            "Flying Mudguards to prevent water splashes",
+            "Includes Water Bottle, Mirror, and safety Bell"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "14 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "14 x 2.125 High-Traction Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Basket, Mudguards, Water Bottle, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM109",
+        featured: true
+    },
+    {
+        id: 10,
+        name: "Caya Aviator 14",
+        category: "Kids",
+        brand: "Caya",
+        mrp: 7299,
+        price: 5399,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7035.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7035.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7046.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7044.jpg"
+        ],
+        description: "The Caya Aviator 14 is a sleek, premium kids' bicycle inspired by active BMX geometries. Built with a solid Hi-Tensile steel frame, it is designed to endure rough-and-tumble play while offering maximum safety. The bicycle comes complete with responsive power brakes, flying mudguards, rear-view mirror, safety bell, water bottle, and a comfortable seat with a high back rest, ensuring a safe and thrilling experience for your young rider.\n\n**Price Comparison:**\n- Market MRP: ₹7,299\n- Typical Retail Price: ₹5,800 - ₹6,300\n- **City Cycle Mart Price: ₹5,399** (Save up to 26%!)",
+        features: [
+            "Power Brake for reliable stopping power",
+            "Front Basket for carrying toys",
+            "Comfortable Back Rest for extra rider support",
+            "Heavy-duty Support Wheels for beginners",
+            "Flying Mudguards to prevent water splashes",
+            "Includes Water Bottle, Mirror, and safety Bell"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "14 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "14 x 2.125 High-Traction Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Support Wheels, Basket, Mudguards, Water Bottle, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM110",
+        featured: true
+    },
+    {
+        id: 11,
+        name: "Caya Colour Run 20",
+        category: "Teen",
+        brand: "Caya",
+        mrp: 8499,
+        price: 6299,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7052.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7052.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7050.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7051.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7055.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7054.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7053.jpg"
+        ],
+        description: "The Caya Colour Run 20 is a stylish, trendy bicycle designed for teens who want to ride with speed and style. It features a streamlined steel frame built for lightweight durability and agility. The 20-inch tires and rigid suspension offer a fast, direct-power ride, while the integrated power brakes ensure high stopping performance. This product is available in two striking color variants. It comes complete with safety mirrors and a bell for active commuting.\n\n**Price Comparison:**\n- Market MRP: ₹8,499\n- Typical Retail Price: ₹6,900 - ₹7,500\n- **City Cycle Mart Price: ₹6,299** (Premium teen cycle at a discounted price!)",
+        features: [
+            "Power Brake for reliable stopping power",
+            "Rigid Suspension for optimal road speed and efficiency",
+            "Includes safety Bell and rear-view Mirror"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "20 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "20 x 2.125 High-Traction Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Bell, Mirror, Reflectors"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM114",
+        featured: true
+    },
+    {
+        id: 12,
+        name: "Caya Kros 20",
+        category: "Teen",
+        brand: "Caya",
+        mrp: 8999,
+        price: 6999,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7058.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7058.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7056.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7057.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7059.jpg"
+        ],
+        description: "The Caya Kros 20 is a premium teen bicycle built for aggressive riding and ultimate control. Equipped with dual mechanical disc brakes, it provides elite stopping power under all weather conditions. The robust frame geometry combined with semi-fat 2.40-inch wide tires offers outstanding stability, comfort, and grip. Featuring a rigid suspension for direct pedal response, this bike is built to conquer both roads and trails.\n\n**Price Comparison:**\n- Market MRP: ₹8,999\n- Typical Retail Price: ₹7,600 - ₹8,200\n- **City Cycle Mart Price: ₹6,999** (Get superior dual disc brakes for less!)",
+        features: [
+            "Dual Disk Brake for ultimate stopping power",
+            "Rigid Suspension for optimal road speed and efficiency",
+            "Robust mudguards to protect from trail debris",
+            "Includes safety Bell and rear-view Mirror"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "20 Inches",
+            "Braking": "Dual Disk Brake",
+            "Tires": "20 x 2.40 Premium Wide Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Mudguard, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM115",
+        featured: true
+    },
+    {
+        id: 13,
+        name: "Hero F11 20",
+        category: "Teen",
+        brand: "Hero",
+        mrp: 8499,
+        price: 6399,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251006_222117.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251006_222117.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251006_220838.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251006_220722.jpg"
+        ],
+        description: "The Hero F11 20 is a high-performance teen bicycle equipped with a state-of-the-art dual suspension system (front fork suspension and rear frame shock absorber). Built with a high-durability carbon steel frame, this bicycle is designed to absorb trail shocks and street bumps with ease, providing a smooth and effortless ride. Combined with responsive power brakes and rugged tires, it is the ultimate bike for young adventure enthusiasts.\n\n**Price Comparison:**\n- Market MRP: ₹8,499\n- Typical Retail Price: ₹7,000 - ₹7,600\n- **City Cycle Mart Price: ₹6,399** (Get premium dual suspension at an unbeatable price!)",
+        features: [
+            "Power Brake for reliable stopping power",
+            "Dual Suspension for maximum shock absorption and trail comfort",
+            "Robust mudguards to protect from trail debris",
+            "Includes safety Bell and rear-view Mirror"
+        ],
+        specs: {
+            "Frame": "Carbon Steel",
+            "Wheel Size": "20 Inches",
+            "Braking": "Power Brakes",
+            "Tires": "20 x 2.125 Off-Road Grip Tires",
+            "Suspension": "Dual Suspension",
+            "Speed": "Single Speed",
+            "Accessories": "Mudguard, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM439",
+        featured: true
+    },
+    {
+        id: 14,
+        name: "Hero Winner 20",
+        category: "Teen",
+        brand: "Hero",
+        mrp: 6999,
+        price: 5099,
+        image: "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_112551.jpg",
+        slides: [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_112551.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_112804.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/photoroom_20251007_112958.jpg"
+        ],
+        description: "The Hero Winner 20 is a rugged, BMX-style single speed bicycle built for teenagers. Designed with a heavy-duty steel frame, it is built to survive active daily play while offering stability and confidence. The rigid suspension ensures direct power transfer and efficiency on flat streets, while the caliper brakes and wide tires provide a reliable and safe ride.\n\n**Price Comparison:**\n- Market MRP: ₹6,999\n- Typical Retail Price: ₹5,500 - ₹6,000\n- **City Cycle Mart Price: ₹5,099** (Durable Hero quality at a budget-friendly price!)",
+        features: [
+            "Caliper Brake for dependable stopping power",
+            "Rigid Suspension for maximum pedaling efficiency",
+            "Robust mudguards to protect from trail debris",
+            "Includes safety Bell and rear-view Mirror"
+        ],
+        specs: {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "20 Inches",
+            "Braking": "Caliper Brakes",
+            "Tires": "20 x 2.125 Grippy BMX Tires",
+            "Suspension": "Rigid",
+            "Speed": "Single Speed",
+            "Accessories": "Mudguard, Mirror, Bell"
+        },
+        catalogLink: "https://wa.me/p/24692556573780654/917511103323",
+        code: "CM445",
         featured: true
     }
 ];
