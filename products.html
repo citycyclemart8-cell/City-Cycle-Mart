@@ -249,7 +249,7 @@
                 // 1. Filter by Category Button
                 let filtered = currentCategory === 'all'
                     ? products
-                    : products.filter(p => p.category === currentCategory);
+                    : products.filter(p => p.category.split(',').map(c => c.trim()).includes(currentCategory));
 
                 // 2. Filter by Price Dropdown
                 const priceFilter = priceFilterEl.value;

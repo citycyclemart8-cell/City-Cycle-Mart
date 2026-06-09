@@ -226,15 +226,15 @@
                     el.innerHTML = `
                         <img src="${item.image}" alt="${item.name}">
                         <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-title">${item.name}${item.selectedColor ? ` <span style="font-size: 0.9rem; color: #666; font-weight: normal;">(${item.selectedColor})</span>` : ''}</div>
                             <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
                             <div class="quantity-controls">
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1}, '${item.selectedColor || ''}')">-</button>
                                 <span class="qty-val">${item.quantity}</span>
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1}, '${item.selectedColor || ''}')">+</button>
                             </div>
                         </div>
-                        <button class="remove-btn" onclick="removeItem(${item.id})">
+                        <button class="remove-btn" onclick="removeItem(${item.id}, '${item.selectedColor || ''}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     `;
@@ -245,14 +245,14 @@
             }
 
             // Expose utility functions globally
-            window.removeItem = function (id) {
-                Cart.removeItem(id);
+            window.removeItem = function (id, color = '') {
+                Cart.removeItem(id, color || null);
                 renderCart();
             };
 
-            window.updateQuantity = function (id, qty) {
+            window.updateQuantity = function (id, qty, color = '') {
                 if (qty < 1) return;
-                Cart.updateQuantity(id, qty);
+                Cart.updateQuantity(id, qty, color || null);
                 renderCart();
             };
 

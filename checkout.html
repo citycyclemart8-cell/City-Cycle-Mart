@@ -469,11 +469,13 @@
                 // Direct checkout
                 const product = products.find(p => p.id == productId);
                 if (product) {
+                    const selectedColor = urlParams.get('color');
                     orderItems = [{
                         name: product.name,
                         quantity: 1,
                         price: product.price,
-                        catalogLink: product.catalogLink
+                        catalogLink: product.catalogLink,
+                        selectedColor: selectedColor || null
                     }];
                     total = product.price;
                 }
@@ -483,7 +485,8 @@
                     name: item.name,
                     quantity: item.quantity,
                     price: item.price,
-                    catalogLink: item.catalogLink
+                    catalogLink: item.catalogLink,
+                    selectedColor: item.selectedColor || null
                 }));
                 total = Cart.getTotal();
             }
@@ -511,7 +514,7 @@
                 const el = document.createElement('div');
                 el.className = 'summary-item';
                 el.innerHTML = `
-                    <span>${item.name} (x${item.quantity})</span>
+                    <span>${item.name}${item.selectedColor ? ` (${item.selectedColor})` : ''} (x${item.quantity})</span>
                     <span>₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                 `;
                 summaryItems.appendChild(el);
@@ -877,7 +880,7 @@
 
                 message += `*Order Summary:*\n`;
                 orderItems.forEach(item => {
-                    message += `- ${item.name} (x${item.quantity}): ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n`;
+                    message += `- ${item.name}${item.selectedColor ? ` (${item.selectedColor})` : ''} (x${item.quantity}): ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n`;
                     if (item.catalogLink) {
                         message += `Catalog Link: ${item.catalogLink}\n`;
                     }

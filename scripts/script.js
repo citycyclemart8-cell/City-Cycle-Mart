@@ -11,7 +11,7 @@ const Cart = {
     },
 
     addItem(product) {
-        const existingItem = this.items.find(item => item.id === product.id);
+        const existingItem = this.items.find(item => item.id === product.id && (item.selectedColor || null) === (product.selectedColor || null));
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
@@ -22,8 +22,8 @@ const Cart = {
         alert('Added to cart!');
     },
 
-    removeItem(productId) {
-        this.items = this.items.filter(item => item.id !== productId);
+    removeItem(productId, color = null) {
+        this.items = this.items.filter(item => !(item.id === productId && (item.selectedColor || null) === (color || null)));
         this.save();
         this.updateCartCount();
         // Trigger a re-render if on cart page (callback if needed)
@@ -45,8 +45,8 @@ const Cart = {
         return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     },
 
-    updateQuantity(productId, newQuantity) {
-        const item = this.items.find(item => item.id === productId);
+    updateQuantity(productId, newQuantity, color = null) {
+        const item = this.items.find(item => item.id === productId && (item.selectedColor || null) === (color || null));
         if (item && newQuantity > 0) {
             item.quantity = newQuantity;
             this.save();

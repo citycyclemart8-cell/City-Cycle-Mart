@@ -132,6 +132,47 @@
         .whatsapp-btn:hover {
             background-color: #128C7E;
         }
+
+        /* Flipkart-style color selector styles */
+        .color-thumbnail-card {
+            width: 56px;
+            height: 56px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .color-thumbnail-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+        }
+
+        .color-thumbnail-card:hover {
+            border-color: #2874f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-thumbnail-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .color-thumbnail-card.active {
+            border-color: #000000;
+            border-width: 2px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
     </style>
 </head>
 
@@ -214,31 +255,57 @@
             const productId = parseInt(urlParams.get('id')); // Simple ID parsing
 
             const product = products.find(p => p.id === productId);
-            const container = document.getElementById('product-detail-container');
+            const container = document.getElementById('product-detail-container');            if (product) {
+                let activeVariantIndex = 0;
+                const hasVariants = product.variants && product.variants.length > 1;
 
-            if (product) {
-                const hasSlides = product.slides && product.slides.length > 0;
+                function getActiveSlides() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].slides || [product.variants[activeVariantIndex].image];
+                    }
+                    return product.slides && product.slides.length > 0 ? product.slides : [product.image];
+                }
+
+                function getActiveImage() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].image;
+                    }
+                    return product.image;
+                }
+
+                function getActiveColorName() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].colorName;
+                    }
+                    return null;
+                }
 
                 container.innerHTML = `
                     <div class="product-detail">
-                        <div class="detail-image">
-                            ${hasSlides ? `
-                                <div class="product-slider">
-                                    <div class="slider-wrapper" id="slider-wrapper">
-                                        ${product.slides.map(slide => `<img src="${slide}" alt="${product.name}">`).join('')}
-                                    </div>
-                                    <button class="slider-btn prev" onclick="moveSlider(-1)"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="slider-btn next" onclick="moveSlider(1)"><i class="fas fa-chevron-right"></i></button>
-                                    <div class="slider-indicators">
-                                        ${product.slides.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="goToSlider(${i})"></span>`).join('')}
-                                    </div>
-                                </div>
-                            ` : `<img src="${product.image}" alt="${product.name}">`}
+                        <div class="detail-image" id="gallery-container">
+                            <!-- Injected dynamically -->
                         </div>
                         <div class="detail-info">
                             <div class="detail-category">${product.brand} | ${product.category}</div>
                             <h1 class="detail-title">${product.name}</h1>
                             ${product.code ? `<div class="product-code" style="margin-top: -15px; margin-bottom: 20px; color: #777; font-size: 0.9rem; font-weight: 500;">Product Code: ${product.code}</div>` : ''}
+                            
+                            <!-- Flipkart-style Color Selector -->
+                            ${hasVariants ? `
+                                <div class="color-selector-section" style="margin-bottom: 25px;">
+                                    <div class="color-selector-label" style="font-weight: 600; font-size: 0.95rem; color: #666; margin-bottom: 10px;">
+                                        Selected Color: <span id="active-color-display" style="color: #212121; font-weight: 700;">${getActiveColorName()}</span>
+                                    </div>
+                                    <div class="color-thumbnails-list" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                                        ${product.variants.map((v, index) => `
+                                            <div class="color-thumbnail-card ${index === 0 ? 'active' : ''}" data-index="${index}" onclick="selectColorVariant(${index})" title="${v.colorName}">
+                                                <img src="${v.image}" alt="${v.colorName}">
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
                             <p class="detail-description">${product.description}</p>
                             
                             <div class="features-list" style="margin-bottom: 30px;">
@@ -268,8 +335,8 @@
                             </div>
 
                             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                <button onclick="Cart.addItem(products.find(p => p.id === ${product.id}))" class="btn">Add to Cart</button>
-                                <a href="checkout.html?id=${product.id}" class="btn whatsapp-btn">
+                                <button id="add-to-cart-btn" class="btn">Add to Cart</button>
+                                <a id="order-now-btn" href="#" class="btn whatsapp-btn">
                                     Order Now
                                 </a>
                                 <button onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn" style="background-color: var(--text-color);">
@@ -280,29 +347,88 @@
                     </div>
                 `;
 
-                // Slider Logic
-                if (hasSlides) {
-                    let currentIndex = 0;
-                    const wrapper = document.getElementById('slider-wrapper');
-                    const indicators = document.querySelectorAll('.indicator');
+                function renderGallery() {
+                    const galleryContainer = document.getElementById('gallery-container');
+                    const slides = getActiveSlides();
+                    const hasSlides = slides.length > 1;
 
-                    window.moveSlider = (direction) => {
-                        currentIndex = (currentIndex + direction + product.slides.length) % product.slides.length;
-                        updateSlider();
-                    };
+                    if (hasSlides) {
+                        galleryContainer.innerHTML = `
+                            <div class="product-slider">
+                                <div class="slider-wrapper" id="slider-wrapper" style="display: flex; transition: transform 0.5s ease-in-out;">
+                                    ${slides.map(slide => `<img src="${slide}" alt="${product.name}" style="min-width: 100%; object-fit: contain;">`).join('')}
+                                </div>
+                                <button class="slider-btn prev" onclick="moveSlider(-1)"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slider-btn next" onclick="moveSlider(1)"><i class="fas fa-chevron-right"></i></button>
+                                <div class="slider-indicators">
+                                    ${slides.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="goToSlider(${i})"></span>`).join('')}
+                                </div>
+                            </div>
+                        `;
 
-                    window.goToSlider = (index) => {
-                        currentIndex = index;
-                        updateSlider();
-                    };
+                        let currentIndex = 0;
+                        const wrapper = document.getElementById('slider-wrapper');
+                        const indicators = document.querySelectorAll('.indicator');
 
-                    function updateSlider() {
-                        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        indicators.forEach((ind, i) => {
-                            ind.classList.toggle('active', i === currentIndex);
-                        });
+                        window.moveSlider = (direction) => {
+                            currentIndex = (currentIndex + direction + slides.length) % slides.length;
+                            updateSlider();
+                        };
+
+                        window.goToSlider = (index) => {
+                            currentIndex = index;
+                            updateSlider();
+                        };
+
+                        function updateSlider() {
+                            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                            indicators.forEach((ind, i) => {
+                                ind.classList.toggle('active', i === currentIndex);
+                            });
+                        }
+                    } else {
+                        galleryContainer.innerHTML = `<img src="${slides[0]}" alt="${product.name}" style="width: 100%; border-radius: 10px; box-shadow: var(--shadow);">`;
                     }
                 }
+
+                function updateActionButtons() {
+                    const addToCartBtn = document.getElementById('add-to-cart-btn');
+                    const orderNowBtn = document.getElementById('order-now-btn');
+                    const selectedColor = getActiveColorName();
+                    const selectedImage = getActiveImage();
+
+                    addToCartBtn.onclick = () => {
+                        const productToCart = {
+                            ...product,
+                            selectedColor: selectedColor,
+                            image: selectedImage
+                        };
+                        Cart.addItem(productToCart);
+                    };
+
+                    if (selectedColor) {
+                        orderNowBtn.href = `checkout.html?id=${product.id}&color=${encodeURIComponent(selectedColor)}`;
+                    } else {
+                        orderNowBtn.href = `checkout.html?id=${product.id}`;
+                    }
+                }
+
+                renderGallery();
+                updateActionButtons();
+
+                window.selectColorVariant = (index) => {
+                    activeVariantIndex = index;
+                    const cards = document.querySelectorAll('.color-thumbnail-card');
+                    cards.forEach((card, idx) => {
+                        card.classList.toggle('active', idx === index);
+                    });
+                    const colorDisplay = document.getElementById('active-color-display');
+                    if (colorDisplay) {
+                        colorDisplay.textContent = getActiveColorName();
+                    }
+                    renderGallery();
+                    updateActionButtons();
+                };
             } else {
                 container.innerHTML = '<h2>Product not found</h2>';
             }
