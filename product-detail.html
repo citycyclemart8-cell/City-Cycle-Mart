@@ -133,6 +133,22 @@
             background-color: #128C7E;
         }
 
+        .order-now-btn {
+            background-color: #ff5722 !important;
+            padding: 15px 30px !important;
+            font-size: 1.2rem !important;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .order-now-btn:hover {
+            background-color: #e64a19 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            color: #fff;
+        }
+
         /* Flipkart-style color selector styles */
         .color-thumbnail-card {
             width: 80px;
@@ -329,7 +345,7 @@
 
                             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                                 <button id="add-to-cart-btn" class="btn">Add to Cart</button>
-                                <a id="order-now-btn" href="#" class="btn whatsapp-btn">
+                                <a id="order-now-btn" href="#" class="btn order-now-btn">
                                     Order Now
                                 </a>
                                 <button onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn" style="background-color: var(--text-color);">
@@ -378,6 +394,24 @@
                             indicators.forEach((ind, i) => {
                                 ind.classList.toggle('active', i === currentIndex);
                             });
+                        }
+
+                        // Add swipe support
+                        let touchstartX = 0;
+                        let touchendX = 0;
+
+                        wrapper.addEventListener('touchstart', e => {
+                            touchstartX = e.changedTouches[0].screenX;
+                        }, {passive: true});
+
+                        wrapper.addEventListener('touchend', e => {
+                            touchendX = e.changedTouches[0].screenX;
+                            handleSwipe();
+                        }, {passive: true});
+
+                        function handleSwipe() {
+                            if (touchendX < touchstartX - 40) moveSlider(1);
+                            if (touchendX > touchstartX + 40) moveSlider(-1);
                         }
                     } else {
                         galleryContainer.innerHTML = `<img src="${slides[0]}" alt="${product.name}" style="width: 100%; border-radius: 10px; box-shadow: var(--shadow);">`;

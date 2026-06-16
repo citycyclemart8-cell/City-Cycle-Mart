@@ -599,15 +599,6 @@ const products = [
                     "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7098.jpg",
                     "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7099.jpg"
                 ]
-            },
-            {
-                "colorName": "Matte Black",
-                "image": "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7100.jpg",
-                "slides": [
-                    "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7100.jpg",
-                    "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7101.jpg",
-                    "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7102.jpg"
-                ]
             }
         ],
         "catalogLink": "https://wa.me/p/24692556573780654/917511103323",
@@ -995,7 +986,7 @@ const products = [
         "category": "Adult, 21 Speed, Sports",
         "brand": "Caya",
         "mrp": 17000,
-        "price": 13600,
+        "price": 13599,
         "image": "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7495.jpg",
         "slides": [
             "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7495.jpg",
@@ -1445,6 +1436,39 @@ const products = [
         },
         "catalogLink": "https://wa.me/p/24692556573780654/917511103323",
         "code": "CM141",
+        "featured": true
+    },
+    {
+        "id": 100,
+        "name": "Caya Gold BMX 16",
+        "category": "Kids",
+        "brand": "Caya",
+        "mrp": 6500,
+        "price": 5899,
+        "image": "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7100.jpg",
+        "slides": [
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7100.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7101.jpg",
+            "https://citycyclemart.wordpress.com/wp-content/uploads/2026/06/img_7102.jpg"
+        ],
+        "description": "The Caya Gold BMX 16 features a premium finish with a sturdy hi-tensile frame, comfortable padding, and durable support wheels. Designed for young adventurers to ride in total confidence and safety. Includes full mudguards to keep clean and dry on wet paths.\n\n**Price Comparison:**\n- Market MRP: ₹6,500\n- Typical Retail Price: ₹6,000 - ₹6,500\n- **City Cycle Mart Price: ₹5,899** (Unbeatable Value!)",
+        "features": [
+            "Power Brake",
+            "Rigid Suspension",
+            "Support Wheel",
+            "Mudguard",
+            "Reflector",
+            "Mirror And Bell"
+        ],
+        "specs": {
+            "Frame": "Hi-Tensile Steel",
+            "Wheel Size": "16",
+            "Braking": "Power Brakes",
+            "Suspension": "Rigid",
+            "Accessories": "Support Wheels, Mudguards, Reflectors, Bell, Mirror"
+        },
+        "catalogLink": "https://wa.me/p/24692556573780654/917511103323",
+        "code": "CM112",
         "featured": true
     }
 ];
