@@ -951,26 +951,42 @@ footer {
         font-size: 0.8rem;
     }
 }
+
 @media (max-width: 768px) {
-    .search-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        margin: 0 !important;
-        border-radius: 0 !important;
-        background: var(--white) !important;
-        border-top: 1px solid #eee;
-        padding: 8px 15px !important;
+    nav {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px 0;
     }
+    
+    .nav-actions {
+        display: contents; /* Break the children out so they become flex items of nav */
+    }
+    
+    .cart-icon {
+        order: 3;
+        margin-left: auto;
+    }
+    
+    .search-bar {
+        position: relative !important;
+        order: 4;
+        width: 100% !important;
+        margin: 15px 0 0 0 !important; /* Space between header row and search bar */
+        border-radius: 20px !important;
+        box-sizing: border-box;
+    }
+    
     .search-bar input {
         width: 100% !important;
     }
+    
     header {
-        padding-bottom: 45px;
+        padding-bottom: 0 !important; /* Remove any previously added padding */
     }
+    
     .nav-links {
-        top: 115px !important;
-        height: calc(100vh - 115px) !important;
+        top: 135px !important; /* Push menu down below expanded header */
+        height: calc(100vh - 135px) !important;
     }
 }
