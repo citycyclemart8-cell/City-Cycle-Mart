@@ -48,6 +48,10 @@
                     City Cycle Mart
                 </div>
                 <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <i class="fas fa-search" onclick="executeSearch()" style="cursor: pointer; color: #555;"></i>
+                </div>
                     <div class="cart-icon" onclick="window.location.href='cart.html'">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
@@ -298,6 +302,20 @@
                         const wheel = p.specs && p.specs["Wheel Size"] ? p.specs["Wheel Size"] : "";
                         return wheel.includes(wheelFilter.split(' ')[0]);
                     });
+                }
+
+                
+                // 6.5 Filter by Search Query
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchQuery = urlParams.get('search');
+                if (searchQuery) {
+                    const query = searchQuery.toLowerCase();
+                    filtered = filtered.filter(p => 
+                        p.name.toLowerCase().includes(query) || 
+                        p.category.toLowerCase().includes(query) ||
+                        p.brand.toLowerCase().includes(query) ||
+                        (p.code && p.code.toLowerCase().includes(query))
+                    );
                 }
 
                 // 7. Apply Sorting

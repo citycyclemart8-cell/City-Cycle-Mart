@@ -272,3 +272,31 @@ const Share = {
 document.addEventListener('DOMContentLoaded', () => {
     Share.init();
 });
+
+// Global Search Logic
+window.executeSearch = function() {
+    const query = document.getElementById('global-search-input').value;
+    if (query) {
+        window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('global-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                executeSearch();
+            }
+        });
+        
+        // Populate search if on products page
+        if (window.location.pathname.includes('products.html')) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                searchInput.value = searchQuery;
+            }
+        }
+    }
+});
