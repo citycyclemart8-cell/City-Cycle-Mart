@@ -110,6 +110,30 @@ document.addEventListener('DOMContentLoaded', () => {
         sliderTimer = setInterval(nextSlide, 5000);
     }
 
+    // Hero Slider Swipe Support
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+        let heroTouchStartX = 0;
+        let heroTouchEndX = 0;
+
+        sliderContainer.addEventListener('touchstart', e => {
+            heroTouchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        sliderContainer.addEventListener('touchend', e => {
+            heroTouchEndX = e.changedTouches[0].screenX;
+            if (heroTouchEndX < heroTouchStartX - 40) {
+                nextSlide();
+                resetTimer();
+            }
+            if (heroTouchEndX > heroTouchStartX + 40) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+                resetTimer();
+            }
+        }, {passive: true});
+    }
+
     // Checkout Redirection
     window.goToCheckout = function (productId = null) {
         if (productId) {

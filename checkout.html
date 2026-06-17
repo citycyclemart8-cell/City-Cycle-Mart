@@ -540,8 +540,8 @@
             updateSummaryUI();
 
             // Delivery Charge Logic
-            const SHOP_LAT = 11.728952;
-            const SHOP_LNG = 75.704207;
+            const SHOP_LAT = 11.732277394109634;
+            const SHOP_LNG = 75.70663862483445;
             const CHARGE_PER_KM = 5;
 
             async function getRoadDistance(lat1, lon1, lat2, lon2) {
@@ -761,6 +761,7 @@
                                 updateMarker(lat, lon);
                                 resultsDiv.style.display = 'none';
                                 searchInput.value = item.display_name;
+                                document.getElementById("address").value = item.display_name;
                             };
                             resultsDiv.appendChild(div);
                         });

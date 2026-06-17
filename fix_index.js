@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+let content = fs.readFileSync('index.html', 'utf8');
+
+// I will just read the file from disk, wait, I can just use git checkout index.html if it's a git repo.
+// Let's check if it's a git repo. If not, I can just write a script to fix index.html based on my previous view_file.
+
+// Wait, I can run a node script to fix it.
+let indexCode = `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -230,4 +238,7 @@
     </script>
 </body>
 
-</html>
+</html>`;
+
+fs.writeFileSync('index.html', indexCode);
+console.log('Fixed index.html');
