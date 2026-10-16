@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Cycle Mart - Premium Bicycles</title>
+    <title>City Cycle Mart | Bicycles in Velliyode, Kozhikode</title>
+    <meta name="description" content="Find your next bicycle at City Cycle Mart in Velliyode, Kozhikode. Browse our bicycle range and accessories, then contact the shop for help or directions.">
+    <meta name="theme-color" content="#102a43">
+    <link rel="preconnect" href="https://citycyclemart.wordpress.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="https://citycyclemart.wordpress.com/wp-content/uploads/2025/11/photoroom_20251017_094110.jpeg" fetchpriority="high">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/brands.css">
+    <link rel="stylesheet" href="styles/premium.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -17,9 +24,9 @@
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
                 <div class="logo">
                     <i class="fas fa-biking"></i>
                     City Cycle Mart
@@ -27,18 +34,16 @@
                 <div class="nav-actions">
                 <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
                     <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
-                    <i class="fas fa-search" onclick="executeSearch()" style="cursor: pointer; color: #555;"></i>
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
                 </div>
-                    <div class="cart-icon" onclick="window.location.href='cart.html'">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="site-navigation">
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="products.html">Bicycles</a></li>
                     <li><a href="accessories.html">Accessories</a></li>
                     <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -52,9 +57,12 @@
                     style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1920');">
                 </div>
                 <div class="hero-content">
-                    <h1>Ride the City in Style</h1>
-                    <p>Premium bikes for the modern commuter</p>
-                    <a href="products.html" class="btn">Shop Now</a>
+                    <p class="hero-eyebrow">CITY CYCLE MART</p><h1>Find Your<br><span>Perfect Ride</span></h1>
+                    <p>Quality bicycles for every adventure. From rugged trails to smooth city roads, find the ride that fits you.</p>
+                                        <div class="hero-actions">
+                        <a href="products.html" class="btn">Explore Bikes</a>
+                        <a href="https://wa.me/917511103323" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Us</a>
+                    </div>
                 </div>
             </div>
             <div class="slide">
@@ -77,11 +85,56 @@
                     <a href="about.html" class="btn">About Us</a>
                 </div>
             </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1711645771248-306a4ee22634?auto=format&fit=crop&q=80&w=1920');"></div>
+                <div class="hero-content">
+                    <p class="hero-eyebrow">FIND YOUR NEXT ADVENTURE</p>
+                    <h1>Take the Trail<br><span>Your Way</span></h1>
+                    <p>Explore bicycles for everyday rides, weekend trails and everything in between.</p>
+                    <a href="products.html?category=Sports" class="btn">Explore Sports Bikes</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&q=80&w=1920');"></div>
+                <div class="hero-content">
+                    <p class="hero-eyebrow">CITY CYCLE MART</p>
+                    <h1>Ready for<br><span>Everyday Rides</span></h1>
+                    <p>Find a bicycle that fits your routine, then talk with our team for help choosing.</p>
+                    <a href="contact.html" class="btn">Talk to Our Team</a>
+                </div>
+            </div>
         </div>
         <div class="slider-dots">
-            <span class="dot active" onclick="currentSlide(0)"></span>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot active" role="button" tabindex="0" aria-label="Show slide 1" onclick="currentSlide(0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();currentSlide(0)}"></span>
+            <span class="dot" role="button" tabindex="0" aria-label="Show slide 2" onclick="currentSlide(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();currentSlide(1)}"></span>
+            <span class="dot" role="button" tabindex="0" aria-label="Show slide 3" onclick="currentSlide(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();currentSlide(2)}"></span>
+            <span class="dot" role="button" tabindex="0" aria-label="Show slide 4" onclick="currentSlide(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();currentSlide(3)}"></span>
+            <span class="dot" role="button" tabindex="0" aria-label="Show slide 5" onclick="currentSlide(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();currentSlide(4)}"></span>
+        </div>
+    </section>
+
+    <section class="shop-by-category" aria-labelledby="shop-category-title">
+        <div class="container">
+            <div class="section-heading">
+                <div><p class="section-kicker">SHOP BY CATEGORY</p><h2 class="section-title" id="shop-category-title">Find the Perfect Bike for You</h2><p class="section-subtitle">Choose from a wide range of bicycles and accessories.</p></div>
+                <a class="section-more" href="categories.html">View all categories <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="category-links">
+                <a class="category-link" href="products.html?category=Kids"><img data-category-image="Kids" alt=""><span>Kids' Cycles</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a class="category-link" href="products.html?category=Junior"><img data-category-image="Junior" alt=""><span>Junior Cycles</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a class="category-link" href="products.html?category=Teen"><img data-category-image="Teen" alt=""><span>Teen Cycles</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a class="category-link" href="products.html?category=Adult"><img data-category-image="Adult" alt=""><span>Adult Cycles</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a class="category-link" href="products.html?category=Sports"><img data-category-image="Sports" alt=""><span>Sports Cycles</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a class="category-link" href="accessories.html"><img src="images/premium_chrome_bell.png" alt="Bicycle accessories"><span>Accessories</span><i class="fas fa-chevron-circle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section featured-cycles" aria-labelledby="featured-cycles-title">
+        <div class="container">
+            <h2 class="section-title" id="featured-cycles-title">Popular Bikes</h2>
+            <div id="featured-products-grid" class="product-grid"></div>
+            <div class="featured-more"><a href="products.html" class="btn">Explore All Bikes</a></div>
         </div>
     </section>
 
@@ -199,7 +252,7 @@
                     <p>Velliyode Juma Masjid </p>
                     <p>Kozhikode, Kerala – 673506
                         India</p>
-                    <div class="social-links">
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener"><i class="fas fa-location-dot" aria-hidden="true"></i> Get directions</a></p>
                         <a href="https://wa.me/917511103323" target="_blank" class="social-icon whatsapp"><i
                                 class="fab fa-whatsapp"></i></a>
                         <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&utm_source=qr"
@@ -212,10 +265,18 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Phone: +918590858064</p>
-                    <p>Email: citycyclemart8@gmail.com</p>
+                    <p>Phone: <a href="tel:+918590858064">+91 85908 58064</a></p>
+                    <p>Email: <a href="mailto:citycyclemart8@gmail.com">citycyclemart8@gmail.com</a></p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener">Get directions</a></p>
                 </div>
-            </div>
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <p><a href="products.html">All bicycles</a></p>
+                    <p><a href="categories.html">Bicycle categories</a></p>
+                    <p><a href="accessories.html">Accessories</a></p>
+                    <p><a href="about.html">About us</a></p>
+                    <p><a href="contact.html">Contact</a></p>
+                </div>
             <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
                 <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
             </div>
@@ -224,10 +285,41 @@
 
     <script src="data/products.js"></script>
     <script src="scripts/script.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BicycleStore",
+      "name": "City Cycle Mart",
+      "url": "https://citycyclemart8-cell.github.io/City-Cycle-Mart1/",
+      "telephone": "+91-85908-58064",
+      "email": "citycyclemart8@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Velliyode Juma Masjid, Kallachi – Vilangad Road, Velliyode",
+        "addressLocality": "Kozhikode",
+        "addressRegion": "Kerala",
+        "postalCode": "673506",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 11.732277394109634,
+        "longitude": 75.70663862483445
+      },
+      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445"
+    }
+    </script>
     <script>
         // Home Page Specific Logic
-        // Brands are static layout
+        // Use catalogue photos for the category cards.
+        document.querySelectorAll('[data-category-image]').forEach((image) => {
+            const category = image.dataset.categoryImage.toLowerCase();
+            const match = products.find((product) => product.category.toLowerCase().split(',').map((item) => item.trim()).includes(category) && product.image);
+            if (match) image.src = match.image;
+            else image.closest('.category-link').classList.add('category-link--empty');
+        });
     </script>
 </body>
 
 </html>
+

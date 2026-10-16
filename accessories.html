@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessories - City Cycle Mart</title>
+    <title>Bicycle Accessories in Velliyode, Kozhikode | City Cycle Mart</title>
+    <meta name="description" content="Explore bicycle accessories at City Cycle Mart in Velliyode, Kozhikode. Browse the current collection and contact the shop for product enquiries.">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -40,9 +42,9 @@
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
                 <div class="logo">
                     <i class="fas fa-biking"></i>
                     City Cycle Mart
@@ -50,18 +52,16 @@
                 <div class="nav-actions">
                 <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
                     <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
-                    <i class="fas fa-search" onclick="executeSearch()" style="cursor: pointer; color: #555;"></i>
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
                 </div>
-                    <div class="cart-icon" onclick="window.location.href='cart.html'">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="site-navigation">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html">Bicycles</a></li>
                     <li><a href="accessories.html" class="active">Accessories</a></li>
                     <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -111,10 +111,18 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Phone: +918590858064</p>
-                    <p>Email: citycyclemart8@gmail.com</p>
+                    <p>Phone: <a href="tel:+918590858064">+91 85908 58064</a></p>
+                    <p>Email: <a href="mailto:citycyclemart8@gmail.com">citycyclemart8@gmail.com</a></p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener">Get directions</a></p>
                 </div>
-            </div>
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <p><a href="products.html">All bicycles</a></p>
+                    <p><a href="categories.html">Bicycle categories</a></p>
+                    <p><a href="accessories.html">Accessories</a></p>
+                    <p><a href="about.html">About us</a></p>
+                    <p><a href="contact.html">Contact</a></p>
+                </div>
             <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
                 <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
             </div>
@@ -151,15 +159,19 @@
                             <div class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product">
                                 <i class="fas fa-share-alt"></i>
                             </div>
-                            <a href="product-detail.html?id=${product.id}">
+                                                        <a class="product-card-link" href="product-detail.html?id=${product.id}">
                                 <img src="${product.image}" alt="${product.name}" class="product-image">
                                 <div class="product-info">
                                     <div class="product-category">${product.category}</div>
                                     <h3 class="product-name">${product.name}</h3>
                                     <div class="product-price">₹${product.price}</div>
-                                    <button onclick="Cart.addItem(products.find(p => p.id === ${product.id})); event.preventDefault();" class="btn" style="width: 100%;">Add to Cart</button>
                                 </div>
                             </a>
+                            <div class="product-card-actions">
+                                <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent('Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.')}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <a class="btn call-card-btn" href="tel:+918590858064" aria-label="Call City Cycle Mart about ${product.name}"><i class="fas fa-phone" aria-hidden="true"></i> Call Now</a>
+                                <button type="button" class="btn cart-card-btn cart-card-icon" onclick="Cart.addItem(products.find(p => p.id === ${product.id}));" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
+                            </div>
                         `;
                         productList.appendChild(card);
                     });

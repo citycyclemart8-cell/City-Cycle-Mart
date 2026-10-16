@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - City Cycle Mart</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -252,9 +253,9 @@
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
                 <div class="logo">
                     <i class="fas fa-biking"></i>
                     City Cycle Mart
@@ -262,18 +263,16 @@
                 <div class="nav-actions">
                 <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
                     <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
-                    <i class="fas fa-search" onclick="executeSearch()" style="cursor: pointer; color: #555;"></i>
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
                 </div>
-                    <div class="cart-icon" onclick="window.location.href='cart.html'">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="site-navigation">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html">Bicycles</a></li>
                     <li><a href="accessories.html">Accessories</a></li>
                     <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -438,10 +437,18 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Phone: +918590858064</p>
-                    <p>Email: citycyclemart8@gmail.com</p>
+                    <p>Phone: <a href="tel:+918590858064">+91 85908 58064</a></p>
+                    <p>Email: <a href="mailto:citycyclemart8@gmail.com">citycyclemart8@gmail.com</a></p>
+                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener">Get directions</a></p>
                 </div>
-            </div>
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <p><a href="products.html">All bicycles</a></p>
+                    <p><a href="categories.html">Bicycle categories</a></p>
+                    <p><a href="accessories.html">Accessories</a></p>
+                    <p><a href="about.html">About us</a></p>
+                    <p><a href="contact.html">Contact</a></p>
+                </div>
             <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
                 <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
             </div>
@@ -576,11 +583,14 @@
                 return deg * (Math.PI / 180);
             }
 
+            let deliveryRequestId = 0;
             async function updateDeliverySummary(lat, lng) {
+                const requestId = ++deliveryRequestId;
                 document.getElementById('distance-val').textContent = "...";
                 document.getElementById('delivery-price').textContent = "Calculating...";
 
                 const distance = await getRoadDistance(SHOP_LAT, SHOP_LNG, lat, lng);
+                if (requestId !== deliveryRequestId) return;
 
                 calculatedDistance = Math.round(distance * 10) / 10;
                 deliveryCharge = calculatedDistance * CHARGE_PER_KM;
@@ -595,7 +605,6 @@
 
                 updateSummaryUI();
             }
-
             // Interactive Map Logic (Leaflet)
             const mapContainer = document.getElementById('map');
             mapContainer.style.display = 'block';
@@ -617,31 +626,35 @@
             L.marker([SHOP_LAT, SHOP_LNG], { icon: shopIcon }).addTo(map)
                 .bindPopup('<b>City Cycle Mart</b>').openPopup();
 
-            function updateMarker(lat, lng) {
+            function updateMarker(lat, lng, locationDetails = {}) {
                 if (marker) {
                     marker.setLatLng([lat, lng]);
                 } else {
                     marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-                    marker.on('dragend', function (event) {
+                    marker.on('dragend', function () {
                         const position = marker.getLatLng();
-                        handleManualLocation(position.lat, position.lng);
+                        handleManualLocation(position.lat, position.lng, { source: 'manual' });
                     });
                 }
-                map.setView([lat, lng], 15);
-                handleManualLocation(lat, lng);
+                map.setView([lat, lng], 16);
+                handleManualLocation(lat, lng, locationDetails);
             }
 
-            function handleManualLocation(lat, lng) {
+            function handleManualLocation(lat, lng, locationDetails = {}) {
                 locationUrl = `https://www.google.com/maps?q=${lat},${lng}`;
-                locationStatus.textContent = "✅ Reading route...";
+                locationStatus.textContent = "Calculating the route to this pin...";
                 locationStatus.style.color = "var(--primary-color)";
                 shareLocationCheckbox.checked = true;
+                const requestId = deliveryRequestId + 1;
 
                 updateDeliverySummary(lat, lng).then(() => {
-                    locationStatus.textContent = "✅ Location pinned at " + lat.toFixed(4) + ", " + lng.toFixed(4);
+                    if (requestId !== deliveryRequestId) return;
+                    const accuracy = Number.isFinite(locationDetails.accuracy)
+                        ? ` (GPS accuracy about ±${Math.round(locationDetails.accuracy)} m)`
+                        : "";
+                    locationStatus.textContent = `Location pinned at ${lat.toFixed(5)}, ${lng.toFixed(5)}${accuracy}.`;
                 });
             }
-
             map.on('click', function (e) {
                 updateMarker(e.latlng.lat, e.latlng.lng);
             });
@@ -670,72 +683,46 @@
             });
             map.addControl(new LocateControl());
 
-            // Geolocation Logic (Instant & Progressive)
+            // Use device GPS for live location. IP-based locations are too approximate for delivery pinning.
             getLocationBtn.addEventListener('click', () => {
                 if (!navigator.geolocation) {
-                    alert("Geolocation is not supported by your browser");
+                    locationStatus.textContent = "Live location is not supported by this browser. Search for your address or tap the map instead.";
+                    locationStatus.style.color = "#e67e22";
                     return;
                 }
 
                 getLocationBtn.disabled = true;
                 getLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
-                locationStatus.textContent = "🚀 Starting instant location search...";
+                locationStatus.textContent = "Waiting for your device's GPS location...";
                 locationStatus.style.color = "#3498db";
 
-                let locationFound = false;
-                let foundBetterLocation = false;
-
-                function handleSuccess(lat, lng, source, accuracy) {
-                    if (source === 'Network' && foundBetterLocation) return;
-                    if (source === 'GPS') foundBetterLocation = true;
-                    locationFound = true;
-
-                    updateMarker(lat, lng);
-                    
-                    const accText = accuracy ? ` (±${Math.round(accuracy)}m)` : "";
-                    locationStatus.textContent = `✅ Found via ${source}${accText}. Pinning...`;
-                    locationStatus.style.color = "#27ae60";
-                    
-                    getLocationBtn.disabled = false;
-                    getLocationBtn.innerHTML = '<i class="fas fa-check"></i> Location Found';
-                    setTimeout(() => {
-                        getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
-                    }, 3000);
-                }
-
-                // 1. Parallel Path A: Instant Network Fallback (ipapi.co)
-                fetch('https://ipapi.co/json/')
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.latitude && data.longitude) {
-                            handleSuccess(data.latitude, data.longitude, 'Network');
-                        }
-                    }).catch(() => {
-                        // Try secondary IP provider if first fails
-                        fetch('http://ip-api.com/json/')
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.lat && data.lon) handleSuccess(data.lat, data.lon, 'Network');
-                            }).catch(() => {});
-                    });
-
-                // 2. Parallel Path B: Precision GPS
                 navigator.geolocation.getCurrentPosition(
-                    (pos) => handleSuccess(pos.coords.latitude, pos.coords.longitude, 'GPS', pos.coords.accuracy),
-                    (err) => {
-                        console.warn("GPS Failed:", err);
-                        // Only show error if NO location (IP or GPS) has been found yet
-                        if (!locationFound) {
-                            locationStatus.textContent = "⚠️ Live location unavailable. Please use Search or tap Map.";
-                            locationStatus.style.color = "#e67e22";
-                            getLocationBtn.disabled = false;
+                    (pos) => {
+                        updateMarker(pos.coords.latitude, pos.coords.longitude, {
+                            source: 'GPS',
+                            accuracy: pos.coords.accuracy
+                        });
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.innerHTML = '<i class="fas fa-check"></i> Location Found';
+                        setTimeout(() => {
                             getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
-                        }
+                        }, 3000);
                     },
-                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 }
+                    (err) => {
+                        console.warn("GPS failed:", err);
+                        const messages = {
+                            1: "Location permission was denied. Allow location access in your browser, or search for your address or tap the map.",
+                            2: "Your device could not determine a GPS location. Try moving near a window, or search for your address or tap the map.",
+                            3: "GPS took too long to respond. Try again, or search for your address or tap the map."
+                        };
+                        locationStatus.textContent = messages[err.code] || "Live location is unavailable. Search for your address or tap the map instead.";
+                        locationStatus.style.color = "#e67e22";
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
+                    },
+                    { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
                 );
             });
-
             // Map Search Logic
             const searchInput = document.getElementById('map-search-input');
             const searchBtn = document.getElementById('map-search-btn');

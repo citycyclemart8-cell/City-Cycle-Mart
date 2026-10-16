@@ -990,3 +990,169 @@ footer {
         height: calc(100vh - 135px) !important;
     }
 }
+
+/* City Cycle Mart premium storefront refresh */
+:root {
+    --primary-color: #c64b2b;
+    --primary-dark: #a8381d;
+    --text-color: #20211f;
+    --bg-color: #f6f4f0;
+    --white: #fffefa;
+    --gray: #777a75;
+    --shadow: 0 10px 30px rgba(32, 33, 31, .08);
+    --transition: all .25s ease;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--text-color); background: var(--bg-color); }
+::selection { background: #efc2b4; color: #20211f; }
+.container { max-width: 1320px; }
+header { background: rgba(255,254,250,.96); box-shadow: 0 1px 0 rgba(32,33,31,.08); backdrop-filter: blur(14px); }
+nav { min-height: 78px; }
+.logo { color: var(--text-color); font-size: 1.25rem; letter-spacing: -.045em; }
+.logo i { background: none; -webkit-text-fill-color: var(--primary-color); color: var(--primary-color); }
+.nav-links { gap: 26px; }
+.nav-links a { font-size: .88rem; font-weight: 600; color: #565852; }
+.nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+.cart-icon { font-size: 1.08rem; padding: 8px; }
+.cart-count { background: var(--primary-color); min-width: 19px; text-align: center; }
+.search-bar { background: #f1eee8 !important; border-radius: 6px !important; padding: 6px 12px !important; }
+.search-bar input { color: var(--text-color); }
+.hero-slider { height: min(76vh, 760px); min-height: 500px; }
+.slide-image { background-position: center 55%; }
+.slide-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,18,16,.67), rgba(16,18,16,.18) 75%); }
+.hero-content { text-align: left; max-width: 1320px; width: 100%; padding: 30px; margin: 0 auto; }
+.hero-content h1 { max-width: 760px; font-size: clamp(3rem, 6vw, 5.6rem); line-height: .99; letter-spacing: -.065em; text-shadow: none; }
+.hero-content p { font-size: 1.15rem; color: rgba(255,255,255,.86); text-shadow: none; margin-bottom: 28px; }
+.btn { border-radius: 4px; padding: 14px 26px; background: var(--primary-color); letter-spacing: .01em; }
+.btn:hover { background: var(--primary-dark); }
+.section { padding: 76px 0; }
+.section-title { font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -.05em; margin-bottom: 38px; }
+.product-grid { gap: 22px; }
+.product-card { background: var(--white); border: 1px solid rgba(32,33,31,.07); border-radius: 8px; box-shadow: 0 3px 14px rgba(32,33,31,.04); }
+.product-card:hover { transform: translateY(-5px); border-color: rgba(198,75,43,.32); box-shadow: 0 16px 34px rgba(32,33,31,.11); }
+.product-image { background: #f0eee9; }
+.product-info { padding: 20px; }
+.product-category { color: var(--primary-color); font-size: .72rem; letter-spacing: .12em; }
+.product-name { font-size: 1.08rem; letter-spacing: -.025em; }
+.product-price { font-size: 1.2rem; }
+.product-card .btn, .product-card button { border-radius: 4px; }
+.brand-card, .category-card { border-radius: 8px; box-shadow: 0 4px 18px rgba(32,33,31,.06); transition: var(--transition); }
+.brand-card:hover, .category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.why-choose-us { background: #222622; color: #e9e8e2; border: 0; }
+.wcu-title { color: #fffefa; }
+.wcu-icon { color: #df7959; }
+.wcu-description { color: #c0c1ba; }
+.wcu-text { color: #fffefa; }
+footer { background: #171a17; }
+.filter-select, .dropdown-menu { border-radius: 6px; }
+.filter-select:focus { box-shadow: 0 0 0 3px rgba(198,75,43,.16); }
+.back-link:hover { color: var(--primary-color); }
+.detail-image img, .product-slider { border-radius: 8px; }
+.detail-title { letter-spacing: -.045em; }
+.detail-category { color: var(--primary-color); }
+.share-btn-card { border-radius: 6px; }
+:focus-visible { outline: 3px solid rgba(198,75,43,.55); outline-offset: 3px; }
+@media (max-width: 768px) {
+    nav { min-height: 0; }
+    .nav-links { background: var(--white); }
+    .hero-slider { min-height: 480px; height: 68vh; }
+    .hero-content { padding: 24px; }
+    .hero-content h1 { font-size: clamp(2.6rem, 11vw, 4rem); }
+    .section { padding: 56px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* Customer-focused shopping refinements */
+.product-card { display: flex; flex-direction: column; }
+.product-image { transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.product-card:hover .product-image { transform: scale(1.025); }
+.product-card .product-info { flex: 1; }
+.product-card .btn,
+.product-card button.btn,
+#add-to-cart-btn,
+#order-now-btn { min-height: 48px; font-size: .95rem; font-weight: 700; box-shadow: 0 5px 14px rgba(198,75,43,.16); }
+.product-card .btn:hover,
+#add-to-cart-btn:hover,
+#order-now-btn:hover { box-shadow: 0 8px 20px rgba(198,75,43,.24); }
+.filter-btn { border: 1px solid #ddd8cf; background: var(--white); color: #4b4d47; border-radius: 5px; font-weight: 600; padding: 10px 17px; }
+.filter-btn:hover, .filter-btn.active { background: var(--text-color); border-color: var(--text-color); color: var(--white); }
+.filters { gap: 9px; margin-bottom: 24px; }
+.detail-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; border-color: #e7e3db; }
+.detail-price .mrp { color: #85857e !important; font-size: .95rem !important; }
+.detail-price .sale-price { color: var(--primary-color) !important; font-size: clamp(1.7rem, 3vw, 2.25rem) !important; }
+#add-to-cart-btn { background: var(--text-color); }
+#add-to-cart-btn:hover { background: #080a08; }
+#order-now-btn { background: var(--primary-color); }
+#order-now-btn:hover { background: var(--primary-dark); }
+#add-to-cart-btn, #order-now-btn { flex: 1 1 150px; text-align: center; }
+.cart-summary { border: 1px solid #e8e4dc; border-radius: 8px; box-shadow: var(--shadow); }
+.empty-cart-msg .btn, #empty-cart-msg .btn { margin-top: 18px; }
+@media (max-width: 576px) {
+    .product-grid { gap: 12px; }
+    .product-card .product-info { padding: 14px 12px; }
+    .product-card .btn, .product-card button.btn { min-height: 44px; padding: 10px 8px; font-size: .82rem; }
+    .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 2px 0 9px; scrollbar-width: thin; }
+    .filter-btn { flex: 0 0 auto; white-space: nowrap; }
+    .detail-info > div:last-child { gap: 10px !important; }
+}
+
+/* Premium showroom direction from the shared concept */
+:root { --primary-color:#ef6b2e; --primary-dark:#d9531c; --text-color:#172b42; --bg-color:#f4f6f8; --white:#fff; --gray:#788697; --shadow:0 12px 32px rgba(19,39,60,.09); }
+body { color:#172b42; background:#f4f6f8; }
+header { background:rgba(255,255,255,.97); }
+.logo { color:#142a42; }
+.logo i { color:#ef6b2e; -webkit-text-fill-color:#ef6b2e; }
+.nav-links a:hover,.nav-links a.active { color:#ef6b2e; }
+.hero-slider { background:#142a42; }
+.slide-image::after { background:linear-gradient(90deg,rgba(11,27,44,.82),rgba(15,39,62,.30) 78%); }
+.hero-content h1 { color:#fff; }
+.hero-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.hero-actions .btn { min-width:156px; text-align:center; }
+.btn { background:#ef6b2e; }
+.btn:hover { background:#d9531c; }
+.hero-actions .btn-secondary { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.76); color:#fff; }
+.hero-actions .btn-secondary:hover { background:#fff; color:#142a42; }
+.section-title { color:#172b42; }
+.product-card { background:#fff; border-color:#e7ebf0; border-radius:10px; }
+.product-card:hover { border-color:rgba(239,107,46,.45); }
+.product-card-link { display:block; color:inherit; }
+.product-card-link .product-image { width:100%; }
+.product-card-link .product-info { padding-bottom:10px; }
+.product-card-actions { display:flex; gap:9px; padding:0 18px 18px; }
+.product-card-actions .btn { display:inline-flex; justify-content:center; align-items:center; gap:7px; flex:1; padding:10px 8px; min-height:44px; font-size:.85rem; text-align:center; }
+.product-card-actions .cart-card-btn { background:#172b42; }
+.product-card-actions .cart-card-btn:hover { background:#0d1d30; }
+.product-card-actions .whatsapp-card-btn { background:#1e9f62; }
+.product-card-actions .whatsapp-card-btn:hover { background:#16834f; }
+.shop-by-category { padding:64px 0; background:#fff; }
+.category-links { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+.category-link { display:flex; min-height:78px; align-items:center; justify-content:center; padding:14px; border:1px solid #e4e9ef; border-radius:8px; color:#172b42; font-weight:700; text-align:center; transition:var(--transition); }
+.category-link:hover { border-color:#ef6b2e; color:#d9531c; transform:translateY(-3px); box-shadow:0 8px 22px rgba(19,39,60,.08); }
+.why-choose-us { background:#142a42; }
+.wcu-icon { color:#ff8a50; }
+.wcu-description { color:#c4d0dc; }
+.wcu-title,.wcu-text { color:#fff; }
+footer { background:#101e2d; }
+.footer-section p a { color:#ff9a68; text-decoration:underline; text-underline-offset:3px; }
+.floating-contact-actions { position:fixed; right:20px; bottom:22px; z-index:2000; display:flex; flex-direction:column; gap:10px; }
+.floating-contact-actions a { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:9px; padding:0 17px; border-radius:7px; color:#fff; font-size:.9rem; font-weight:700; box-shadow:0 8px 22px rgba(8,24,39,.24); transition:var(--transition); }
+.floating-contact-actions a:hover { transform:translateY(-2px); }
+.floating-contact-actions .float-whatsapp { background:#1e9f62; }
+.floating-contact-actions .float-call { background:#172b42; }
+.floating-contact-actions .float-directions { background:#ef6b2e; }
+#whatsapp-enquiry-btn { background:#1e9f62; }
+#whatsapp-enquiry-btn:hover { background:#16834f; }
+@media(max-width:900px) { .category-links { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:576px) {
+ .category-links { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .product-card-actions { padding:0 10px 12px; gap:7px; }
+ .product-card-actions .btn { font-size:.75rem; min-height:42px; }
+ .floating-contact-actions { left:0; right:0; bottom:0; flex-direction:row; gap:0; padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left)); background:rgba(255,255,255,.97); box-shadow:0 -5px 20px rgba(8,24,39,.12); }
+ .floating-contact-actions a { flex:1; min-height:44px; padding:0 6px; border-radius:5px; font-size:.76rem; box-shadow:none; }
+ body { padding-bottom:66px; }
+}.featured-cycles { background:#f4f6f8; }
+.featured-cycles .section-title { margin-bottom:32px; }
+.featured-more { margin-top:30px; text-align:center; }

@@ -59,14 +59,58 @@ const Cart = {
 document.addEventListener('DOMContentLoaded', () => {
     Cart.init();
 
+    // Keep contact, phone and shop directions available throughout the storefront.
+    const contactActions = document.createElement('nav');
+    contactActions.className = 'floating-contact-actions';
+    contactActions.setAttribute('aria-label', 'Contact City Cycle Mart');
+    contactActions.innerHTML = `
+        <a class="float-whatsapp" href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp City Cycle Mart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+        <a class="float-call" href="tel:+918590858064" aria-label="Call City Cycle Mart"><i class="fas fa-phone" aria-hidden="true"></i><span>Call</span></a>
+        <a class="float-directions" href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener" aria-label="Get directions to City Cycle Mart"><i class="fas fa-location-dot" aria-hidden="true"></i><span>Directions</span></a>
+    `;
+    document.body.appendChild(contactActions);
+
+    const featuredGrid = document.getElementById('featured-products-grid');
+    if (featuredGrid && typeof products !== 'undefined' && Array.isArray(products)) {
+        products.slice(0, 4).forEach(product => {
+            const card = document.createElement('article');
+            card.className = 'product-card';
+            const enquiry = 'Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.';
+            card.innerHTML = `
+                <a class="product-card-link" href="product-detail.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">₹${Number(product.price).toLocaleString('en-IN')}</div>
+                    </div>
+                </a>
+                <div class="product-card-actions">
+                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                    <a class="btn call-card-btn" href="tel:+918590858064" aria-label="Call City Cycle Mart about ${product.name}"><i class="fas fa-phone" aria-hidden="true"></i> Call Now</a>
+                    <button class="btn cart-card-btn cart-card-icon" type="button" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
+                </div>
+            `;
+            card.querySelector('.cart-card-btn').addEventListener('click', () => Cart.addItem(product));
+            featuredGrid.appendChild(card);
+        });
+    }
+
     // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
     if (hamburger) {
         hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', String(isOpen));
         });
+    }
+    if (navLinks && hamburger) {
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }));
     }
 
     // Hero Slider Logic
