@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - City Cycle Mart</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        .checkout-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .order-summary {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+
+        #map {
+            height: 300px;
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+
+        /* Payment Options Accordion */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .payment-option:has(input[type="radio"]:checked) {
+            border-color: var(--primary-color);
+            background: #f9fff9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .option-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 15px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .payment-option:has(input[type="radio"]:checked) .option-header {
+            border-bottom-color: #eee;
+        }
+
+        .option-header input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .app-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .app-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .option-content {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .payment-option:has(input[type="radio"]:checked) .option-content {
+            display: block;
+            border-top: 1px solid #eee;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .upi-id {
+            font-weight: 700;
+            color: #333;
+            user-select: all;
+            background: #f1f1f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 1.05rem;
+        }
+
+        .scan-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .transaction-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .search-btn {
+            padding: 10px 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 8px 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
+                </div>
+                <ul class="nav-links" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1 class="section-title">Checkout</h1>
+
+            <div class="checkout-container">
+                <!-- Step 1: Address Details -->
+                <div id="step-1">
+                    <h3
+                        style="margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px;">
+                        Step 1: Delivery Address</h3>
+                    <form id="address-form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" required placeholder="Enter your full name">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" required placeholder="Main phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone2">Alternative Phone</label>
+                                <input type="tel" id="phone2" placeholder="Secondary number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Delivery Address *</label>
+                            <textarea id="address" required placeholder="House No, Street, City"></textarea>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label for="pincode">Pincode *</label>
+                                <input type="text" id="pincode" required placeholder="6-digit Pincode">
+                            </div>
+                            <div class="form-group">
+                                <label for="landmark">Nearest Landmark</label>
+                                <input type="text" id="landmark" placeholder="e.g. Near Masjid">
+                            </div>
+                        </div>
+                        <div id="location-section">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <input type="checkbox" id="share-location" style="width: auto;">
+                                <label for="share-location" style="margin-bottom: 0;">Share location on map (via
+                                    WhatsApp)</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" id="get-location" class="btn"
+                                    style="background-color: #3498db; width: 100%; border-radius: 8px; padding: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <i class="fas fa-location-arrow"></i> Use My Live Location
+                                </button>
+                                <p id="location-status"
+                                    style="font-size: 0.85rem; margin-top: 8px; color: #666; text-align: center; line-height: 1.4;">
+                                    Click above to auto-pin, or search/tap the map below.
+                                </p>
+                                <div id="location-search-box" style="position: relative; margin-top: 10px;">
+                                    <div class="search-container">
+                                        <input type="text" id="map-search-input" placeholder="Search area/city/street...">
+                                        <button type="button" id="map-search-btn" class="search-btn"><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div id="search-results" class="search-results"></div>
+                                </div>
+                                <div id="map" style="z-index: 1;"></div>
+                            </div>
+                        </div>
+                        <button type="submit" id="next-step" class="btn" style="width: 100%;">Next</button>
+                    </form>
+                </div>
+
+                <!-- Step 2: Order Summary & Payment -->
+                <div id="step-2" style="display: none;">
+                    <h3
+                        style="margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px;">
+                        Step 2: Order Summary & Payment</h3>
+
+                    <div id="order-summary" class="order-summary">
+                        <div id="summary-items">
+                            <!-- Items injected here -->
+                        </div>
+                        <div class="summary-item" id="delivery-row"
+                            style="display: none; border-top: 1px dashed #ccc; padding-top: 10px; margin-top: 10px;">
+                            <span>Delivery Charges (<span id="distance-val">0</span> km)</span>
+                            <span id="delivery-price">₹0.00</span>
+                        </div>
+                        <div class="summary-item" id="round-off-row" style="display: none;">
+                            <span>Round Off</span>
+                            <span id="round-off-val">₹0.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span id="summary-total-price">₹0.00</span>
+                        </div>
+                        <div id="accessory-note" style="display: none; color: #e67e22; font-size: 0.9rem; margin-top: 10px; font-weight: 600; background: #fff8f0; padding: 8px; border-radius: 4px; border-left: 4px solid #e67e22;">
+                            <i class="fas fa-shipping-fast"></i> Note: Courier charges will be taken later
+                        </div>
+                        <p id="delivery-info-text"
+                            style="font-size: 0.8rem; color: #666; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
+                            * Delivery is free within 50 km of the shop. Beyond 50 km, delivery is calculated at ₹5/km.
+                        </p>
+                    </div>
+
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label for="payment">Payment Method *</label>
+                            <select id="payment" required>
+                                <option value="" disabled selected>Select Payment Method</option>
+                                <option value="Cash on Delivery">Cash on Delivery</option>
+                                <option value="UPI / Online Transfer">UPI / Online Transfer</option>
+                            </select>
+                        </div>
+
+                        <!-- Captcha Block (Shared) -->
+                        <div id="captcha-block" style="display: none;">
+                            <div
+                                style="background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px dashed #ccc;">
+                                <p style="margin-bottom: 10px; font-weight: 500;">To prevent spam orders, please enter
+                                    the CAPTCHA code below:</p>
+                                <div style="font-size: 2rem; font-weight: bold; letter-spacing: 5px; color: var(--primary-color); background: #eee; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 15px;"
+                                    id="captcha-display">
+                                    1234
+                                </div>
+                                <div class="form-group" style="max-width: 200px; margin: 0 auto;">
+                                    <input type="text" id="captcha-input" placeholder="Enter code here"
+                                        style="text-align: center; font-size: 1.2rem; font-weight: bold;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" id="prev-step" class="btn"
+                                style="background-color: #95a5a6;">Back</button>
+                            <button type="submit" class="btn whatsapp-btn" style="flex: 1;">Complete Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            const summaryItems = document.getElementById('summary-items');
+            const summaryTotalPrice = document.getElementById('summary-total-price');
+            const getLocationBtn = document.getElementById('get-location');
+            const locationStatus = document.getElementById('location-status');
+            const shareLocationCheckbox = document.getElementById('share-location');
+            let locationUrl = "";
+            const checkoutForm = document.getElementById('checkout-form');
+
+            let orderItems = [];
+            let total = 0;
+            let deliveryCharge = 0;
+            let calculatedDistance = 0;
+            let roundOff = Math.floor(total / 5) * 5 - total;
+            let finalTotal = total + roundOff;
+
+            if (productId) {
+                // Direct checkout
+                const product = products.find(p => p.id == productId);
+                if (product) {
+                    const selectedColor = urlParams.get('color');
+                    orderItems = [{
+                        name: product.name,
+                        quantity: 1,
+                        price: product.price,
+                        catalogLink: product.catalogLink,
+                        selectedColor: selectedColor || null
+                    }];
+                    total = product.price;
+                }
+            } else {
+                // Cart checkout
+                orderItems = Cart.items.map(item => ({
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    catalogLink: item.catalogLink,
+                    selectedColor: item.selectedColor || null
+                }));
+                total = Cart.getTotal();
+            }
+
+            // Detect if order is accessory-only
+            const accessoryCategories = ['Essential', 'Safety', 'Storage', 'Comfort'];
+            const isAccessoryOnly = orderItems.every(item => {
+                const product = products.find(p => p.name === item.name);
+                return product && accessoryCategories.includes(product.category);
+            });
+
+            if (isAccessoryOnly) {
+                document.getElementById('accessory-note').style.display = 'block';
+                document.getElementById('delivery-info-text').style.display = 'none';
+                document.getElementById('location-section').style.display = 'none';
+            }
+
+            if (orderItems.length === 0) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Render summary
+            orderItems.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'summary-item';
+                el.innerHTML = `
+                    <span>${item.name}${item.selectedColor ? ` (${item.selectedColor})` : ''} (x${item.quantity})</span>
+                    <span>₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                `;
+                summaryItems.appendChild(el);
+            });
+
+            function updateSummaryUI() {
+                const roundOffRow = document.getElementById('round-off-row');
+                if (Math.abs(roundOff) > 0.001) {
+                    roundOffRow.style.display = 'flex';
+                    document.getElementById('round-off-val').textContent = (roundOff > 0 ? '+' : '') + roundOff.toFixed(2);
+                } else {
+                    roundOffRow.style.display = 'none';
+                }
+                summaryTotalPrice.textContent = '₹' + finalTotal.toLocaleString('en-IN');
+            }
+            
+            // Set initial state
+            finalTotal = total; 
+            updateSummaryUI();
+
+            // Delivery Charge Logic
+            const SHOP_LAT = 11.7324349;
+            const SHOP_LNG = 75.7065688;
+            const CHARGE_PER_KM = 5;
+            const FREE_DELIVERY_RADIUS_KM = 50;
+
+            async function getRoadDistance(lat1, lon1, lat2, lon2) {
+                try {
+                    const response = await fetch(`https://router.project-osrm.org/route/v1/driving/${lon1},${lat1};${lon2},${lat2}?overview=false`);
+                    const data = await response.json();
+
+                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                        return data.routes[0].distance / 1000; // Return distance in km
+                    }
+                    throw new Error('OSRM Route not found');
+                } catch (error) {
+                    console.error('Routing Error:', error);
+                    // Fallback to straight line if API fails
+                    return calculateStraightDistance(lat1, lon1, lat2, lon2);
+                }
+            }
+
+            function calculateStraightDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Radius of the earth in km
+                const dLat = deg2rad(lat2 - lat1);
+                const dLon = deg2rad(lon2 - lon1);
+                const a =
+                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return R * c; // Distance in km
+            }
+
+            function deg2rad(deg) {
+                return deg * (Math.PI / 180);
+            }
+
+            let deliveryRequestId = 0;
+            async function updateDeliverySummary(lat, lng) {
+                const requestId = ++deliveryRequestId;
+                document.getElementById('distance-val').textContent = "...";
+                document.getElementById('delivery-price').textContent = "Calculating...";
+
+                const distance = await getRoadDistance(SHOP_LAT, SHOP_LNG, lat, lng);
+                if (requestId !== deliveryRequestId) return;
+
+                calculatedDistance = Math.round(distance * 10) / 10;
+                deliveryCharge = distance <= FREE_DELIVERY_RADIUS_KM ? 0 : distance * CHARGE_PER_KM;
+
+                document.getElementById('delivery-row').style.display = 'flex';
+                document.getElementById('distance-val').textContent = calculatedDistance;
+                document.getElementById('delivery-price').textContent = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                const rawTotal = isAccessoryOnly ? total : (total + deliveryCharge);
+                finalTotal = Math.floor(rawTotal / 5) * 5;
+                roundOff = finalTotal - rawTotal;
+
+                updateSummaryUI();
+            }
+            // Interactive Map Logic (Leaflet)
+            const mapContainer = document.getElementById('map');
+            mapContainer.style.display = 'block';
+
+            // Initialize map centered at shop
+            const map = L.map('map').setView([SHOP_LAT, SHOP_LNG], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            let marker;
+            const shopIcon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/619/619153.png',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+
+            // Add Shop Marker
+            L.marker([SHOP_LAT, SHOP_LNG], { icon: shopIcon }).addTo(map)
+                .bindPopup('<b>City Cycle Mart</b>').openPopup();
+
+            function updateMarker(lat, lng, locationDetails = {}) {
+                if (marker) {
+                    marker.setLatLng([lat, lng]);
+                } else {
+                    marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+                    marker.on('dragend', function () {
+                        const position = marker.getLatLng();
+                        handleManualLocation(position.lat, position.lng, { source: 'manual' });
+                    });
+                }
+                map.setView([lat, lng], 16);
+                handleManualLocation(lat, lng, locationDetails);
+            }
+
+            function handleManualLocation(lat, lng, locationDetails = {}) {
+                locationUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+                locationStatus.textContent = "Calculating the route to this pin...";
+                locationStatus.style.color = "var(--primary-color)";
+                shareLocationCheckbox.checked = true;
+                const requestId = deliveryRequestId + 1;
+
+                updateDeliverySummary(lat, lng).then(() => {
+                    if (requestId !== deliveryRequestId) return;
+                    const accuracy = Number.isFinite(locationDetails.accuracy)
+                        ? ` (GPS accuracy about ±${Math.round(locationDetails.accuracy)} m)`
+                        : "";
+                    locationStatus.textContent = `Location pinned at ${lat.toFixed(5)}, ${lng.toFixed(5)}${accuracy}.`;
+                });
+            }
+            map.on('click', function (e) {
+                updateMarker(e.latlng.lat, e.latlng.lng);
+            });
+
+            // Add a "Locate Me" button control on the map
+            const LocateControl = L.Control.extend({
+                options: { position: 'topleft' },
+                onAdd: function(map) {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                    container.style.backgroundColor = 'white';
+                    container.style.width = '34px';
+                    container.style.height = '34px';
+                    container.style.cursor = 'pointer';
+                    container.style.display = 'flex';
+                    container.style.alignItems = 'center';
+                    container.style.justifyContent = 'center';
+                    container.innerHTML = '<i class="fas fa-location-arrow" style="color: #3498db; font-size: 16px;"></i>';
+                    container.title = "Center on my location";
+                    
+                    container.onclick = function(e) {
+                        e.stopPropagation();
+                        getLocationBtn.click();
+                    };
+                    return container;
+                }
+            });
+            map.addControl(new LocateControl());
+
+            // Use device GPS for live location. IP-based locations are too approximate for delivery pinning.
+            getLocationBtn.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    locationStatus.textContent = "Live location is not supported by this browser. Search for your address or tap the map instead.";
+                    locationStatus.style.color = "#e67e22";
+                    return;
+                }
+
+                getLocationBtn.disabled = true;
+                getLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
+                locationStatus.textContent = "Waiting for your device's GPS location...";
+                locationStatus.style.color = "#3498db";
+
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        updateMarker(pos.coords.latitude, pos.coords.longitude, {
+                            source: 'GPS',
+                            accuracy: pos.coords.accuracy
+                        });
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.innerHTML = '<i class="fas fa-check"></i> Location Found';
+                        setTimeout(() => {
+                            getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
+                        }, 3000);
+                    },
+                    (err) => {
+                        console.warn("GPS failed:", err);
+                        const messages = {
+                            1: "Location permission was denied. Allow location access in your browser, or search for your address or tap the map.",
+                            2: "Your device could not determine a GPS location. Try moving near a window, or search for your address or tap the map.",
+                            3: "GPS took too long to respond. Try again, or search for your address or tap the map."
+                        };
+                        locationStatus.textContent = messages[err.code] || "Live location is unavailable. Search for your address or tap the map instead.";
+                        locationStatus.style.color = "#e67e22";
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Use My Live Location';
+                    },
+                    { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+                );
+            });
+            // Map Search Logic
+            const searchInput = document.getElementById('map-search-input');
+            const searchBtn = document.getElementById('map-search-btn');
+            const resultsDiv = document.getElementById('search-results');
+
+            async function searchArea(query) {
+                if (!query || query.length < 3) return;
+                
+                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                try {
+                    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&countrycodes=in`);
+                    const data = await response.json();
+                    
+                    resultsDiv.innerHTML = '';
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'search-result-item';
+                            div.textContent = item.display_name;
+                            div.onclick = () => {
+                                const lat = parseFloat(item.lat);
+                                const lon = parseFloat(item.lon);
+                                updateMarker(lat, lon);
+                                resultsDiv.style.display = 'none';
+                                searchInput.value = item.display_name;
+                                document.getElementById("address").value = item.display_name;
+                            };
+                            resultsDiv.appendChild(div);
+                        });
+                        resultsDiv.style.display = 'block';
+                    } else {
+                        alert("No results found. Try a different search term.");
+                    }
+                } catch (err) {
+                    console.error("Search Error:", err);
+                } finally {
+                    searchBtn.innerHTML = '<i class="fas fa-search"></i>';
+                }
+            }
+
+            searchBtn.onclick = () => searchArea(searchInput.value);
+            searchInput.onkeypress = (e) => { if (e.key === 'Enter') { e.preventDefault(); searchArea(searchInput.value); } };
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!resultsDiv.contains(e.target) && e.target !== searchInput) {
+                    resultsDiv.style.display = 'none';
+                }
+            });
+
+            // Navigation Logic
+            const bridge = {
+                step1: document.getElementById('step-1'),
+                step2: document.getElementById('step-2'),
+                addressForm: document.getElementById('address-form'),
+                paymentForm: document.getElementById('payment-form'),
+                prevBtn: document.getElementById('prev-step')
+            };
+
+            let generatedCaptcha = "";
+
+            bridge.addressForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                if (!locationUrl) {
+                    const confirmProceed = confirm("You haven't pinned your location. Delivery charges will be calculated manually on WhatsApp. Proceed?");
+                    if (!confirmProceed) return;
+                }
+
+                bridge.step1.style.display = 'none';
+                bridge.step2.style.display = 'block';
+                window.scrollTo(0, 0);
+            });
+
+            bridge.prevBtn.addEventListener('click', () => {
+                bridge.step2.style.display = 'none';
+                bridge.step1.style.display = 'block';
+                window.scrollTo(0, 0);
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
+            });
+
+            // Display details dynamically based on payment method
+            document.getElementById('payment').addEventListener('change', (e) => {
+                const payment = e.target.value;
+                const captchaBlock = document.getElementById('captcha-block');
+                const captchaInput = document.getElementById('captcha-input');
+
+                if (payment) {
+                    captchaBlock.style.display = 'block';
+                    generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+                    document.getElementById('captcha-display').textContent = generatedCaptcha;
+                    captchaInput.required = true;
+                }
+            });
+
+            // Final Form Submission (Confirmation Form)
+            bridge.paymentForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const payment = document.getElementById('payment').value;
+
+                if (!payment) return;
+
+                const userCaptcha = document.getElementById('captcha-input').value;
+                if (userCaptcha !== generatedCaptcha) {
+                    alert("Incorrect CAPTCHA. Please try again.");
+                    generatedCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+                    document.getElementById('captcha-display').textContent = generatedCaptcha;
+                    document.getElementById('captcha-input').value = "";
+                    return;
+                }
+
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const phone2 = document.getElementById('phone2').value;
+                const address = document.getElementById('address').value;
+                const pincode = document.getElementById('pincode').value;
+                const landmark = document.getElementById('landmark').value;
+                const shareLocation = document.getElementById('share-location').checked;
+
+                const phoneNumber = "917511103323";
+                let message = `*New Order from City Cycle Mart*\n\n`;
+                message += `*Customer Details:*\n`;
+                message += `Name: ${name}\n`;
+                message += `Phone: ${phone}\n`;
+                if (phone2) message += `Alt Phone: ${phone2}\n`;
+                message += `Address: ${address}\n`;
+                message += `Pincode: ${pincode}\n`;
+                if (landmark) message += `Landmark: ${landmark}\n`;
+
+                message += `*Payment Details:*\n`;
+                message += `Payment Method: ${payment}\n`;
+
+                if (shareLocation) {
+                    if (locationUrl) {
+                        message += `\n*Delivery & Location*\n`;
+                        message += `Distance: ${calculatedDistance} km\n`;
+                        message += `Delivery Charge: ₹${deliveryCharge}\n`;
+                        message += `Location (Map): ${locationUrl}\n`;
+                    } else {
+                        message += `\n*Note: Customer will share live location manually*\n`;
+                    }
+                }
+                message += `\n`;
+
+                message += `*Order Summary:*\n`;
+                orderItems.forEach(item => {
+                    message += `- ${item.name}${item.selectedColor ? ` (${item.selectedColor})` : ''} (x${item.quantity}): ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n`;
+                    if (item.catalogLink) {
+                        message += `Catalog Link: ${item.catalogLink}\n`;
+                    }
+                });
+
+                message += `\n*Subtotal: ₹${total.toLocaleString('en-IN')}*\n`;
+                if (deliveryCharge > 0) {
+                    if (isAccessoryOnly) {
+                        message += `*Calculated Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
+                        message += `(Note: Courier charges will be taken later)\n`;
+                    } else {
+                        message += `*Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
+                    }
+                } else if (!isAccessoryOnly && shareLocation && locationUrl) {
+                    message += `*Delivery: FREE (within 50 km)*\n`;
+                }
+                if (Math.abs(roundOff) > 0.001) message += `*Round Off: ${(roundOff > 0 ? '+' : '')}${roundOff.toFixed(2)}*\n`;
+                message += `*TOTAL PAYABLE: ₹${finalTotal.toLocaleString('en-IN')}*\n`;
+                message += `\nPlease confirm my order.`;
+
+                const shareData = {
+                    title: 'City Cycle Mart Order',
+                    text: message,
+                };
+
+                // Fallback to text only since screenshots have been removed
+                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, '_blank');
+                finalizeOrder();
+
+                function finalizeOrder() {
+                    // Clear cart if it was a cart checkout
+                    if (!productId) {
+                        Cart.items = [];
+                        Cart.save();
+                        Cart.updateCartCount();
+                    }
+                    alert("Your order is being sent to WhatsApp. The cart has been cleared.");
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Deep Link Generation for Pay Now Buttons
+            document.querySelectorAll('.pay-now-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const scheme = btn.getAttribute('data-scheme');
+                    const pa = btn.getAttribute('data-pa');
+                    const pn = btn.getAttribute('data-pn');
+                    const am = finalTotal;
+                    
+                    const url = `${scheme}?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR`;
+                    
+                    // Create an invisible anchor tag for higher reliability on mobile browsers
+                    const link = document.createElement('a');
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    setTimeout(() => {
+                        document.body.removeChild(link);
+                    }, 100);
+                });
+            });
+
+            // Copy to clipboard functionality
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const elementId = btn.getAttribute('data-copy');
+                    const textToCopy = document.getElementById(elementId).innerText;
+                    
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const originalHtml = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        btn.style.color = '#25D366';
+                        btn.style.borderColor = '#25D366';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalHtml;
+                            btn.style.color = '#333';
+                            btn.style.borderColor = '#ccc';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicycles in Velliyode, Kozhikode | City Cycle Mart</title>
+    <meta name="description" content="Browse the City Cycle Mart bicycle collection in Velliyode, Kozhikode. Filter by category and brand, view product details, or enquire directly on WhatsApp.">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .filters {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            background: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
+                </div>
+                <ul class="nav-links" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title">Our Collection</h1>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Kids">Kids</button>
+                <button class="filter-btn" data-filter="Junior">Junior</button>
+                <button class="filter-btn" data-filter="Teen">Teen</button>
+                <button class="filter-btn" data-filter="Adult">Adult</button>
+                <button class="filter-btn" data-filter="Ladies">Ladies</button>
+                <button class="filter-btn" data-filter="Single Speed">Single Speed</button>
+                <button class="filter-btn" data-filter="21 Speed">21 Speed</button>
+                <button class="filter-btn" data-filter="Sports">Sports</button>
+                <button class="filter-btn" data-filter="IBC">IBC</button>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="filter-controls"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 15px;">
+                <!-- Collapsible Filter Menu -->
+                <div class="filter-dropdown-container" style="position: relative;">
+                    <button id="filter-toggle-btn" class="filter-select"
+                        style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    <div id="filter-menu" class="dropdown-menu"
+                        style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); min-width: 250px;">
+                        <div class="filter-group" style="margin-bottom: 12px;">
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px;">Price
+                                Range</label>
+                            <select id="filter-price" class="filter-select" style="width: 100%;">
+                                <option value="all">All Prices</option>
+                                <option value="under-5000">Under ₹5,000</option>
+                                <option value="5000-10000">₹5,000 - ₹10,000</option>
+                                <option value="10000-15000">₹10,000 - ₹15,000</option>
+                                <option value="15000-plus">Over ₹15,000</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group" style="margin-bottom: 12px;">
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px;">Brand</label>
+                            <select id="filter-brand" class="filter-select" style="width: 100%;">
+                                <option value="all">All Brands</option>
+                                <option value="Caya">Caya</option>
+                                <option value="Hero">Hero</option>
+                                <option value="Hercules">Hercules</option>
+                                <option value="Alpha">Alpha</option>
+                                <option value="Addo-India">Addo-India</option>
+                                <option value="Avrox">Avrox</option>
+                                <option value="Lotus">Lotus</option>
+                                <option value="Bruce">Bruce</option>
+                                <option value="Coco">Coco</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group" style="margin-bottom: 12px;">
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px;">Suspension
+                                Type</label>
+                            <select id="filter-suspension" class="filter-select" style="width: 100%;">
+                                <option value="all">All Types</option>
+                                <option value="Rigid">Rigid</option>
+                                <option value="Front">Front Suspension</option>
+                                <option value="Back">Back Suspension</option>
+                                <option value="Dual">Dual Suspension</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group" style="margin-bottom: 12px;">
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px;">Brake
+                                System</label>
+                            <select id="filter-brake" class="filter-select" style="width: 100%;">
+                                <option value="all">All Brakes</option>
+                                <option value="Caliper">Caliper Brakes</option>
+                                <option value="Power">Power Brakes</option>
+                                <option value="Dual Disk">Dual Disk Brakes</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px;">Wheel
+                                Size</label>
+                            <select id="filter-wheel" class="filter-select" style="width: 100%;">
+                                <option value="all">All Sizes</option>
+                                <option value="12 Inches">12 Inches</option>
+                                <option value="14 Inches">14 Inches</option>
+                                <option value="16 Inches">16 Inches</option>
+                                <option value="20 Inches">20 Inches</option>
+                                <option value="24 Inches">24 Inches</option>
+                                <option value="26 Inches">26 Inches</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <select id="sort-products" class="filter-select">
+                    <option value="default">Sort By: Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
+            </div>
+
+            <div id="product-list" class="product-grid">
+                <!-- Products injected here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productList = document.getElementById('product-list');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            // Filter elements
+            const filterToggleBtn = document.getElementById('filter-toggle-btn');
+            const filterMenu = document.getElementById('filter-menu');
+            const priceFilterEl = document.getElementById('filter-price');
+            const brandFilterEl = document.getElementById('filter-brand');
+            const suspensionFilterEl = document.getElementById('filter-suspension');
+            const brakeFilterEl = document.getElementById('filter-brake');
+            const wheelFilterEl = document.getElementById('filter-wheel');
+            const sortEl = document.getElementById('sort-products');
+
+            // Toggle Filter Menu
+            filterToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!filterMenu.contains(e.target) && e.target !== filterToggleBtn) {
+                    filterMenu.style.display = 'none';
+                }
+            });
+
+            // Current state
+            const requestedCategory = new URLSearchParams(window.location.search).get('category');
+            let currentCategory = requestedCategory && Array.from(filterBtns).some(btn => btn.dataset.filter === requestedCategory) ? requestedCategory : 'all';
+            filterBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === currentCategory));
+
+            function renderProducts() {
+                productList.innerHTML = '';
+
+                // 1. Filter by Category Button
+                let filtered = currentCategory === 'all'
+                    ? products
+                    : products.filter(p => p.category.split(',').map(c => c.trim()).includes(currentCategory));
+
+                // 2. Filter by Price Dropdown
+                const priceFilter = priceFilterEl.value;
+                if (priceFilter !== 'all') {
+                    filtered = filtered.filter(p => {
+                        if (priceFilter === 'under-5000') return p.price < 5000;
+                        if (priceFilter === '5000-10000') return p.price >= 5000 && p.price <= 10000;
+                        if (priceFilter === '10000-15000') return p.price > 10000 && p.price <= 15000;
+                        if (priceFilter === '15000-plus') return p.price > 15000;
+                        return true;
+                    });
+                }
+
+                // 3. Filter by Brand Dropdown
+                const brandFilter = brandFilterEl.value;
+                if (brandFilter !== 'all') {
+                    filtered = filtered.filter(p => p.brand === brandFilter);
+                }
+
+                // 4. Filter by Suspension Dropdown
+                const suspensionFilter = suspensionFilterEl.value;
+                if (suspensionFilter !== 'all') {
+                    filtered = filtered.filter(p => {
+                        const susp = p.specs && p.specs.Suspension ? p.specs.Suspension : "";
+                        if (suspensionFilter === 'Rigid') return susp.toLowerCase().includes('rigid') || susp === "";
+                        if (suspensionFilter === 'Front') return susp.toLowerCase().includes('front');
+                        if (suspensionFilter === 'Back') return susp.toLowerCase().includes('back');
+                        if (suspensionFilter === 'Dual') return susp.toLowerCase().includes('dual') || susp.toLowerCase().includes('double');
+                        return true;
+                    });
+                }
+
+                // 5. Filter by Brake Dropdown
+                const brakeFilter = brakeFilterEl.value;
+                if (brakeFilter !== 'all') {
+                    filtered = filtered.filter(p => {
+                        const braking = p.specs && p.specs.Braking ? p.specs.Braking : (p.specs && p.specs.Brakes ? p.specs.Brakes : "");
+                        return braking.toLowerCase().includes(brakeFilter.toLowerCase());
+                    });
+                }
+
+                // 6. Filter by Wheel Size Dropdown
+                const wheelFilter = wheelFilterEl.value;
+                if (wheelFilter !== 'all') {
+                    filtered = filtered.filter(p => {
+                        const wheel = p.specs && p.specs["Wheel Size"] ? p.specs["Wheel Size"] : "";
+                        return wheel.includes(wheelFilter.split(' ')[0]);
+                    });
+                }
+
+                
+                // 6.5 Filter by Search Query
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchQuery = urlParams.get('search');
+                if (searchQuery) {
+                    const query = searchQuery.toLowerCase();
+                    filtered = filtered.filter(p => getProductSearchText(p).includes(query.trim().toLocaleLowerCase()));
+                }
+
+                // 7. Apply Sorting
+                const sortType = sortEl.value;
+                if (sortType === 'price-asc') {
+                    filtered.sort((a, b) => a.price - b.price);
+                } else if (sortType === 'price-desc') {
+                    filtered.sort((a, b) => b.price - a.price);
+                }
+
+                // 8. Render
+                if (filtered.length === 0) {
+                    productList.innerHTML = '<p style="text-align: center; width: 100%; grid-column: 1 / -1; padding: 40px;">No bicycles match your selected filters.</p>';
+                } else {
+                    filtered.forEach(product => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                            <div class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                                                        <a class="product-card-link" href="product-detail.html?id=${product.id}">
+                                <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" decoding="async">
+                                <div class="product-info">
+                                    <div class="product-category">${product.category}</div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <div class="product-price">₹${product.price}</div>
+                                </div>
+                            </a>
+                            <div class="product-card-actions">
+                                <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent('Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.')}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <button type="button" class="btn add-to-cart-card-btn" onclick="Cart.addItem(products.find(p => p.id === ${product.id}));" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                <button type="button" class="btn buy-now-card-btn" onclick="window.location.href='checkout.html?id=${product.id}';" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
+                                
+                            </div>
+                        `;
+                        productList.appendChild(card);
+                    });
+                }
+            }
+
+            // Initial Render
+            renderProducts();
+
+            // Event Listeners for Category Buttons
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.dataset.filter;
+                    renderProducts();
+                });
+            });
+
+            // Event Listeners for Dropdowns
+            priceFilterEl.addEventListener('change', renderProducts);
+            brandFilterEl.addEventListener('change', renderProducts);
+            suspensionFilterEl.addEventListener('change', renderProducts);
+            brakeFilterEl.addEventListener('change', renderProducts);
+            wheelFilterEl.addEventListener('change', renderProducts);
+            sortEl.addEventListener('change', renderProducts);
+
+        });
+    </script>
+</body>
+
+</html>

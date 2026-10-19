@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - City Cycle Mart</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            gap: 20px;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+        }
+
+        .remove-btn {
+            color: #e74c3c;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .cart-summary {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-checkout {
+            background-color: #25D366;
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-checkout:hover {
+            background-color: #128C7E;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .qty-btn {
+            background: #eee;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #ddd;
+        }
+
+        .qty-val {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
+                </div>
+                <ul class="nav-links" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container cart-container">
+            <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1 class="section-title">Your Shopping Cart</h1>
+            <div id="cart-items">
+                <!-- Items injected here -->
+            </div>
+
+            <div id="cart-summary" class="cart-summary" style="display: none;">
+                <div class="total-price">Total: <span id="cart-total">₹0.00</span></div>
+                <button id="checkout-btn" class="btn whatsapp-checkout">
+                    Order Now
+                </button>
+            </div>
+
+            <div id="empty-cart-msg" style="text-align: center; display: none;">
+                <p>Your cart is empty.</p>
+                <a href="products.html" class="btn" style="margin-top: 20px;">Browse Products</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSummary = document.getElementById('cart-summary');
+            const emptyCartMsg = document.getElementById('empty-cart-msg');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            function renderCart() {
+                cartItemsContainer.innerHTML = '';
+
+                if (Cart.items.length === 0) {
+                    cartSummary.style.display = 'none';
+                    emptyCartMsg.style.display = 'block';
+                    return;
+                }
+
+                cartSummary.style.display = 'block';
+                emptyCartMsg.style.display = 'none';
+
+                Cart.items.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'cart-item';
+                    el.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}${item.selectedColor ? ` <span style="font-size: 0.9rem; color: #666; font-weight: normal;">(${item.selectedColor})</span>` : ''}</div>
+                            <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1}, '${item.selectedColor || ''}')">-</button>
+                                <span class="qty-val">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1}, '${item.selectedColor || ''}')">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${item.id}, '${item.selectedColor || ''}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(el);
+                });
+
+                cartTotal.textContent = formatCurrency(Cart.getTotal());
+            }
+
+            // Expose utility functions globally
+            window.removeItem = function (id, color = '') {
+                Cart.removeItem(id, color || null);
+                renderCart();
+            };
+
+            window.updateQuantity = function (id, qty, color = '') {
+                if (qty < 1) return;
+                Cart.updateQuantity(id, qty, color || null);
+                renderCart();
+            };
+
+            // Checkout Logic
+            checkoutBtn.addEventListener('click', () => {
+                window.location.href = 'checkout.html';
+            });
+
+            renderCart();
+        });
+    </script>
+</body>
+
+</html>

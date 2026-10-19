@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicycle Brands in Velliyode, Kozhikode | City Cycle Mart</title>
+    <meta name="description" content="Browse bicycle brands available in the City Cycle Mart catalogue in Velliyode, Kozhikode. View product details and send an enquiry to the shop.">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-biking"></i>
+                    City Cycle Mart
+                </div>
+                <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
+                </div>
+                <ul class="nav-links" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1 id="brand-title" class="section-title">Brand Collection</h1>
+            <div id="product-list" class="product-grid">
+                <!-- Products injected here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandName = urlParams.get('name');
+            const brandTitle = document.getElementById('brand-title');
+            const productList = document.getElementById('product-list');
+
+            if (brandName) {
+                brandTitle.textContent = brandName + " Collection";
+                const filteredProducts = products.filter(p => p.brand === brandName);
+
+                if (filteredProducts.length > 0) {
+                    filteredProducts.forEach(product => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                                                        <a class="product-card-link" href="product-detail.html?id=${product.id}">
+                                <img src="${product.image}" alt="${product.name}" class="product-image">
+                                <div class="product-info">
+                                    <div class="product-category">${product.category}</div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <div class="product-price">₹${product.price}</div>
+                                </div>
+                            </a>
+                            <div class="product-card-actions">
+                                <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent('Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.')}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <button type="button" class="btn add-to-cart-card-btn" onclick="Cart.addItem(products.find(p => p.id === ${product.id}));" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                <button type="button" class="btn buy-now-card-btn" onclick="window.location.href='checkout.html?id=${product.id}';" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
+                                
+                            </div>
+                        `;
+                        productList.appendChild(card);
+                    });
+                } else {
+                    productList.innerHTML = '<h3>No products found for this brand.</h3>';
+                }
+            } else {
+                brandTitle.textContent = "Brand Not Specified";
+                productList.innerHTML = '<h3>Please select a brand from the home page.</h3>';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - City Cycle Mart</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/premium.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-detail {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+        }
+
+        .detail-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .detail-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .detail-category {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .detail-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .detail-price {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .detail-description {
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* Product Slider Styles */
+        .product-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-wrapper img {
+            min-width: 100%;
+            height: auto;
+            flex-shrink: 0;
+            border-radius: 0;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .slider-btn:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        .slider-btn.prev {
+            left: 10px;
+        }
+
+        .slider-btn.next {
+            right: 10px;
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: var(--primary-color);
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+
+        .order-now-btn {
+            background-color: #ff5722 !important;
+            padding: 15px 30px !important;
+            font-size: 1.2rem !important;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .order-now-btn:hover {
+            background-color: #e64a19 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            color: #fff;
+        }
+
+        /* Flipkart-style color selector styles */
+        .color-thumbnail-card {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            padding: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .color-thumbnail-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .color-thumbnail-card:hover {
+            transform: scale(1.05);
+        }
+
+        .color-thumbnail-card.active {
+            border-color: #000000;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/page-refresh.css">
+</head>
+
+<body>
+
+  <div class="store-topbar"><div class="container"><div class="store-promises"><span><i class="fas fa-shield-alt" aria-hidden="true"></i> Genuine Products</span><span>Best Prices</span><span>Local Showroom Support</span></div><div class="store-quick-contact"><a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a><a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a></div></div></div>
+    <!-- Navigation -->
+    <header class="reference-header">
+        <div class="container">
+            <nav>
+                <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <a class="logo" href="index.html"><i class="fas fa-biking" aria-hidden="true"></i><span>CITY CYCLE MART<small>RIDE · EXPLORE · LIVE</small></span></a>
+                <div class="nav-actions">
+                <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
+                    <input type="search" id="global-search-input" placeholder="Search for bikes..." aria-label="Search products">
+                    <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                    <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
+                </div>
+                <ul class="nav-links" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Bicycles</a></li>
+                    <li><a href="accessories.html">Accessories</a></li><li><a href="index.html#brands">Brands</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container product-page-main">
+        <div id="product-detail-container">
+            <!-- Details injected here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
+
+    <script src="data/products.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id')); // Simple ID parsing
+
+            const product = products.find(p => p.id === productId);
+            const container = document.getElementById('product-detail-container');            if (product) {
+                let activeVariantIndex = 0;
+                const hasVariants = product.variants && product.variants.length > 1;
+
+                function getActiveSlides() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].slides || [product.variants[activeVariantIndex].image];
+                    }
+                    return product.slides && product.slides.length > 0 ? product.slides : [product.image];
+                }
+
+                function getActiveImage() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].image;
+                    }
+                    return product.image;
+                }
+
+                function getActiveColorName() {
+                    if (hasVariants) {
+                        return product.variants[activeVariantIndex].colorName;
+                    }
+                    return null;
+                }
+
+                container.innerHTML = `
+                    <nav class="product-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i><a href="products.html">Bicycles</a><i class="fas fa-chevron-right" aria-hidden="true"></i><span>${product.category.split(",")[0].trim()}</span><i class="fas fa-chevron-right" aria-hidden="true"></i><span aria-current="page">${product.name}</span></nav> 
+                     <div class="product-detail">
+                        <div class="detail-image" id="gallery-container">
+                            <!-- Injected dynamically -->
+                        </div>
+                        <div class="detail-info">
+                            <div class="detail-category">${product.brand} | ${product.category}</div>
+                            <h1 class="detail-title">${product.name}</h1>
+                            ${product.code ? `<div class="product-code" style="margin-top: -15px; margin-bottom: 20px; color: #777; font-size: 0.9rem; font-weight: 500;">Product Code: ${product.code}</div>` : ''}
+                            
+                            <!-- Flipkart-style Color Selector -->
+                            ${hasVariants ? `
+                                <div class="color-selector-section" style="margin-bottom: 25px;">
+                                    <div class="color-selector-label" style="font-weight: 600; font-size: 0.95rem; color: #666; margin-bottom: 10px;">
+                                        Selected Color: <span id="active-color-display" style="color: #212121; font-weight: 700;">${getActiveColorName()}</span>
+                                    </div>
+                                    <div class="color-thumbnails-list" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                                        ${product.variants.map((v, index) => `
+                                            <div class="color-thumbnail-card ${index === 0 ? 'active' : ''}" data-index="${index}" onclick="selectColorVariant(${index})" title="${v.colorName}">
+                                                <img src="${v.image}" alt="${v.colorName}">
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            <p class="detail-description">${product.description}</p>
+                            
+                            <div class="features-list" style="margin-bottom: 30px;">
+                                <h3 style="margin-bottom: 10px;">Main Features:</h3>
+                                <ul style="list-style: disc; margin-left: 20px; color: #555;">
+                                    ${(product.features || []).map(f => `<li>${f}</li>`).join('')}
+                                </ul>
+                                ${(product.features || []).some(f => f.toLowerCase().includes("support wheel")) ? `<p style="color: #e67e22; font-size: 0.9rem; margin-top: 10px; font-weight: 600;"><i class="fas fa-info-circle"></i> Note: Support Wheels Can Be Changed into a Boot Stand</p>` : ""}
+                            </div>
+
+                            ${product.specs ? `
+                            <div class="specs-list" style="margin-bottom: 30px;">
+                                <h3 style="margin-bottom: 10px;">Specifications:</h3>
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    ${Object.entries(product.specs).map(([key, value]) => `
+                                        <tr style="border-bottom: 1px solid #eee;">
+                                            <td style="padding: 8px 0; font-weight: 600; color: #333;">${key}</td>
+                                            <td style="padding: 8px 0; color: #666; text-align: right;">${value}</td>
+                                        </tr>
+                                    `).join('')}
+                                </table>
+                            </div>
+                            ` : ''}
+
+                            <div class="detail-price" style="margin-bottom: 30px;">
+                                <span class="mrp" style="text-decoration: line-through; color: #e74c3c; font-size: 1.2rem; margin-right: 10px;">MRP: ₹${product.mrp}</span>
+                                <span class="sale-price" style="font-size: 2rem; color: var(--text-color); font-weight: 700;">Our Price: ₹${product.price}</span>
+                            </div>
+
+                            <div class="detail-actions">
+                                <button id="add-to-cart-btn" class="btn detail-cart-btn"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                <a id="whatsapp-enquiry-btn" href="#" class="btn whatsapp-detail-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <a id="order-now-btn" href="#" class="btn order-now-btn"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</a>
+                                <button type="button" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn share-detail-btn"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="related-products-section" aria-labelledby="related-products-title">
+                        <div class="related-products-heading"><div><p class="section-kicker">More to Explore</p><h2 id="related-products-title">Related Bicycles</h2></div><div class="related-heading-actions"><div class="related-carousel-controls"><button type="button" class="related-carousel-arrow" id="related-prev" aria-label="Scroll to previous bicycles" disabled><i class="fas fa-chevron-left" aria-hidden="true"></i></button><button type="button" class="related-carousel-arrow" id="related-next" aria-label="Scroll to more bicycles" disabled><i class="fas fa-chevron-right" aria-hidden="true"></i></button></div><a href="products.html" class="related-view-all">View All <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div></div>
+                        <div class="related-products-viewport" id="related-products-viewport"><div id="related-products-grid" class="related-products-track" aria-label="Related bicycles"></div></div>
+                    </section>
+                    <section class="product-help-banner"><div><p class="page-kicker">PERSONAL HELP FROM OUR TEAM</p><h2>Need Help Choosing?</h2><p>Talk with us and we’ll help you find a bicycle that suits your ride.</p></div><div class="product-help-actions"><a class="btn product-help-contact" href="contact.html">Contact Us</a><a class="btn product-help-whatsapp" href="https://wa.me/917511103323?text=Hi%20City%20Cycle%20Mart%2C%20I%20need%20help%20choosing%20a%20bicycle." target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a></div></section>                `;
+
+                const categoryTokens = product.category.split(',').map(value => value.trim().toLocaleLowerCase());
+                const relatedProducts = products.filter(item => item.id !== product.id && item.category.split(',').some(value => categoryTokens.includes(value.trim().toLocaleLowerCase())));
+                const relatedTrack = document.getElementById('related-products-grid');
+                const relatedViewport = document.getElementById('related-products-viewport');
+                const relatedPrev = document.getElementById('related-prev');
+                const relatedNext = document.getElementById('related-next');
+                relatedProducts.forEach(item => {
+                    const relatedCard = document.createElement('article');
+                    const enquiryText = `Hi City Cycle Mart, I am interested in the ${item.name}. Please share the price and availability.`;
+                    const discountPercent = Number(item.mrp) > Number(item.price) ? Math.round((Number(item.mrp) - Number(item.price)) / Number(item.mrp) * 100) : 0;
+                    const availability = item.availability || item.stockStatus || '';
+                    relatedCard.className = 'product-card related-product-card';
+                    relatedCard.innerHTML = `
+                        <a class="related-product-link" href="product-detail.html?id=${item.id}">
+                            <div class="related-card-image-wrap">${discountPercent ? `<span class="related-discount">${discountPercent}% off</span>` : ''}<img src="${item.image}" alt="${item.name}" class="product-image" loading="lazy" decoding="async"></div>
+                            <div class="related-card-info"><h3 class="related-product-name">${item.name}</h3><div class="related-price-row"><span class="related-sale-price">₹${Number(item.price).toLocaleString('en-IN')}</span>${Number(item.mrp) > Number(item.price) ? `<span class="related-mrp">₹${Number(item.mrp).toLocaleString('en-IN')}</span>` : ''}</div>${availability ? `<span class="related-availability">${availability}</span>` : ''}</div>
+                        </a>
+                        <div class="related-card-actions">
+                            <a class="related-action related-whatsapp" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiryText)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${item.name}" title="WhatsApp Enquiry"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                            <button type="button" class="related-action related-add-cart" aria-label="Add ${item.name} to cart" title="Add to Cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
+                            <a class="related-action related-buy-now" href="checkout.html?id=${item.id}" aria-label="Buy ${item.name} now" title="Buy Now"><i class="fas fa-bolt" aria-hidden="true"></i></a>
+                        </div>`;
+                    relatedCard.querySelector('.related-add-cart').addEventListener('click', () => Cart.addItem(item));
+                    relatedTrack.appendChild(relatedCard);
+                });
+                if (!relatedProducts.length) {
+                    relatedTrack.innerHTML = '<p class="related-empty-state">No related bicycles are available right now.</p>';
+                }
+                function updateRelatedControls() {
+                    const maxScroll = relatedViewport.scrollWidth - relatedViewport.clientWidth;
+                    relatedPrev.disabled = relatedViewport.scrollLeft <= 2;
+                    relatedNext.disabled = maxScroll <= 2 || relatedViewport.scrollLeft >= maxScroll - 2;
+                }
+                function scrollRelated(direction) {
+                    const card = relatedTrack.querySelector('.related-product-card');
+                    if (!card) return;
+                    const styles = window.getComputedStyle(relatedTrack);
+                    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+                    const step = card.getBoundingClientRect().width + gap;
+                    const cardsPerStep = Math.max(1, Math.floor(relatedViewport.clientWidth / step));
+                    relatedViewport.scrollBy({ left: direction * step * cardsPerStep, behavior: 'smooth' });
+                }
+                relatedPrev.addEventListener('click', () => scrollRelated(-1));
+                relatedNext.addEventListener('click', () => scrollRelated(1));
+                relatedViewport.addEventListener('scroll', updateRelatedControls, { passive: true });
+                window.addEventListener('resize', updateRelatedControls);
+                requestAnimationFrame(updateRelatedControls);
+                function renderGallery() {
+                    const galleryContainer = document.getElementById('gallery-container');
+                    const slides = getActiveSlides();
+                    const hasSlides = slides.length > 1;
+
+                    if (hasSlides) {
+                        galleryContainer.innerHTML = `
+                            <div class="product-slider">
+                                <div class="slider-wrapper" id="slider-wrapper" style="display: flex; transition: transform 0.5s ease-in-out;">
+                                    ${slides.map(slide => `<img src="${slide}" alt="${product.name}" draggable="false" style="min-width: 100%; object-fit: contain; pointer-events: none;">`).join('')}
+                                </div>
+                                <button class="slider-btn prev" onclick="moveSlider(-1)"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slider-btn next" onclick="moveSlider(1)"><i class="fas fa-chevron-right"></i></button>
+                                <div class="slider-indicators">
+                                    ${slides.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="goToSlider(${i})"></span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+
+                        let currentIndex = 0;
+                        const wrapper = document.getElementById('slider-wrapper');
+                        const indicators = document.querySelectorAll('.indicator');
+
+                        window.moveSlider = (direction) => {
+                            currentIndex = (currentIndex + direction + slides.length) % slides.length;
+                            updateSlider();
+                        };
+
+                        window.goToSlider = (index) => {
+                            currentIndex = index;
+                            updateSlider();
+                        };
+
+                        function updateSlider() {
+                            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                            indicators.forEach((ind, i) => {
+                                ind.classList.toggle('active', i === currentIndex);
+                            });
+                        }
+
+                        // Add swipe support
+                        let touchstartX = 0;
+                        let touchendX = 0;
+
+                        wrapper.addEventListener('touchstart', e => {
+                            touchstartX = e.changedTouches[0].screenX;
+                        }, {passive: true});
+
+                        wrapper.addEventListener('touchend', e => {
+                            touchendX = e.changedTouches[0].screenX;
+                            handleSwipe();
+                        }, {passive: true});
+
+                        function handleSwipe() {
+                            if (touchendX < touchstartX - 40) moveSlider(1);
+                            if (touchendX > touchstartX + 40) moveSlider(-1);
+                        }
+                    } else {
+                        galleryContainer.innerHTML = `<img src="${slides[0]}" alt="${product.name}" style="width: 100%; border-radius: 10px; box-shadow: var(--shadow);">`;
+                    }
+                }
+
+                function updateActionButtons() {
+                    const addToCartBtn = document.getElementById('add-to-cart-btn');
+                    const orderNowBtn = document.getElementById('order-now-btn');
+                    const whatsappEnquiryBtn = document.getElementById('whatsapp-enquiry-btn');
+                    const selectedColor = getActiveColorName();
+                    const selectedImage = getActiveImage();
+
+                    addToCartBtn.onclick = () => {
+                        const productToCart = {
+                            ...product,
+                            selectedColor: selectedColor,
+                            image: selectedImage
+                        };
+                        Cart.addItem(productToCart);
+                    };
+
+                    const enquiryMessage = `Hi City Cycle Mart, I am interested in the ${product.name}${selectedColor ? ` (${selectedColor})` : ''}. Please share the price and availability.`;
+                    whatsappEnquiryBtn.href = `https://wa.me/917511103323?text=${encodeURIComponent(enquiryMessage)}`;
+
+                    if (selectedColor) {
+                        orderNowBtn.href = `checkout.html?id=${product.id}&color=${encodeURIComponent(selectedColor)}`;
+                    } else {
+                        orderNowBtn.href = `checkout.html?id=${product.id}`;
+                    }
+                }
+
+                renderGallery();
+                updateActionButtons();
+
+                window.selectColorVariant = (index) => {
+                    activeVariantIndex = index;
+                    const cards = document.querySelectorAll('.color-thumbnail-card');
+                    cards.forEach((card, idx) => {
+                        card.classList.toggle('active', idx === index);
+                    });
+                    const colorDisplay = document.getElementById('active-color-display');
+                    if (colorDisplay) {
+                        colorDisplay.textContent = getActiveColorName();
+                    }
+                    renderGallery();
+                    updateActionButtons();
+                };
+            } else {
+                container.innerHTML = '<h2>Product not found</h2>';
+            }
+        });
+    </script>
+</body>
+
+</html>
