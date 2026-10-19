@@ -140,16 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const enquiry = 'Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.';
             card.innerHTML = `
                 <a class="product-card-link" href="product-detail.html?id=${product.id}">
+                    ${Number.isFinite(Number(product.mrp)) && Number(product.mrp) > Number(product.price) ? `<span class="product-discount-badge">${Math.round((Number(product.mrp) - Number(product.price)) / Number(product.mrp) * 100)}% off</span>` : ''}
                     <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
                     <div class="product-info">
                         <div class="product-category">${product.category}</div>
                         <h3 class="product-name">${product.name}</h3>
-                        <div class="product-price">₹${Number(product.price).toLocaleString('en-IN')}</div>
+                        <div class="product-price-row"><span class="product-price">₹${Number(product.price).toLocaleString('en-IN')}</span>${Number(product.mrp) > Number(product.price) ? `<span class="product-mrp">MRP ₹${Number(product.mrp).toLocaleString('en-IN')}</span>` : ''}</div>
                     </div>
                 </a>
                 <div class="product-card-actions">
-                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
                     <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
                     <button type="button" class="btn buy-now-card-btn" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
                     
                 </div>
@@ -187,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove active class from all slides and dots
         slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
+        dots.forEach(dot => { dot.classList.remove('active'); dot.setAttribute('aria-pressed', 'false'); });
 
         // Handle index bounds
         if (index >= slides.length) currentSlideIndex = 0;
@@ -196,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add active class to current slide and dot
         slides[currentSlideIndex].classList.add('active');
         dots[currentSlideIndex].classList.add('active');
+        dots[currentSlideIndex].setAttribute('aria-pressed', 'true');
     }
 
     function nextSlide() {

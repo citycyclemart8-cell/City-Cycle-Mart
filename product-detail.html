@@ -236,7 +236,7 @@
         <h2 id="footer-contact-title">Contact Details</h2>
         <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
         <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
-        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
         <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
       </section>
       <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
@@ -286,6 +286,10 @@
                     }
                     return null;
                 }
+
+                const sellingPrice = Number(product.price);
+                const mrpPrice = Number(product.mrp);
+                const hasGenuineDiscount = Number.isFinite(sellingPrice) && Number.isFinite(mrpPrice) && mrpPrice > sellingPrice;
 
                 container.innerHTML = `
                     <nav class="product-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i><a href="products.html">Bicycles</a><i class="fas fa-chevron-right" aria-hidden="true"></i><span>${product.category.split(",")[0].trim()}</span><i class="fas fa-chevron-right" aria-hidden="true"></i><span aria-current="page">${product.name}</span></nav> 
@@ -339,15 +343,15 @@
                             ` : ''}
 
                             <div class="detail-price" style="margin-bottom: 30px;">
-                                <span class="mrp" style="text-decoration: line-through; color: #e74c3c; font-size: 1.2rem; margin-right: 10px;">MRP: ₹${product.mrp}</span>
-                                <span class="sale-price" style="font-size: 2rem; color: var(--text-color); font-weight: 700;">Our Price: ₹${product.price}</span>
+                                ${hasGenuineDiscount ? `<span class="mrp">MRP: ₹${mrpPrice.toLocaleString('en-IN')}</span>` : ''}
+                                <span class="sale-price">Our Price: ₹${sellingPrice.toLocaleString('en-IN')}</span>
                             </div>
 
                             <div class="detail-actions">
-                                <button id="add-to-cart-btn" class="btn detail-cart-btn"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
-                                <a id="whatsapp-enquiry-btn" href="#" class="btn whatsapp-detail-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <button id="add-to-cart-btn" class="btn detail-cart-btn" aria-label="Add to Cart"><i class="fas fa-cart-plus" aria-hidden="true"></i><span class="action-label-full">Add to Cart</span><span class="action-label-compact" aria-hidden="true">Cart</span></button>
+                                <a id="whatsapp-enquiry-btn" href="#" class="btn whatsapp-detail-btn" target="_blank" rel="noopener" aria-label="WhatsApp Enquiry"><i class="fab fa-whatsapp" aria-hidden="true"></i><span class="action-label-full">WhatsApp Enquiry</span><span class="action-label-compact" aria-hidden="true">WhatsApp</span></a>
+                                <button type="button" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn share-detail-btn" aria-label="Share"><i class="fas fa-share-alt" aria-hidden="true"></i><span class="action-label-full">Share</span><span class="action-label-compact" aria-hidden="true">Share</span></button>
                                 <a id="order-now-btn" href="#" class="btn order-now-btn"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</a>
-                                <button type="button" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn share-detail-btn"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
                             </div>
                         </div>
                     </div>
@@ -375,7 +379,7 @@
                             <div class="related-card-info"><h3 class="related-product-name">${item.name}</h3><div class="related-price-row"><span class="related-sale-price">₹${Number(item.price).toLocaleString('en-IN')}</span>${Number(item.mrp) > Number(item.price) ? `<span class="related-mrp">₹${Number(item.mrp).toLocaleString('en-IN')}</span>` : ''}</div>${availability ? `<span class="related-availability">${availability}</span>` : ''}</div>
                         </a>
                         <div class="related-card-actions">
-                            <a class="related-action related-whatsapp" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiryText)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${item.name}" title="WhatsApp Enquiry"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                            <a class="related-action related-whatsapp" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiryText)}" target="_blank" rel="noopener" aria-label="WhatsApp ${item.name}" title="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                             <button type="button" class="related-action related-add-cart" aria-label="Add ${item.name} to cart" title="Add to Cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
                             <a class="related-action related-buy-now" href="checkout.html?id=${item.id}" aria-label="Buy ${item.name} now" title="Buy Now"><i class="fas fa-bolt" aria-hidden="true"></i></a>
                         </div>`;

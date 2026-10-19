@@ -70,7 +70,7 @@
         <h2 id="footer-contact-title">Contact Details</h2>
         <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
         <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
-        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
         <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
       </section>
       <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
@@ -107,16 +107,17 @@
                         card.className = 'product-card';
                         card.innerHTML = `
                                                         <a class="product-card-link" href="product-detail.html?id=${product.id}">
+                                ${Number.isFinite(Number(product.mrp)) && Number(product.mrp) > Number(product.price) ? `<span class="product-discount-badge">${Math.round((Number(product.mrp) - Number(product.price)) / Number(product.mrp) * 100)}% off</span>` : ''}
                                 <img src="${product.image}" alt="${product.name}" class="product-image">
                                 <div class="product-info">
                                     <div class="product-category">${product.category}</div>
                                     <h3 class="product-name">${product.name}</h3>
-                                    <div class="product-price">₹${product.price}</div>
+                                    <div class="product-price-row"><span class="product-price">₹${Number(product.price).toLocaleString('en-IN')}</span>${Number(product.mrp) > Number(product.price) ? `<span class="product-mrp">MRP ₹${Number(product.mrp).toLocaleString('en-IN')}</span>` : ''}</div>
                                 </div>
                             </a>
                             <div class="product-card-actions">
-                                <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent('Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.')}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
                                 <button type="button" class="btn add-to-cart-card-btn" onclick="Cart.addItem(products.find(p => p.id === ${product.id}));" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent('Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.')}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
                                 <button type="button" class="btn buy-now-card-btn" onclick="window.location.href='checkout.html?id=${product.id}';" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
                                 
                             </div>

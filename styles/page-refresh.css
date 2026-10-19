@@ -374,3 +374,38 @@
   .related-action { min-width:44px; min-height:44px; height:44px; }
   .product-help-actions { flex-wrap:wrap; }
 }
+
+/* Product page price clarity and the requested action hierarchy. */
+.product-page-main .detail-price { display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+.product-page-main .detail-price .mrp { color:#c62828!important; font-size:1rem!important; text-decoration:line-through; }
+.product-page-main .detail-price .sale-price { color:var(--brand-navy)!important; font-size:1.8rem!important; font-weight:800!important; }
+.related-mrp { color:#c62828!important; text-decoration:line-through; }
+.product-page-main .detail-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.product-page-main .detail-actions .btn { box-sizing:border-box; display:flex; width:100%; min-width:0!important; min-height:48px; align-items:center; justify-content:center; gap:7px; padding:10px 8px!important; border:1px solid transparent; border-radius:8px; font-family:inherit; font-size:.88rem!important; font-weight:750; line-height:1.15; text-align:center; white-space:nowrap; }
+.product-page-main .detail-actions .detail-cart-btn { color:#fff; background:var(--brand-orange); border-color:var(--brand-orange); }
+.product-page-main .detail-actions .whatsapp-detail-btn { color:#fff; background:#25d366; border-color:#25d366; text-decoration:none; }
+.product-page-main .detail-actions .share-detail-btn { color:var(--brand-navy); background:#fff; border-color:#cbd6e0; cursor:pointer; }
+.product-page-main .detail-actions .order-now-btn { grid-column:1 / -1; color:#fff!important; background:var(--brand-navy)!important; border-color:var(--brand-navy)!important; padding:10px 14px!important; font-size:.95rem!important; box-shadow:none; }
+.product-page-main .detail-actions .order-now-btn:hover { color:#fff!important; background:var(--brand-navy-deep)!important; border-color:var(--brand-navy-deep)!important; }
+.product-page-main .detail-actions .detail-cart-btn:hover { background:var(--brand-orange-dark); }
+.product-page-main .detail-actions .whatsapp-detail-btn:hover { background:#128c7e; }
+.product-page-main .detail-actions .share-detail-btn:hover { color:#fff; background:var(--brand-navy); }
+.action-label-compact { display:none; }
+
+/* Keep the More to Explore cards' compact, icon-only controls. */
+.related-card-actions { display:flex; gap:7px; padding:0 10px 10px; }
+.related-action { box-sizing:border-box; display:grid; flex:1 1 0; min-width:44px; min-height:44px; height:44px; padding:0; place-items:center; border:1px solid #dce4eb; border-radius:7px; color:#18334d; background:#fff; font-size:.9rem; text-decoration:none; cursor:pointer; }
+.related-whatsapp { color:#118850; }
+.related-add-cart { color:#d57a00; }
+.related-buy-now { color:#102a43; }
+.related-action:hover { border-color:#f59a23; color:#102a43; background:#fff7eb; }
+@media(max-width:900px) {
+  .product-page-main .detail-actions { gap:6px; }
+  .product-page-main .detail-actions .btn { min-height:48px; gap:4px; padding:8px 4px!important; font-size:.72rem!important; }
+  .product-page-main .detail-actions .action-label-full { display:none; }
+  .product-page-main .detail-actions .action-label-compact { display:inline; }
+  .product-page-main .detail-actions .order-now-btn { min-height:48px; font-size:.86rem!important; }
+}
+@media(max-width:600px) {
+  .related-card-actions { gap:7px; padding:0 8px 8px; }
+}
