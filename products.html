@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
     <title>Bicycles in Velliyode, Kozhikode | City Cycle Mart</title>
     <meta name="description" content="Browse the City Cycle Mart bicycle collection in Velliyode, Kozhikode. Filter by category and brand, view product details, or enquire directly on WhatsApp.">
     <link rel="stylesheet" href="styles/style.css">
@@ -89,7 +89,7 @@
                 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 15px;">
                 <!-- Collapsible Filter Menu -->
                 <div class="filter-dropdown-container" style="position: relative;">
-                    <button id="filter-toggle-btn" class="filter-select"
+                    <button id="filter-toggle-btn" class="filter-select" aria-expanded="false" aria-controls="filter-menu"
                         style="display: flex; align-items: center; gap: 8px;">
                         <i class="fas fa-filter"></i> Filter
                     </button>
@@ -235,15 +235,19 @@
             // Toggle Filter Menu
             filterToggleBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+                const isOpen = filterMenu.style.display === 'none';
+                filterMenu.style.display = isOpen ? 'block' : 'none';
+                filterToggleBtn.setAttribute('aria-expanded', String(isOpen));
             });
 
             // Close menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!filterMenu.contains(e.target) && e.target !== filterToggleBtn) {
                     filterMenu.style.display = 'none';
+                    filterToggleBtn.setAttribute('aria-expanded', 'false');
                 }
             });
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { filterMenu.style.display = 'none'; filterToggleBtn.setAttribute('aria-expanded', 'false'); filterToggleBtn.focus(); } });
 
             // Current state
             const requestedCategory = new URLSearchParams(window.location.search).get('category');
@@ -381,3 +385,4 @@
 </body>
 
 </html>
+

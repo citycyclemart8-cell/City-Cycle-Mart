@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
     <title>Product Details - City Cycle Mart</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/premium.css">
@@ -418,7 +418,7 @@
                                 <button class="slider-btn prev" onclick="moveSlider(-1)"><i class="fas fa-chevron-left"></i></button>
                                 <button class="slider-btn next" onclick="moveSlider(1)"><i class="fas fa-chevron-right"></i></button>
                                 <div class="slider-indicators">
-                                    ${slides.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="goToSlider(${i})"></span>`).join('')}
+                                    ${slides.map((_, i) => `<button type="button" class="indicator ${i === 0 ? 'active' : ''}" aria-label="Show product image ${i + 1}" onclick="goToSlider(${i})"></button>`).join('')}
                                 </div>
                             </div>
                         `;
@@ -516,3 +516,4 @@
 </body>
 
 </html>
+

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
     <title>Checkout - City Cycle Mart</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/premium.css">
@@ -292,16 +292,16 @@
                     <form id="address-form">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
-                            <input type="text" id="name" required placeholder="Enter your full name">
+                            <input type="text" id="name" required autocomplete="name" placeholder="Enter your full name">
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div class="form-group">
                                 <label for="phone">Phone Number *</label>
-                                <input type="tel" id="phone" required placeholder="Main phone number">
+                                <input type="tel" id="phone" required autocomplete="tel" inputmode="tel" placeholder="Main phone number">
                             </div>
                             <div class="form-group">
                                 <label for="phone2">Alternative Phone</label>
-                                <input type="tel" id="phone2" placeholder="Secondary number">
+                                <input type="tel" id="phone2" autocomplete="tel-national" inputmode="tel" placeholder="Secondary number">
                             </div>
                         </div>
                         <div class="form-group">
@@ -311,7 +311,7 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div class="form-group">
                                 <label for="pincode">Pincode *</label>
-                                <input type="text" id="pincode" required placeholder="6-digit Pincode">
+                                <input type="text" id="pincode" required autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" title="Enter a 6-digit postal code" placeholder="6-digit Pincode">
                             </div>
                             <div class="form-group">
                                 <label for="landmark">Nearest Landmark</label>

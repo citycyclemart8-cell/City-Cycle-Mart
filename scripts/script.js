@@ -1,11 +1,31 @@
+// Announce shopping feedback without blocking touch navigation.
+function announceStoreStatus(message) {
+    let status = document.getElementById('store-status');
+    if (!status) {
+        status = document.createElement('div');
+        status.id = 'store-status';
+        status.setAttribute('role', 'status');
+        status.setAttribute('aria-live', 'polite');
+        status.style.cssText = 'position:fixed;left:50%;bottom:calc(82px + env(safe-area-inset-bottom, 0px));z-index:3000;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:12px 18px;border-radius:10px;background:#071d35;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);text-align:center';
+        document.body.appendChild(status);
+    }
+    status.textContent = message;
+    status.hidden = false;
+    clearTimeout(status._hideTimer);
+    status._hideTimer = setTimeout(() => { status.hidden = true; }, 2600);
+}
+
 // Cart Management
 const Cart = {
     items: [],
 
     init() {
-        const storedCart = localStorage.getItem('cityCycleCart');
-        if (storedCart) {
-            this.items = JSON.parse(storedCart);
+        try {
+            const storedCart = localStorage.getItem('cityCycleCart');
+            const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+            this.items = Array.isArray(parsedCart) ? parsedCart.filter(item => item && item.id && Number(item.quantity) > 0) : [];
+        } catch (error) {
+            this.items = [];
         }
         this.updateCartCount();
     },
@@ -19,7 +39,7 @@ const Cart = {
         }
         this.save();
         this.updateCartCount();
-        alert('Added to cart!');
+        announceStoreStatus('Added to cart.');
     },
 
     removeItem(productId, color = null) {
@@ -30,7 +50,11 @@ const Cart = {
     },
 
     save() {
-        localStorage.setItem('cityCycleCart', JSON.stringify(this.items));
+        try {
+            localStorage.setItem('cityCycleCart', JSON.stringify(this.items));
+        } catch (error) {
+            announceStoreStatus('Cart storage is unavailable in this browser session.');
+        }
     },
 
     updateCartCount() {
@@ -38,6 +62,7 @@ const Cart = {
         if (countSpan) {
             const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
             countSpan.textContent = totalItems;
+            countSpan.setAttribute('aria-label', `${totalItems} items in cart`);
         }
     },
 
@@ -102,17 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    if (hamburger) {
+    if (hamburger && navLinks) {
+        hamburger.setAttribute('aria-expanded', 'false');
         hamburger.addEventListener('click', () => {
             const isOpen = navLinks.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', String(isOpen));
         });
-    }
-    if (navLinks && hamburger) {
-        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }));
+        const closeMenu = () => { navLinks.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); };
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+        document.addEventListener('click', event => { if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) closeMenu(); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+        window.addEventListener('resize', () => { if (window.matchMedia('(min-width: 768px)').matches) closeMenu(); }, { passive: true });
     }
 
     // Hero Slider Logic
@@ -374,6 +399,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create suggestion box
         const suggestionBox = document.createElement('div');
         suggestionBox.id = 'search-suggestions';
+        suggestionBox.setAttribute('role', 'listbox');
+        suggestionBox.setAttribute('aria-label', 'Product suggestions');
+        searchInput.setAttribute('aria-autocomplete', 'list');
+        searchInput.setAttribute('aria-controls', 'search-suggestions');
         suggestionBox.style.position = 'absolute';
         suggestionBox.style.top = '100%';
         suggestionBox.style.left = '0';
@@ -418,12 +447,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         item.addEventListener('mouseenter', () => item.style.backgroundColor = '#f9f9f9');
                         item.addEventListener('mouseleave', () => item.style.backgroundColor = 'transparent');
-                        
-                        item.addEventListener('mousedown', (e) => {
-                            // prevent blur from hiding it before click registers
-                            e.preventDefault(); 
-                            window.location.href = `product-detail.html?id=${p.id}`;
-                        });
+                        item.setAttribute('role', 'option');
+                        item.setAttribute('tabindex', '0');
+                        item.setAttribute('aria-label', `${p.name}, ₹${Number(p.price).toLocaleString('en-IN')}`);
+                        item.querySelector('img').alt = '';
+                        item.querySelector('img').loading = 'lazy';
+                        item.addEventListener('click', () => { window.location.href = `product-detail.html?id=${p.id}`; });
+                        item.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href = `product-detail.html?id=${p.id}`; } });
                         
                         suggestionBox.appendChild(item);
                     });
@@ -438,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Hide when losing focus
         searchInput.addEventListener('blur', () => {
-            suggestionBox.style.display = 'none';
+            setTimeout(() => { if (!suggestionBox.contains(document.activeElement)) suggestionBox.style.display = 'none'; }, 120);
         });
         // Show when focusing if there's text
         searchInput.addEventListener('focus', () => {
@@ -448,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { suggestionBox.style.display = 'none'; searchInput.blur(); return; }
             if (e.key === 'Enter') {
                 e.preventDefault();
                 executeSearch();
@@ -464,3 +495,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+
+
+
