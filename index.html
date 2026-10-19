@@ -142,7 +142,7 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Our Premium Brands</h2>
-            <div class="brand-grid">
+            <div class="brand-grid" id="brands">
                 <div class="brand-card" onclick="window.location.href='brand.html?name=Caya'" style="cursor: pointer;">
                     <!-- Caya: Used placeholder matching brand color -->
                     <img src="images/caya_logo.png" alt="Caya">
@@ -241,47 +241,40 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>City Cycle Mart</h3>
-                    <p>City Cycle Mart</p>
-                    <p>Velliyode</p>
-                    <P>Kallachi – Vilangad Road</P>
-                    <p>Velliyode Juma Masjid </p>
-                    <p>Kozhikode, Kerala – 673506
-                        India</p>
-                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener"><i class="fas fa-location-dot" aria-hidden="true"></i> Get directions</a></p>
-                        <a href="https://wa.me/917511103323" target="_blank" class="social-icon whatsapp"><i
-                                class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&utm_source=qr"
-                            target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
-                            class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
-                                class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>Phone: <a href="tel:+918590858064">+91 85908 58064</a></p>
-                    <p>Email: <a href="mailto:citycyclemart8@gmail.com">citycyclemart8@gmail.com</a></p>
-                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener">Get directions</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Explore</h3>
-                    <p><a href="products.html">All bicycles</a></p>
-                    <p><a href="categories.html">Bicycle categories</a></p>
-                    <p><a href="accessories.html">Accessories</a></p>
-                    <p><a href="about.html">About us</a></p>
-                    <p><a href="contact.html">Contact</a></p>
-                </div>
-            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
-                <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
-            </div>
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
         </div>
-    </footer>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
 
     <script src="data/products.js"></script>
     <script src="scripts/script.js"></script>
@@ -303,10 +296,10 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 11.732277394109634,
-        "longitude": 75.70663862483445
+        "latitude": 11.7324349,
+        "longitude": 75.7065688
       },
-      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445"
+      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=11.7324349%2C75.7065688"
     }
     </script>
     <script>

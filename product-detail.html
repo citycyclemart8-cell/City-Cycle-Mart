@@ -180,24 +180,23 @@
             border-color: #000000;
         }
     </style>
+    <link rel="stylesheet" href="styles/page-refresh.css">
 </head>
 
 <body>
 
+  <div class="store-topbar"><div class="container"><div class="store-promises"><span><i class="fas fa-shield-alt" aria-hidden="true"></i> Genuine Products</span><span>Best Prices</span><span>Local Showroom Support</span></div><div class="store-quick-contact"><a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a><a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a></div></div></div>
     <!-- Navigation -->
-    <header>
+    <header class="reference-header">
         <div class="container">
             <nav>
                 <button type="button" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">
                     <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
-                <div class="logo">
-                    <i class="fas fa-biking"></i>
-                    City Cycle Mart
-                </div>
+                <a class="logo" href="index.html"><i class="fas fa-biking" aria-hidden="true"></i><span>CITY CYCLE MART<small>RIDE · EXPLORE · LIVE</small></span></a>
                 <div class="nav-actions">
                 <div class="search-bar" style="display: flex; align-items: center; background: #f0f0f0; border-radius: 20px; padding: 5px 15px; margin-right: 15px;">
-                    <input type="text" id="global-search-input" placeholder="Search products..." style="border: none; background: transparent; outline: none; padding: 5px; width: 150px;">
+                    <input type="search" id="global-search-input" placeholder="Search for bikes..." aria-label="Search products">
                     <button type="button" class="search-submit" onclick="executeSearch()" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
                 </div>
                     <a class="cart-icon" href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count">0</span></a>
@@ -205,7 +204,7 @@
                 <ul class="nav-links" id="site-navigation">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html" class="active">Bicycles</a></li>
-                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="accessories.html">Accessories</a></li><li><a href="index.html#brands">Brands</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -213,55 +212,47 @@
         </div>
     </header>
 
-    <div class="container" style="padding-top: 20px;">
-        <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+    <main class="container product-page-main">
         <div id="product-detail-container">
             <!-- Details injected here -->
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>City Cycle Mart</h3>
-                    <p>City Cycle Mart</p>
-                    <p>Velliyode</p>
-                    <P>Kallachi – Vilangad Road</P>
-                    <p>Velliyode Juma Masjid </p>
-                    <p>Kozhikode, Kerala – 673506
-                        India</p>
-                    <div class="social-links">
-                        <a href="https://wa.me/917511103323" target="_blank" class="social-icon whatsapp"><i
-                                class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&utm_source=qr"
-                            target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank"
-                            class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="mailto:citycyclemart8@gmail.com" class="social-icon email"><i
-                                class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>Phone: <a href="tel:+918590858064">+91 85908 58064</a></p>
-                    <p>Email: <a href="mailto:citycyclemart8@gmail.com">citycyclemart8@gmail.com</a></p>
-                    <p><a href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener">Get directions</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Explore</h3>
-                    <p><a href="products.html">All bicycles</a></p>
-                    <p><a href="categories.html">Bicycle categories</a></p>
-                    <p><a href="accessories.html">Accessories</a></p>
-                    <p><a href="about.html">About us</a></p>
-                    <p><a href="contact.html">Contact</a></p>
-                </div>
-            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
-                <p>&copy; 2026 City Cycle Mart. All rights reserved.</p>
-            </div>
+    <footer class="ccm-footer">
+  <div class="container">
+    <div class="ccm-footer-grid">
+      <section class="ccm-footer-column ccm-footer-shop" aria-labelledby="footer-shop-title">
+        <h2 id="footer-shop-title"><i class="fas fa-bicycle" aria-hidden="true"></i> City Cycle Mart</h2>
+        <p class="ccm-footer-tagline">Your local destination for quality bicycles and helpful service.</p>
+        <address><i class="fas fa-location-dot" aria-hidden="true"></i><span>Velliyode Juma Masjid,<br>Kallachi–Vilangad Road,<br>Velliyode, Kozhikode, Kerala 673506, India</span></address>
+        <a class="ccm-footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.7324349%2C75.7065688" target="_blank" rel="noopener"><i class="fas fa-diamond-turn-right" aria-hidden="true"></i> Get directions</a>
+      </section>
+      <nav class="ccm-footer-column" aria-labelledby="footer-links-title">
+        <h2 id="footer-links-title">Quick Links</h2>
+        <a href="index.html">Home</a><a href="products.html">Bicycles</a><a href="categories.html">Categories</a><a href="accessories.html">Accessories</a><a href="brand.html">Brands</a><a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      </nav>
+      <section class="ccm-footer-column" aria-labelledby="footer-contact-title">
+        <h2 id="footer-contact-title">Contact Details</h2>
+        <a href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> +91 85908 58064</a>
+        <a href="mailto:citycyclemart8@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> citycyclemart8@gmail.com</a>
+        <a href="https://wa.me/917511103323" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+        <p><i class="far fa-clock" aria-hidden="true"></i> 9:00 AM – 7:00 PM</p>
+      </section>
+      <section class="ccm-footer-column ccm-footer-social" aria-labelledby="footer-social-title">
+        <h2 id="footer-social-title">Follow Us</h2>
+        <p>Connect with City Cycle Mart.</p>
+        <div class="ccm-footer-social-links">
+          <a href="https://www.instagram.com/city_cycle_mart_?igsh=MTh1M3RuNnVxZDgyMQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/share/1b7MFytypS/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="mailto:citycyclemart8@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
         </div>
-    </footer>
+      </section>
+    </div>
+    <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
+  </div>
+</footer>
 
     <script src="data/products.js"></script>
     <script src="scripts/script.js"></script>
@@ -297,7 +288,8 @@
                 }
 
                 container.innerHTML = `
-                    <div class="product-detail">
+                    <nav class="product-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i><a href="products.html">Bicycles</a><i class="fas fa-chevron-right" aria-hidden="true"></i><span>${product.category.split(",")[0].trim()}</span><i class="fas fa-chevron-right" aria-hidden="true"></i><span aria-current="page">${product.name}</span></nav> 
+                     <div class="product-detail">
                         <div class="detail-image" id="gallery-container">
                             <!-- Injected dynamically -->
                         </div>
@@ -351,19 +343,67 @@
                                 <span class="sale-price" style="font-size: 2rem; color: var(--text-color); font-weight: 700;">Our Price: ₹${product.price}</span>
                             </div>
 
-                            <div class="detail-actions" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                <button id="add-to-cart-btn" class="btn">Add to Cart</button>
-                                <a id="order-now-btn" href="#" class="btn order-now-btn">Order Now</a>
-                                <a id="whatsapp-enquiry-btn" href="#" class="btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Ask on WhatsApp</a>
-                                <a class="btn call-detail-btn" href="tel:+918590858064"><i class="fas fa-phone" aria-hidden="true"></i> Call Shop</a>
-                                <button onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn" style="background-color: var(--text-color);">
-                                    <i class="fas fa-share-alt"></i> Share
-                                </button>
+                            <div class="detail-actions">
+                                <button id="add-to-cart-btn" class="btn detail-cart-btn"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                <a id="whatsapp-enquiry-btn" href="#" class="btn whatsapp-detail-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
+                                <a id="order-now-btn" href="#" class="btn order-now-btn"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</a>
+                                <button type="button" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" class="btn share-detail-btn"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
                             </div>
                         </div>
                     </div>
-                `;
+                    <section class="related-products-section" aria-labelledby="related-products-title">
+                        <div class="related-products-heading"><div><p class="section-kicker">More to Explore</p><h2 id="related-products-title">Related Bicycles</h2></div><div class="related-heading-actions"><div class="related-carousel-controls"><button type="button" class="related-carousel-arrow" id="related-prev" aria-label="Scroll to previous bicycles" disabled><i class="fas fa-chevron-left" aria-hidden="true"></i></button><button type="button" class="related-carousel-arrow" id="related-next" aria-label="Scroll to more bicycles" disabled><i class="fas fa-chevron-right" aria-hidden="true"></i></button></div><a href="products.html" class="related-view-all">View All <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div></div>
+                        <div class="related-products-viewport" id="related-products-viewport"><div id="related-products-grid" class="related-products-track" aria-label="Related bicycles"></div></div>
+                    </section>
+                    <section class="product-help-banner"><div><p class="page-kicker">PERSONAL HELP FROM OUR TEAM</p><h2>Need Help Choosing?</h2><p>Talk with us and we’ll help you find a bicycle that suits your ride.</p></div><div class="product-help-actions"><a class="btn product-help-contact" href="contact.html">Contact Us</a><a class="btn product-help-whatsapp" href="https://wa.me/917511103323?text=Hi%20City%20Cycle%20Mart%2C%20I%20need%20help%20choosing%20a%20bicycle." target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a></div></section>                `;
 
+                const categoryTokens = product.category.split(',').map(value => value.trim().toLocaleLowerCase());
+                const relatedProducts = products.filter(item => item.id !== product.id && item.category.split(',').some(value => categoryTokens.includes(value.trim().toLocaleLowerCase())));
+                const relatedTrack = document.getElementById('related-products-grid');
+                const relatedViewport = document.getElementById('related-products-viewport');
+                const relatedPrev = document.getElementById('related-prev');
+                const relatedNext = document.getElementById('related-next');
+                relatedProducts.forEach(item => {
+                    const relatedCard = document.createElement('article');
+                    const enquiryText = `Hi City Cycle Mart, I am interested in the ${item.name}. Please share the price and availability.`;
+                    const discountPercent = Number(item.mrp) > Number(item.price) ? Math.round((Number(item.mrp) - Number(item.price)) / Number(item.mrp) * 100) : 0;
+                    const availability = item.availability || item.stockStatus || '';
+                    relatedCard.className = 'product-card related-product-card';
+                    relatedCard.innerHTML = `
+                        <a class="related-product-link" href="product-detail.html?id=${item.id}">
+                            <div class="related-card-image-wrap">${discountPercent ? `<span class="related-discount">${discountPercent}% off</span>` : ''}<img src="${item.image}" alt="${item.name}" class="product-image" loading="lazy" decoding="async"></div>
+                            <div class="related-card-info"><h3 class="related-product-name">${item.name}</h3><div class="related-price-row"><span class="related-sale-price">₹${Number(item.price).toLocaleString('en-IN')}</span>${Number(item.mrp) > Number(item.price) ? `<span class="related-mrp">₹${Number(item.mrp).toLocaleString('en-IN')}</span>` : ''}</div>${availability ? `<span class="related-availability">${availability}</span>` : ''}</div>
+                        </a>
+                        <div class="related-card-actions">
+                            <a class="related-action related-whatsapp" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiryText)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${item.name}" title="WhatsApp Enquiry"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                            <button type="button" class="related-action related-add-cart" aria-label="Add ${item.name} to cart" title="Add to Cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
+                            <a class="related-action related-buy-now" href="checkout.html?id=${item.id}" aria-label="Buy ${item.name} now" title="Buy Now"><i class="fas fa-bolt" aria-hidden="true"></i></a>
+                        </div>`;
+                    relatedCard.querySelector('.related-add-cart').addEventListener('click', () => Cart.addItem(item));
+                    relatedTrack.appendChild(relatedCard);
+                });
+                if (!relatedProducts.length) {
+                    relatedTrack.innerHTML = '<p class="related-empty-state">No related bicycles are available right now.</p>';
+                }
+                function updateRelatedControls() {
+                    const maxScroll = relatedViewport.scrollWidth - relatedViewport.clientWidth;
+                    relatedPrev.disabled = relatedViewport.scrollLeft <= 2;
+                    relatedNext.disabled = maxScroll <= 2 || relatedViewport.scrollLeft >= maxScroll - 2;
+                }
+                function scrollRelated(direction) {
+                    const card = relatedTrack.querySelector('.related-product-card');
+                    if (!card) return;
+                    const styles = window.getComputedStyle(relatedTrack);
+                    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+                    const step = card.getBoundingClientRect().width + gap;
+                    const cardsPerStep = Math.max(1, Math.floor(relatedViewport.clientWidth / step));
+                    relatedViewport.scrollBy({ left: direction * step * cardsPerStep, behavior: 'smooth' });
+                }
+                relatedPrev.addEventListener('click', () => scrollRelated(-1));
+                relatedNext.addEventListener('click', () => scrollRelated(1));
+                relatedViewport.addEventListener('scroll', updateRelatedControls, { passive: true });
+                window.addEventListener('resize', updateRelatedControls);
+                requestAnimationFrame(updateRelatedControls);
                 function renderGallery() {
                     const galleryContainer = document.getElementById('gallery-container');
                     const slides = getActiveSlides();

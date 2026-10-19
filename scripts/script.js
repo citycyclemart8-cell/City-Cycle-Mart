@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactActions.innerHTML = `
         <a class="float-whatsapp" href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp City Cycle Mart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
         <a class="float-call" href="tel:+918590858064" aria-label="Call City Cycle Mart"><i class="fas fa-phone" aria-hidden="true"></i><span>Call</span></a>
-        <a class="float-directions" href="https://www.google.com/maps/dir/?api=1&destination=11.732277394109634%2C75.70663862483445" target="_blank" rel="noopener" aria-label="Get directions to City Cycle Mart"><i class="fas fa-location-dot" aria-hidden="true"></i><span>Directions</span></a>
+        <a class="float-directions" href="https://www.google.com/maps/dir/?api=1&destination=11.7324349%2C75.7065688" target="_blank" rel="noopener" aria-label="Get directions to City Cycle Mart"><i class="fas fa-location-dot" aria-hidden="true"></i><span>Directions</span></a>
     `;
     document.body.appendChild(contactActions);
 
@@ -87,11 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
                 <div class="product-card-actions">
                     <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp enquiry about ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Enquiry</a>
-                    <a class="btn call-card-btn" href="tel:+918590858064" aria-label="Call City Cycle Mart about ${product.name}"><i class="fas fa-phone" aria-hidden="true"></i> Call Now</a>
-                    <button class="btn cart-card-btn cart-card-icon" type="button" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i></button>
+                    <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                    <button type="button" class="btn buy-now-card-btn" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
+                    
                 </div>
             `;
-            card.querySelector('.cart-card-btn').addEventListener('click', () => Cart.addItem(product));
+            card.querySelector('.add-to-cart-card-btn').addEventListener('click', () => Cart.addItem(product));
+            card.querySelector('.buy-now-card-btn').addEventListener('click', () => { window.location.href = 'checkout.html?id=' + product.id; });
             featuredGrid.appendChild(card);
         });
     }
@@ -343,11 +345,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Global Search Logic
+function getProductSearchText(product) {
+    const specs = Object.values(product.specs || {}).join(' ');
+    const features = Array.isArray(product.features) ? product.features.join(' ') : '';
+    return [product.name, product.brand, product.category, product.code, product.description, features, specs]
+        .filter(value => typeof value === 'string' && value.trim())
+        .join(' ')
+        .toLocaleLowerCase();
+}
+
 window.executeSearch = function() {
-    const query = document.getElementById('global-search-input').value;
-    if (query) {
-        window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+    const searchInput = document.getElementById('global-search-input');
+    if (!searchInput) return;
+    const query = searchInput.value.trim();
+    if (!query) {
+        searchInput.focus();
+        return;
     }
+    window.location.href = `products.html?search=${encodeURIComponent(query)}`;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -380,12 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
             suggestionBox.innerHTML = '';
             
             if (query.length > 0 && typeof products !== 'undefined') {
-                const matches = products.filter(p => 
-                    p.name.toLowerCase().includes(query) || 
-                    p.category.toLowerCase().includes(query) ||
-                    p.brand.toLowerCase().includes(query) ||
-                    (p.code && p.code.toLowerCase().includes(query))
-                ).slice(0, 5); // limit to 5
+                const matches = products.filter(p => getProductSearchText(p).includes(query)).slice(0, 5);
                 
                 if (matches.length > 0) {
                     matches.forEach(p => {
@@ -437,8 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        searchInput.addEventListener('keypress', function (e) {
+        searchInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 executeSearch();
             }
         });

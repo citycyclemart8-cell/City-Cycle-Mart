@@ -333,3 +333,37 @@ footer { margin-top:auto; padding:42px 0 20px; color:#e6eef5; background:var(--b
 /* WhatsApp brand color for product enquiry actions */
 .product-card-actions > .whatsapp-card-btn { color:#fff; background:#25d366; border-color:#25d366; }
 .product-card-actions > .whatsapp-card-btn:hover { color:#fff; background:#128c7e; border-color:#128c7e; }
+
+/* Orange Add to Cart action on product cards */
+.product-card-actions > .add-to-cart-card-btn { color:#fff; background:var(--brand-orange); border-color:var(--brand-orange); cursor:pointer; }
+.product-card-actions > .add-to-cart-card-btn:hover { color:#fff; background:var(--brand-orange-dark); border-color:var(--brand-orange-dark); transform:translateY(-1px); }
+/* Product card purchase actions: WhatsApp full width, cart and checkout side by side */
+.product-card-actions { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.product-card-actions > .whatsapp-card-btn { grid-column:1 / -1; }
+.product-card-actions > .buy-now-card-btn { color:#fff; background:var(--brand-navy); border-color:var(--brand-navy); }
+.product-card-actions > .buy-now-card-btn:hover { color:#fff; background:var(--brand-navy-deep); border-color:var(--brand-navy-deep); transform:translateY(-1px); }
+.product-card-actions > .add-to-cart-card-btn,.product-card-actions > .buy-now-card-btn { font-size:clamp(.64rem, .8vw, .78rem); padding-inline:5px; }
+/* Compact, shared City Cycle Mart footer */
+footer.ccm-footer { margin-top:auto; padding:25px 0 0; color:#d7e1ec; background:#091d32; }
+.ccm-footer .container { width:min(100% - 40px, 1320px); }
+.ccm-footer-grid { display:grid; grid-template-columns:1.35fr .8fr 1.2fr .85fr; gap:clamp(20px,3vw,42px); padding-bottom:20px; }
+.ccm-footer-column { display:flex; flex-direction:column; align-items:flex-start; gap:8px; min-width:0; }
+.ccm-footer-column h2 { margin:0 0 5px; color:#fff; font-size:.92rem; font-weight:750; letter-spacing:.01em; }
+.ccm-footer-column h2::after { display:block; width:28px; height:2px; margin-top:7px; background:#f59a23; content:""; }
+.ccm-footer-column p { margin:0; color:#c2cedb; font-size:.78rem; line-height:1.55; }
+.ccm-footer-column a { display:inline-flex; align-items:flex-start; gap:9px; color:#d7e1ec; font-size:.78rem; line-height:1.5; text-decoration:none; transition:color .18s ease,transform .18s ease; }
+.ccm-footer-column a:hover { color:#ffad35; transform:translateX(2px); }
+.ccm-footer-column a > i,.ccm-footer-column address > i { flex:0 0 15px; margin-top:3px; color:#f59a23; text-align:center; }
+.ccm-footer-shop h2 { display:flex; align-items:center; gap:9px; font-size:1.02rem; text-transform:uppercase; }
+.ccm-footer-shop h2 > i { color:#f59a23; font-size:1.3rem; }
+.ccm-footer-shop h2::after { display:none; }
+.ccm-footer-shop .ccm-footer-tagline { max-width:255px; margin-bottom:3px; }
+.ccm-footer-column address { display:flex; gap:9px; color:#c2cedb; font-size:.78rem; font-style:normal; line-height:1.55; }
+.ccm-footer-column .ccm-footer-directions { margin-top:1px; color:#ffad35; font-weight:700; }
+.ccm-footer-social-links { display:flex; flex-wrap:wrap; gap:9px; margin-top:3px; }
+.ccm-footer-column .ccm-footer-social-links a { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.2); border-radius:50%; color:#fff; font-size:.9rem; transition:color .18s ease,background .18s ease,border-color .18s ease,transform .18s ease; }
+.ccm-footer-column .ccm-footer-social-links a:hover { transform:translateY(-2px); border-color:#f59a23; color:#091d32; background:#f59a23; }
+.ccm-footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:12px; min-height:41px; padding:10px 0; border-top:1px solid rgba(255,255,255,.15); color:#aebdcd; font-size:.72rem; }
+.ccm-footer-bottom i { margin-left:4px; color:#f59a23; }
+@media(max-width:850px) { .ccm-footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 32px; } }
+@media(max-width:480px) { footer.ccm-footer { padding-top:22px; } .ccm-footer .container { width:min(100% - 32px, 1320px); } .ccm-footer-grid { grid-template-columns:1fr 1fr; gap:22px 18px; } .ccm-footer-column h2 { font-size:.86rem; } .ccm-footer-column a,.ccm-footer-column address,.ccm-footer-column p { font-size:.74rem; overflow-wrap:anywhere; } .ccm-footer-bottom { align-items:flex-start; flex-direction:column; justify-content:center; gap:4px; padding:10px 0; } }
