@@ -89,11 +89,48 @@ document.addEventListener('DOMContentLoaded', () => {
     contactActions.className = 'floating-contact-actions';
     contactActions.setAttribute('aria-label', 'Contact City Cycle Mart');
     contactActions.innerHTML = `
-        <a class="float-whatsapp" href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp City Cycle Mart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
-        <a class="float-call" href="tel:+918590858064" aria-label="Call City Cycle Mart"><i class="fas fa-phone" aria-hidden="true"></i><span>Call</span></a>
-        <a class="float-directions" href="https://www.google.com/maps/dir/?api=1&destination=11.7324349%2C75.7065688" target="_blank" rel="noopener" aria-label="Get directions to City Cycle Mart"><i class="fas fa-location-dot" aria-hidden="true"></i><span>Directions</span></a>
+        <nav class="contact-widget-links" id="contact-widget-links" aria-label="Contact options">
+            <a class="float-whatsapp" href="https://wa.me/917511103323" target="_blank" rel="noopener" aria-label="WhatsApp City Cycle Mart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+            <a class="float-call" href="tel:+918590858064" aria-label="Call City Cycle Mart"><i class="fas fa-phone" aria-hidden="true"></i><span>Call</span></a>
+            <a class="float-directions" href="https://www.google.com/maps/dir/?api=1&destination=11.7324349%2C75.7065688" target="_blank" rel="noopener" aria-label="Get directions to City Cycle Mart"><i class="fas fa-location-dot" aria-hidden="true"></i><span>Directions</span></a>
+        </nav>
+        <button type="button" class="contact-widget-toggle" aria-expanded="false" aria-controls="contact-widget-links" aria-label="Open contact options"><i class="fas fa-comment-dots" aria-hidden="true"></i></button>
     `;
     document.body.appendChild(contactActions);
+
+    const contactToggle = contactActions.querySelector('.contact-widget-toggle');
+    const contactLinks = contactActions.querySelector('.contact-widget-links');
+    function closeContactWidget() {
+        contactActions.classList.remove('is-open');
+        contactToggle.setAttribute('aria-expanded', 'false');
+        contactToggle.setAttribute('aria-label', 'Open contact options');
+    }
+    contactToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = contactActions.classList.toggle('is-open');
+        contactToggle.setAttribute('aria-expanded', String(isOpen));
+        contactToggle.setAttribute('aria-label', isOpen ? 'Close contact options' : 'Open contact options');
+    });
+    contactLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeContactWidget));
+    document.addEventListener('click', event => { if (!contactActions.contains(event.target)) closeContactWidget(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeContactWidget(); });
+    window.addEventListener('resize', () => { if (window.matchMedia('(min-width: 577px)').matches) closeContactWidget(); }, { passive: true });
+
+    // Hide the mobile widget while shopping controls or key content are on screen.
+    const protectedSelectors = ['.hero-slider', '.hero', '#product-detail-container', '.product-grid', '#product-list', '#featured-products-grid', '.related-products-viewport', '.filters', '.filter-controls', '.filter-dropdown-container', '.category-directory', '.cart-container', '.cart-item', '.cart-summary', '.checkout-container', 'footer.ccm-footer'];
+    if ('IntersectionObserver' in window) {
+        const visibleProtectedContent = new Set();
+        const protectedObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) visibleProtectedContent.add(entry.target);
+                else visibleProtectedContent.delete(entry.target);
+            });
+            const hasProtectedContent = visibleProtectedContent.size > 0;
+            contactActions.classList.toggle('is-obscured', hasProtectedContent);
+            if (hasProtectedContent) closeContactWidget();
+        }, { root: null, threshold: 0.01, rootMargin: '0px 0px -48px 0px' });
+        protectedSelectors.forEach(selector => document.querySelectorAll(selector).forEach(element => protectedObserver.observe(element)));
+    }
 
     const featuredGrid = document.getElementById('featured-products-grid');
     if (featuredGrid && typeof products !== 'undefined' && Array.isArray(products)) {
@@ -495,6 +532,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+
+
 
 
 
