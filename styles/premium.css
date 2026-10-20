@@ -502,3 +502,128 @@ button, a, [role="button"] { touch-action: manipulation; }
   .product-card-actions > .buy-now-card-btn > i { font-size:.8rem; }
 }
 
+
+
+/* Popular Bikes promotional carousel */
+.featured-cycles { padding:clamp(34px,5vw,58px) 0; }
+.featured-cycles > .container > .section-title { margin:0 0 20px; }
+.popular-carousel { position:relative; min-height:390px; overflow:hidden; isolation:isolate; border-radius:20px; color:#fff; background:radial-gradient(ellipse at 30% 50%,#183b5b 0,#0c2743 44%,#071a2e 100%); box-shadow:0 22px 50px rgba(7,29,53,.18); }
+.popular-carousel-track { position:relative; min-height:390px; }
+.popular-slide { position:absolute; inset:0; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr); align-items:center; gap:clamp(22px,4vw,62px); padding:clamp(30px,5vw,64px) clamp(58px,8vw,100px); opacity:0; visibility:hidden; transform:translateX(22px); transition:opacity .55s ease,transform .55s ease,visibility .55s; }
+.popular-slide.is-active { position:relative; opacity:1; visibility:visible; transform:translateX(0); }
+.popular-slide-image-wrap { min-width:0; display:grid; place-items:center; height:100%; min-height:265px; border-radius:16px; background:radial-gradient(ellipse,rgba(255,255,255,.13),rgba(255,255,255,0) 68%); }
+.popular-slide-image { display:block; width:100%; height:clamp(240px,32vw,350px); object-fit:contain; filter:drop-shadow(0 22px 22px rgba(0,0,0,.38)); }
+.popular-slide-copy { max-width:470px; padding:8px 0; }
+.popular-eyebrow { margin:0 0 12px; color:#ff9a54; font-size:.74rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.popular-slide-copy h3 { margin:0 0 14px; color:#fff; font-size:clamp(2rem,4vw,3.25rem); font-weight:800; line-height:1.02; letter-spacing:-.045em; }
+.popular-product-name { margin:0 0 8px; color:#fff; font-size:1.08rem; font-weight:700; }
+.popular-description { max-width:390px; margin:0 0 18px; color:#c7d5e3; font-size:.94rem; line-height:1.55; }
+.popular-price { display:flex; align-items:baseline; flex-wrap:wrap; gap:9px; margin-bottom:20px; }
+.popular-price-label { color:#bdcbd9; font-size:.78rem; }.popular-price strong { color:#fff; font-size:1.6rem; }.popular-price del { color:#9eb0c1; font-size:.88rem; }.popular-saving { padding:3px 8px; border-radius:20px; color:#ffb17b; background:rgba(244,119,33,.16); font-size:.72rem; font-weight:800; }
+.popular-shop-btn { display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:48px; padding:0 21px; border-radius:8px; background:var(--brand-orange); color:white; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(244,119,33,.22); transition:background .2s ease,transform .2s ease; }.popular-shop-btn:hover { background:var(--brand-orange-dark); color:#fff; transform:translateY(-2px); }
+.popular-carousel-arrow { position:absolute; z-index:3; top:50%; display:grid; place-items:center; width:42px; height:42px; border:1px solid rgba(255,255,255,.22); border-radius:50%; color:#fff; background:rgba(4,21,41,.6); cursor:pointer; transform:translateY(-50%); }.popular-carousel-arrow:hover { border-color:var(--brand-orange); background:var(--brand-orange); }.popular-carousel-prev { left:16px; }.popular-carousel-next { right:16px; }
+.popular-carousel-dots { position:absolute; z-index:3; right:0; bottom:17px; left:0; display:flex; justify-content:center; gap:8px; }.popular-carousel-dot { width:9px; height:9px; padding:0; border:0; border-radius:50px; background:rgba(255,255,255,.45); cursor:pointer; transition:width .2s ease,background .2s ease; }.popular-carousel-dot.is-active { width:26px; background:var(--brand-orange); }
+.explore-bikes-title { margin:34px 0 16px; color:var(--brand-navy); font-size:1.25rem; letter-spacing:-.02em; }
+#featured-products-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+@media(max-width:900px) { .popular-carousel,.popular-carousel-track { min-height:350px; }.popular-slide { grid-template-columns:1fr 1fr; gap:20px; padding:32px 58px 44px; }.popular-slide-image { height:290px; } #featured-products-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:640px) { .popular-carousel,.popular-carousel-track { min-height:0; }.popular-carousel { border-radius:15px; }.popular-slide { grid-template-columns:1fr; gap:0; padding:20px 24px 54px; }.popular-slide-image-wrap { min-height:0; height:clamp(160px,48vw,230px); }.popular-slide-image { height:100%; }.popular-slide-copy { padding:8px 2px 0; }.popular-eyebrow { margin-bottom:7px; font-size:.65rem; }.popular-slide-copy h3 { margin-bottom:8px; font-size:clamp(1.65rem,7vw,2.15rem); }.popular-product-name { font-size:.96rem; }.popular-description { margin-bottom:10px; font-size:.82rem; }.popular-price { gap:7px; margin-bottom:12px; }.popular-price strong { font-size:1.35rem; }.popular-shop-btn { min-height:44px; }.popular-carousel-arrow { top:clamp(85px,24vw,118px); width:36px; height:36px; }.popular-carousel-prev { left:8px; }.popular-carousel-next { right:8px; }.popular-carousel-dots { bottom:12px; } #featured-products-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } }
+@media(prefers-reduced-motion:reduce) { .popular-slide,.popular-carousel-dot,.popular-shop-btn { transition:none; } }
+
+
+/* Brand spotlight carousel */
+.featured-brands-intro { margin:-12px 0 20px; color:var(--brand-muted); font-size:.94rem; }
+.popular-carousel { min-height:410px; border-radius:22px; background:#101827; }
+.popular-carousel-track { min-height:410px; }
+.popular-slide { grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr); gap:clamp(18px,4vw,54px); padding:clamp(28px,4vw,54px) clamp(60px,7vw,88px) 54px; overflow:hidden; background:linear-gradient(110deg,rgba(8,19,34,.98) 0%,rgba(8,19,34,.92) 38%,rgba(8,19,34,.4) 72%,rgba(8,19,34,.08) 100%),radial-gradient(ellipse at 78% 48%,var(--ad-glow,rgba(244,119,33,.4)),transparent 53%),#101827; }
+.popular-slide--caya { --ad-glow:rgba(255,187,45,.35); }.popular-slide--hero { --ad-glow:rgba(236,51,56,.35); }.popular-slide--hercules { --ad-glow:rgba(52,132,218,.34); }.popular-slide--alpha { --ad-glow:rgba(180,191,203,.26); }.popular-slide--addo { --ad-glow:rgba(252,125,53,.34); }.popular-slide--avrox { --ad-glow:rgba(240,94,35,.34); }.popular-slide--lotus { --ad-glow:rgba(149,73,199,.32); }.popular-slide--bla { --ad-glow:rgba(218,38,47,.37); }.popular-slide--coco { --ad-glow:rgba(38,174,166,.32); }.popular-slide--bsa { --ad-glow:rgba(192,49,50,.32); }
+.popular-slide-copy { position:relative; z-index:1; max-width:460px; }
+.popular-brand-row { display:flex; align-items:center; min-height:44px; margin-bottom:16px; }
+.popular-brand-logo { display:block; width:auto; max-width:170px; height:42px; object-fit:contain; object-position:left center; filter:drop-shadow(0 2px 9px rgba(0,0,0,.28)); }
+.popular-brand-fallback { display:none; color:#fff; font-size:1.35rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }.popular-brand-row.logo-unavailable .popular-brand-fallback { display:block; }
+.popular-eyebrow { margin-bottom:9px; }
+.popular-slide-copy h3 { max-width:430px; margin-bottom:11px; font-size:clamp(2rem,4vw,3.35rem); }
+.popular-quote { margin:0 0 17px; color:#e6edf5; font-size:1rem; font-style:italic; }
+.popular-price { align-items:center; gap:10px; margin:0 0 15px; }.popular-price-label { color:#cbd4df; font-size:.82rem; }.popular-price strong { display:inline-block; padding:4px 12px; border-radius:7px; color:#101827; background:#ffb02e; font-size:1.36rem; }.popular-price-unavailable { padding:5px 11px; border-radius:7px; color:#fff; background:rgba(255,255,255,.15); font-size:.94rem; font-weight:750; }
+.popular-benefits { display:flex; flex-wrap:wrap; gap:7px 14px; padding:0; margin:0 0 19px; list-style:none; }.popular-benefits li { display:flex; align-items:center; gap:6px; color:#e0e7ef; font-size:.76rem; line-height:1.3; }.popular-benefits li::before { content:'✓'; color:#ff9b48; font-weight:900; }
+.popular-shop-btn { min-width:145px; min-height:48px; }
+.popular-slide-photo { position:relative; display:grid; align-items:center; justify-items:center; min-width:0; height:100%; min-height:292px; border-radius:15px; background:radial-gradient(ellipse,rgba(255,255,255,.13),rgba(255,255,255,0) 70%); }
+.popular-slide-image { width:100%; height:clamp(245px,30vw,330px); object-fit:contain; filter:drop-shadow(0 20px 22px rgba(0,0,0,.42)); }
+.popular-slide-model { position:absolute; right:8px; bottom:0; padding:4px 9px; border-radius:20px; color:#e3eaf1; background:rgba(4,15,28,.55); font-size:.7rem; }
+.popular-carousel-arrow { top:auto; bottom:16px; transform:none; }.popular-carousel-prev { left:18px; }.popular-carousel-next { right:18px; }
+.popular-carousel-dots { bottom:30px; gap:7px; }.popular-carousel-dot { width:8px; height:8px; }.popular-carousel-dot.is-active { width:24px; }
+.popular-slide.reduce-motion,.reduce-motion .popular-slide { transition:none!important; }
+@media(max-width:800px) { .popular-carousel,.popular-carousel-track { min-height:370px; }.popular-slide { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); padding:28px 56px 55px; gap:16px; }.popular-slide-photo { min-height:260px; }.popular-slide-image { height:270px; }.popular-brand-logo { max-width:145px; height:36px; }.popular-slide-copy h3 { font-size:clamp(1.75rem,4vw,2.55rem); } }
+@media(max-width:600px) { .featured-brands-intro { margin:-10px 0 15px; font-size:.84rem; }.popular-carousel,.popular-carousel-track { min-height:0; }.popular-carousel { border-radius:16px; }.popular-slide { grid-template-columns:1fr; gap:4px; padding:18px 22px 62px; background:linear-gradient(180deg,rgba(8,19,34,.94),rgba(8,19,34,.7) 56%,rgba(8,19,34,.94)),radial-gradient(ellipse at 52% 36%,var(--ad-glow,rgba(244,119,33,.4)),transparent 59%),#101827; }.popular-brand-row { min-height:32px; margin-bottom:8px; }.popular-brand-logo { height:30px; max-width:124px; }.popular-brand-fallback { font-size:1.1rem; }.popular-eyebrow { margin-bottom:6px; font-size:.63rem; }.popular-slide-copy h3 { margin-bottom:5px; font-size:clamp(1.6rem,7.2vw,2.2rem); }.popular-quote { margin-bottom:9px; font-size:.86rem; }.popular-price { margin-bottom:9px; }.popular-price strong { font-size:1.18rem; }.popular-benefits { gap:5px 10px; margin-bottom:10px; }.popular-benefits li { font-size:.69rem; }.popular-shop-btn { min-height:44px; }.popular-slide-photo { min-height:0; height:clamp(155px,48vw,220px); order:-1; margin-bottom:4px; }.popular-slide-image { height:100%; }.popular-slide-model { right:2px; bottom:0; font-size:.62rem; }.popular-carousel-arrow { top:clamp(88px,26vw,122px); bottom:auto; width:38px; height:38px; }.popular-carousel-prev { left:8px; }.popular-carousel-next { right:8px; }.popular-carousel-dots { bottom:13px; gap:6px; }.popular-carousel-dot { width:7px; height:7px; }.popular-carousel-dot.is-active { width:20px; } }
+@media(prefers-reduced-motion:reduce) { .popular-slide,.popular-carousel-dot,.popular-shop-btn { transition:none!important; } }
+
+/* Larger tap targets for brand carousel dots */
+.popular-carousel-dots { gap:3px; }
+.popular-carousel-dot { position:relative; display:grid; place-items:center; flex:0 0 23px; width:23px; height:28px; background:transparent; }
+.popular-carousel-dot::before { content:''; display:block; width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.5); transition:width .2s ease,background .2s ease; }
+.popular-carousel-dot.is-active::before { width:20px; border-radius:10px; background:var(--brand-orange); }
+@media(max-width:600px) { .popular-carousel-dot { flex-basis:23px; width:23px; height:30px; } .popular-carousel-dot.is-active::before { width:18px; } }
+
+.popular-carousel-dot.is-active { width:23px; background:transparent; }
+@media(max-width:600px) { .popular-carousel-dot.is-active { width:23px; } }
+
+/* Keep Explore More Bikes in a single horizontal row */
+#featured-products-grid { display:flex; flex-wrap:nowrap; gap:14px; overflow-x:auto; overflow-y:hidden; padding:2px 2px 14px; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; }
+#featured-products-grid > .product-card { flex:0 0 clamp(220px,22vw,260px); min-width:0; scroll-snap-align:start; }
+#featured-products-grid .whatsapp-card-btn > span { display:inline!important; }
+@media(max-width:600px) { #featured-products-grid { gap:10px; } #featured-products-grid > .product-card { flex-basis:min(76vw,260px); } }
+
+/* Match the wide split-banner proportions in the supplied reference */
+.popular-carousel { min-height:clamp(420px,52vw,620px); border-radius:20px; background:#101827; }
+.popular-carousel-track { min-height:inherit; }
+.popular-slide { grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:clamp(28px,5vw,74px); padding:clamp(38px,5vw,66px) clamp(64px,7vw,92px) 70px; background:linear-gradient(100deg,rgba(8,19,34,.97) 0%,rgba(8,19,34,.88) 36%,rgba(8,19,34,.22) 70%,rgba(8,19,34,.04) 100%),radial-gradient(ellipse at 80% 48%,var(--ad-glow,rgba(244,119,33,.4)),transparent 54%),#101827; }
+.popular-slide.is-active { position:relative; }
+.popular-slide-photo { min-height:350px; background:radial-gradient(ellipse,rgba(255,255,255,.17),rgba(255,255,255,0) 70%); }
+.popular-slide-image { height:clamp(300px,35vw,430px); }
+@media(max-width:800px) { .popular-carousel { min-height:clamp(420px,58vw,500px); } .popular-carousel-track { min-height:inherit; } .popular-slide { padding:32px 56px 68px; gap:20px; } .popular-slide-photo { min-height:300px; } .popular-slide-image { height:clamp(280px,37vw,360px); } }
+@media(max-width:600px) { .popular-carousel { min-height:0; aspect-ratio:auto; } .popular-carousel-track { position:relative; inset:auto; min-height:0; height:auto; } .popular-slide { position:absolute; } .popular-slide.is-active { position:relative; } .popular-slide-photo { min-height:0; height:clamp(170px,50vw,230px); } .popular-slide-image { height:100%; } }
+
+/* Reference-matched promotional card details */
+.popular-slide { grid-template-rows:minmax(0,1fr) 42px; padding-bottom:64px; }
+.popular-slide-copy { grid-row:1; align-self:center; }
+.popular-slide-photo { grid-row:1; }
+.popular-price strong { border-radius:3px; padding:7px 16px; color:#fff; background:var(--ad-price,#f97316); clip-path:polygon(3% 7%,98% 0,94% 17%,100% 30%,96% 48%,100% 65%,94% 83%,97% 100%,2% 92%,5% 77%,0 62%,4% 43%,0 24%); }
+.popular-slide--caya { --ad-price:#f4c51d; }.popular-slide--hero { --ad-price:#ed1c2e; }.popular-slide--hercules { --ad-price:#1465b5; }.popular-slide--alpha { --ad-price:#f0c722; }.popular-slide--addo { --ad-price:#e82a35; }.popular-slide--avrox { --ad-price:#f47721; }.popular-slide--lotus { --ad-price:#772ba3; }.popular-slide--bla { --ad-price:#e6242e; }.popular-slide--coco { --ad-price:#168e87; }.popular-slide--bsa { --ad-price:#d82935; }
+.popular-benefits { position:absolute; z-index:2; right:72px; bottom:22px; left:32%; display:flex; justify-content:space-around; gap:10px; margin:0; }
+.popular-benefits li { font-size:.73rem; }
+.popular-carousel-arrow { top:50%; bottom:auto; transform:translateY(-50%); }
+.popular-carousel-prev { left:14px; }.popular-carousel-next { right:14px; }
+.popular-carousel-dots { bottom:5px; }
+@media(max-width:800px) { .popular-slide { grid-template-rows:minmax(0,1fr) 40px; padding-bottom:62px; }.popular-benefits { left:28%; right:64px; bottom:20px; gap:7px; }.popular-benefits li { font-size:.66rem; } }
+@media(max-width:600px) { .popular-slide { grid-template-rows:auto; padding-bottom:62px; }.popular-benefits { position:static; display:flex; justify-content:flex-start; gap:5px 10px; margin:0 0 10px; }.popular-benefits li { font-size:.69rem; }.popular-carousel-arrow { top:clamp(88px,26vw,122px); bottom:auto; transform:none; }.popular-carousel-dots { bottom:5px; } }
+
+.popular-slide { min-height:inherit; }
+@media(max-width:600px) { .popular-slide { min-height:0; } }
+
+.popular-shop-btn { background:var(--ad-price,var(--brand-orange)); }
+.popular-shop-btn:hover { background:var(--ad-price,var(--brand-orange)); filter:brightness(.9); }
+.popular-benefits { bottom:44px; }
+@media(max-width:800px) { .popular-benefits { bottom:42px; } }
+
+
+/* PDF artwork carousel: display the supplied page images without editing or cropping */
+.pdf-ad-carousel { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; grid-template-rows:auto 44px; align-items:center; gap:10px; min-height:0; overflow:visible; border:0; border-radius:0; color:inherit; background:transparent; box-shadow:none; }
+.pdf-ad-track { position:relative; grid-column:1 / -1; grid-row:1; width:100%; min-height:0; aspect-ratio:var(--pdf-slide-ratio,1.9 / 1); overflow:hidden; background:transparent; border-radius:0; }
+.pdf-ad-slide { position:absolute; inset:0; display:block; overflow:hidden; opacity:0; visibility:hidden; transition:opacity .38s ease,visibility .38s ease; }
+.pdf-ad-slide.is-active { position:absolute; inset:0; opacity:1; visibility:visible; }
+.pdf-ad-image { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; object-position:center; }
+.pdf-ad-shop-hitbox { position:absolute; z-index:2; left:6%; bottom:6%; width:20%; height:12%; border-radius:30px; background:transparent; }
+.pdf-ad-shop-hitbox:focus-visible { outline:3px solid #fff; outline-offset:2px; background:rgba(255,255,255,.08); }
+.pdf-ad-arrow { position:static; display:grid; place-items:center; width:42px; height:42px; border:1px solid rgba(16,24,39,.2); border-radius:50%; color:#fff; background:#101827; cursor:pointer; transform:none; }
+.pdf-ad-arrow:hover { border-color:#f97316; background:#f97316; }
+.pdf-ad-prev { grid-column:1; grid-row:2; }.pdf-ad-next { grid-column:3; grid-row:2; }
+.pdf-ad-dots { position:static; grid-column:2; grid-row:2; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:7px; min-width:0; }
+.pdf-ad-dot { width:10px; height:10px; padding:0; border:0; border-radius:50%; background:#c4cbd3; cursor:pointer; transition:width .18s ease,background .18s ease; }
+.pdf-ad-dot.is-active { width:26px; border-radius:10px; background:#f97316; }
+@media(max-width:600px) { .pdf-ad-carousel { grid-template-columns:40px minmax(0,1fr) 40px; grid-template-rows:auto 44px; gap:7px; }.pdf-ad-arrow { width:38px; height:38px; }.pdf-ad-dots { gap:5px; }.pdf-ad-dot { width:8px; height:8px; }.pdf-ad-dot.is-active { width:18px; } }
+@media(prefers-reduced-motion:reduce) { .pdf-ad-slide,.pdf-ad-dot { transition:none!important; } }
+
+/* Preserve clarity of the original PDF artwork on large displays */
+.pdf-ad-carousel { width:min(100%,1012px); margin-inline:auto; }
+.pdf-ad-track { image-rendering:auto; }
+.pdf-ad-image { image-rendering:auto; }
+@media(max-width:700px) { .pdf-ad-carousel { width:100%; } }

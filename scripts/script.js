@@ -132,9 +132,45 @@ document.addEventListener('DOMContentLoaded', () => {
         protectedSelectors.forEach(selector => document.querySelectorAll(selector).forEach(element => protectedObserver.observe(element)));
     }
 
+    const popularCarousel=document.getElementById('popular-carousel');
+    const carouselTrack=document.getElementById('popular-carousel-track');
+    const carouselDots=document.getElementById('popular-carousel-dots');
+    if(popularCarousel&&carouselTrack&&carouselDots){
+        const pdfSlides=[
+            {name:'Your Next Ride Starts Here',alt:'City Cycle Mart Your Next Ride Starts Here campaign banner',src:'images/brand-sliders/brand-slide-11.png',ratio:'1017 / 246',width:1017,href:null,ctaBottom:'0%'},
+            {name:'CAYA',alt:'CAYA bicycle advertisement',src:'images/brand-sliders/brand-slide-01.png',ratio:'506 / 268',width:506,href:'brand.html?name=Caya',ctaBottom:'6%'},
+            {name:'Hero Cycles',alt:'Hero Cycles bicycle advertisement',src:'images/brand-sliders/brand-slide-02.png',ratio:'501 / 268',width:501,href:'brand.html?name=Hero',ctaBottom:'6%'},
+            {name:'Hercules',alt:'Hercules bicycle advertisement',src:'images/brand-sliders/brand-slide-03.png',ratio:'504 / 268',width:504,href:'products.html?search=Hercules',ctaBottom:'6%'},
+            {name:'Alpha',alt:'Alpha bicycle advertisement',src:'images/brand-sliders/brand-slide-04.png',ratio:'506 / 238',width:506,href:'brand.html?name=Alpha',ctaBottom:'9%'},
+            {name:'Addo India',alt:'Addo India bicycle advertisement',src:'images/brand-sliders/brand-slide-05.png',ratio:'501 / 238',width:501,href:'brand.html?name=Addo-India',ctaBottom:'9%'},
+            {name:'Avrox',alt:'Avrox bicycle advertisement',src:'images/brand-sliders/brand-slide-06.png',ratio:'504 / 238',width:504,href:'brand.html?name=Avrox',ctaBottom:'9%'},
+            {name:'Lotus',alt:'Lotus bicycle advertisement',src:'images/brand-sliders/brand-slide-07.png',ratio:'506 / 238',width:506,href:'products.html?search=Lotus',ctaBottom:'9%'},
+            {name:'BLA (Bruce)',alt:'BLA Bruce bicycle advertisement',src:'images/brand-sliders/brand-slide-08.png',ratio:'501 / 238',width:501,href:'brand.html?name=Bruce',ctaBottom:'9%'},
+            {name:'Coco',alt:'Coco bicycle advertisement',src:'images/brand-sliders/brand-slide-09.png',ratio:'504 / 238',width:504,href:'brand.html?name=Coco',ctaBottom:'9%'},
+            {name:'BSA',alt:'BSA bicycle advertisement',src:'images/brand-sliders/brand-slide-10.png',ratio:'506 / 246',width:506,href:'brand.html?name=BSA',ctaBottom:'14%'}
+        ];
+        const slides=[];const dots=[];
+        pdfSlides.forEach((item,index)=>{
+            const slide=document.createElement('article');slide.className='pdf-ad-slide'+(index===0?' is-active':'');slide.setAttribute('role','group');slide.setAttribute('aria-roledescription','slide');slide.setAttribute('aria-label',(index+1)+' of '+pdfSlides.length+': '+item.name);slide.setAttribute('aria-hidden',index===0?'false':'true');
+            const image=document.createElement('img');image.className='pdf-ad-image';image.src=item.src;image.alt=item.alt;image.loading=index===0?'eager':'lazy';image.decoding='async';if(index===0)image.fetchPriority='high';slide.appendChild(image);
+            if(item.href){const link=document.createElement('a');link.className='pdf-ad-shop-hitbox';link.href=item.href;link.setAttribute('aria-label','Shop '+item.name+' bicycles');link.style.bottom=item.ctaBottom;slide.appendChild(link);}
+            carouselTrack.appendChild(slide);slides.push(slide);
+            const dot=document.createElement('button');dot.type='button';dot.className='pdf-ad-dot'+(index===0?' is-active':'');dot.setAttribute('aria-label','Show advertisement '+(index+1)+': '+item.name);dot.setAttribute('aria-pressed',index===0?'true':'false');dot.addEventListener('click',()=>showPdfSlide(index,true));carouselDots.appendChild(dot);dots.push(dot);
+        });
+        let activeIndex=0,autoTimer=null;
+        const stopTimer=()=>{if(autoTimer!==null){window.clearInterval(autoTimer);autoTimer=null;}};
+        const startTimer=()=>{stopTimer();if(document.hidden||popularCarousel.matches(':hover')||popularCarousel.contains(document.activeElement))return;autoTimer=window.setInterval(()=>{if(!popularCarousel.isConnected){stopTimer();return;}showPdfSlide(activeIndex+1,false);},3000);};
+        function showPdfSlide(index,manual){activeIndex=(index+slides.length)%slides.length;carouselTrack.style.setProperty('--pdf-slide-ratio',pdfSlides[activeIndex].ratio);popularCarousel.style.setProperty('--pdf-ad-native-width',pdfSlides[activeIndex].width+'px');slides.forEach((slide,i)=>{const active=i===activeIndex;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',active?'false':'true');});dots.forEach((dot,i)=>{const active=i===activeIndex;dot.classList.toggle('is-active',active);dot.setAttribute('aria-pressed',active?'true':'false');});carouselTrack.setAttribute('aria-live',manual?'polite':'off');if(manual)startTimer();}
+        carouselTrack.style.setProperty('--pdf-slide-ratio',pdfSlides[0].ratio);
+        popularCarousel.querySelector('.pdf-ad-prev').addEventListener('click',()=>showPdfSlide(activeIndex-1,true));popularCarousel.querySelector('.pdf-ad-next').addEventListener('click',()=>showPdfSlide(activeIndex+1,true));
+        popularCarousel.addEventListener('mouseenter',stopTimer);popularCarousel.addEventListener('mouseleave',startTimer);popularCarousel.addEventListener('focusin',stopTimer);popularCarousel.addEventListener('focusout',event=>{if(!popularCarousel.contains(event.relatedTarget))startTimer();});
+        let touchStartX=null;popularCarousel.addEventListener('touchstart',event=>{stopTimer();touchStartX=event.changedTouches[0].clientX;},{passive:true});popularCarousel.addEventListener('touchend',event=>{if(touchStartX===null)return;const delta=event.changedTouches[0].clientX-touchStartX;if(Math.abs(delta)>45)showPdfSlide(activeIndex+(delta<0?1:-1),true);else startTimer();touchStartX=null;},{passive:true});
+        popularCarousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();showPdfSlide(activeIndex-1,true);}if(event.key==='ArrowRight'){event.preventDefault();showPdfSlide(activeIndex+1,true);}});document.addEventListener('visibilitychange',startTimer);startTimer();
+    }
+
     const featuredGrid = document.getElementById('featured-products-grid');
     if (featuredGrid && typeof products !== 'undefined' && Array.isArray(products)) {
-        products.slice(0, 4).forEach(product => {
+        products.slice(0, 7).forEach(product => {
             const card = document.createElement('article');
             card.className = 'product-card';
             const enquiry = 'Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.';
@@ -151,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
                 <div class="product-card-actions">
                     <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i><span class="card-action-full">Add to Cart</span><span class="card-action-compact" aria-hidden="true">Cart</span></button>
-                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i><span class="card-action-full">WhatsApp Enquiry</span><span class="card-action-compact" aria-hidden="true">WhatsApp</span></a>
+                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
                     <button type="button" class="btn buy-now-card-btn" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
                     
                 </div>
