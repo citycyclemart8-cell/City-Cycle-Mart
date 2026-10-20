@@ -72,7 +72,10 @@
     <div class="ccm-footer-bottom"><span>© 2026 City Cycle Mart. All rights reserved.</span><span>Ride with us <i class="fas fa-bicycle" aria-hidden="true"></i></span></div>
   </div>
 </footer>
-  <script src="data/products.js"></script><script src="scripts/script.js"></script>
+  <script src="data/products.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/catalog-store.js"></script><script src="scripts/script.js"></script>
   <script>document.getElementById('contact-message-form').addEventListener('submit', function(event) { event.preventDefault(); const name = document.getElementById('contact-name').value.trim(); const phone = document.getElementById('contact-phone').value.trim(); const message = document.getElementById('contact-message').value.trim(); const text = `Hello City Cycle Mart, my name is ${name}.${phone ? ` My phone number is ${phone}.` : ''} ${message}`; window.open(`https://wa.me/917511103323?text=${encodeURIComponent(text)}`, '_blank', 'noopener'); });</script>
 </body>
 </html>

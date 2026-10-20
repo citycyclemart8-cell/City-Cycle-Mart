@@ -216,9 +216,13 @@
 </footer>
 
     <script src="data/products.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/catalog-store.js"></script>
     <script src="scripts/script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.catalogReady;
             const productList = document.getElementById('product-list');
             const filterBtns = document.querySelectorAll('.filter-btn');
 

@@ -168,8 +168,10 @@ document.addEventListener('DOMContentLoaded', () => {
         popularCarousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();showPdfSlide(activeIndex-1,true);}if(event.key==='ArrowRight'){event.preventDefault();showPdfSlide(activeIndex+1,true);}});document.addEventListener('visibilitychange',startTimer);startTimer();
     }
 
-    const featuredGrid = document.getElementById('featured-products-grid');
-    if (featuredGrid && typeof products !== 'undefined' && Array.isArray(products)) {
+    function renderFeaturedProducts() {
+        const featuredGrid = document.getElementById('featured-products-grid');
+        if (!featuredGrid || typeof products === 'undefined' || !Array.isArray(products)) return;
+        featuredGrid.innerHTML = '';
         products.slice(0, 7).forEach(product => {
             const card = document.createElement('article');
             card.className = 'product-card';
@@ -178,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button type="button" class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product" aria-label="Share ${product.name}"><i class="fas fa-share-alt" aria-hidden="true"></i></button>
                 <a class="product-card-link" href="product-detail.html?id=${product.id}">
                     ${Number.isFinite(Number(product.mrp)) && Number(product.mrp) > Number(product.price) ? `<span class="product-discount-badge">${Math.round((Number(product.mrp) - Number(product.price)) / Number(product.mrp) * 100)}% off</span>` : ''}
-                    <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                    <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" decoding="async">
                     <div class="product-info">
                         <div class="product-category">${product.category}</div>
                         <h3 class="product-name">${product.name}</h3>
@@ -189,14 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i><span class="card-action-full">Add to Cart</span><span class="card-action-compact" aria-hidden="true">Cart</span></button>
                     <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
                     <button type="button" class="btn buy-now-card-btn" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
-                    
-                </div>
-            `;
+                </div>`;
             card.querySelector('.add-to-cart-card-btn').addEventListener('click', () => Cart.addItem(product));
             card.querySelector('.buy-now-card-btn').addEventListener('click', () => { window.location.href = 'checkout.html?id=' + product.id; });
             featuredGrid.appendChild(card);
         });
     }
+    if (window.catalogReady) window.catalogReady.then(renderFeaturedProducts); else renderFeaturedProducts();
 
     // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
