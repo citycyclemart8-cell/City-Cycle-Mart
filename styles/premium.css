@@ -627,3 +627,7 @@ button, a, [role="button"] { touch-action: manipulation; }
 .pdf-ad-track { image-rendering:auto; }
 .pdf-ad-image { image-rendering:auto; }
 @media(max-width:700px) { .pdf-ad-carousel { width:100%; } }
+
+
+/* Home featured cards keep the full Add to Cart label on mobile. */
+@media(max-width:600px){#featured-products-grid .product-card-actions > .add-to-cart-card-btn::after{content:"Add to Cart";font-size:.56rem;line-height:1.1}}

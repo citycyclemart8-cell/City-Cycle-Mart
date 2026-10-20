@@ -8,6 +8,7 @@
   let client;
   let catalog = [];
   let editing = null;
+  let gallerySlides = [];
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const say = (message, error = false) => { notice.textContent = message; notice.classList.toggle('error', error); notice.hidden = false; };
   const errorText = (error) => error?.message || 'Something went wrong. Please try again.';
@@ -46,12 +47,28 @@
   }
   function clearForm() {
     editing = null;
+    gallerySlides = [];
     form.reset();
     form.elements.id.value = '';
     form.elements.extra.value = '';
+    $('#photo').value = '';
     $('#form-title').textContent = 'Add a product';
     $('#delete-button').hidden = true;
+    renderGallery();
     renderList();
+  }
+  function renderGallery() {
+    const mainUrl = form.elements.image.value.trim();
+    const photos = mainUrl ? [mainUrl, ...gallerySlides.filter(url => url !== mainUrl)] : gallerySlides.slice();
+    $('#gallery-count').textContent = `${photos.length} ${photos.length === 1 ? 'photo' : 'photos'}`;
+    $('#gallery-preview').innerHTML = photos.length ? photos.map((url, index) => `<div class="gallery-photo"><img src="${escapeHtml(url)}" alt="Product photo ${index + 1}" loading="lazy"><span class="main-tag">${index === 0 ? 'Main image' : `Photo ${index + 1}`}</span><button type="button" data-photo-index="${index}" aria-label="Remove photo ${index + 1}">×</button></div>`).join('') : '<div class="gallery-photo empty-preview">No photos added yet</div>';
+    $('#gallery-preview').querySelectorAll('button[data-photo-index]').forEach(button => button.addEventListener('click', () => {
+      const index = Number(button.dataset.photoIndex);
+      const url = photos[index];
+      gallerySlides = gallerySlides.filter(item => item !== url);
+      if (form.elements.image.value.trim() === url) form.elements.image.value = gallerySlides[0] || '';
+      renderGallery();
+    }));
   }
   function choose(id) {
     editing = catalog.find(p => Number(p.id) === id) || null;
@@ -63,10 +80,13 @@
     form.elements.price.value = editing.price ?? '';
     form.elements.mrp.value = editing.mrp ?? '';
     form.elements.image.value = /^https?:\/\//i.test(editing.image || '') ? editing.image : '';
+    gallerySlides = Array.isArray(editing.slides) ? editing.slides.filter(url => typeof url === 'string' && url) : [];
+    if (editing.image && !gallerySlides.includes(editing.image)) gallerySlides.unshift(editing.image);
+    renderGallery();
     form.elements.description.value = editing.description || '';
     form.elements.features.value = Array.isArray(editing.features) ? editing.features.join('\n') : '';
     form.elements.specs.value = JSON.stringify(editing.specs || {}, null, 2);
-    const known = new Set(['id','name','brand','category','price','mrp','image','description','features','specs']);
+    const known = new Set(['id','name','brand','category','price','mrp','image','slides','description','features','specs']);
     form.elements.extra.value = JSON.stringify(Object.fromEntries(Object.entries(editing).filter(([key]) => !known.has(key))), null, 2);
     $('#form-title').textContent = `Edit: ${editing.name || 'product'}`;
     $('#delete-button').hidden = false;
@@ -93,20 +113,28 @@
   $('#product-search').addEventListener('input', renderList);
 
   $('#photo').addEventListener('change', async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (!/^image\/(jpeg|png|webp|avif)$/.test(file.type) || file.size > 6 * 1024 * 1024) { say('Choose a JPG, PNG, WebP or AVIF image under 6 MB.', true); event.target.value = ''; return; }
-    const ext = ({'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/avif':'avif'})[file.type];
-    const path = `${crypto.randomUUID()}.${ext}`;
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    const invalid = files.find(file => !/^image\/(jpeg|png|webp|avif)$/.test(file.type) || file.size > 6 * 1024 * 1024);
+    if (invalid) { say(`“${invalid.name}” is not a supported image or is larger than 6 MB.`, true); event.target.value = ''; return; }
     try {
-      say('Uploading photo…');
-      const { error } = await client.storage.from('product-images').upload(path, file, {contentType:file.type, upsert:false});
-      if (error) throw error;
-      const { data } = client.storage.from('product-images').getPublicUrl(path);
-      form.elements.image.value = data.publicUrl;
-      say('Photo uploaded. Save the product to publish it.');
-    } catch (error) { say(errorText(error), true); }
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const ext = ({'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/avif':'avif'})[file.type];
+        const path = `${crypto.randomUUID()}.${ext}`;
+        say(`Uploading photo ${i + 1} of ${files.length}…`);
+        const { error } = await client.storage.from('product-images').upload(path, file, {contentType:file.type, upsert:false});
+        if (error) throw error;
+        const { data } = client.storage.from('product-images').getPublicUrl(path);
+        if (!gallerySlides.includes(data.publicUrl)) gallerySlides.push(data.publicUrl);
+        if (gallerySlides.length === 1) form.elements.image.value = data.publicUrl;
+      }
+      renderGallery();
+      say(`${files.length} ${files.length === 1 ? 'photo uploaded' : 'photos uploaded'}. Save the product to publish the gallery.`);
+    } catch (error) { renderGallery(); say(errorText(error), true); }
+    finally { event.target.value = ''; }
   });
+  form.elements.image.addEventListener('input', renderGallery);
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -121,15 +149,17 @@
       if (!extras || Array.isArray(extras) || typeof extras !== 'object') throw new Error('Other product data must be a JSON object.');
       if (!specs || Array.isArray(specs) || typeof specs !== 'object') throw new Error('Specifications must be a JSON object.');
       const id = editing ? Number(editing.id) : (Math.max(0, ...catalog.map(p => Number(p.id) || 0)) + 1);
+      let slides = gallerySlides.slice();
+      const enteredImage = String(values.get('image')).trim();
+      if (enteredImage) slides = [enteredImage, ...slides.filter(url => url !== enteredImage)];
+      const mainImage = enteredImage || slides[0] || editing?.image || '';
+      if (mainImage && !slides.includes(mainImage)) slides.unshift(mainImage);
       const product = {...(editing || {}), ...extras, id,
         name:String(values.get('name')).trim(), brand:String(values.get('brand')).trim(), category:String(values.get('category')).trim(),
         price:Number(values.get('price')), mrp:values.get('mrp') === '' ? Number(values.get('price')) : Number(values.get('mrp')),
-        image:String(values.get('image')).trim(), description:String(values.get('description')).trim(),
+        image:mainImage, slides, description:String(values.get('description')).trim(),
         features:String(values.get('features')).split('\n').map(s => s.trim()).filter(Boolean), specs};
       if (!product.image) throw new Error('Add a photo URL or upload a product photo.');
-      if (editing && !form.elements.image.value && editing.image) product.image = editing.image;
-      if (!editing) product.slides = [product.image];
-      else if (product.image !== editing.image) product.slides = [product.image];
       const { error } = await client.from('products').upsert({id, data:product, updated_at:new Date().toISOString()});
       if (error) throw error;
       await loadCatalog();
