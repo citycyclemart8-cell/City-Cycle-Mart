@@ -479,5 +479,26 @@ button, a, [role="button"] { touch-action: manipulation; }
 .product-card { position:relative; }
 .product-discount-badge { position:absolute; z-index:4; top:10px; left:10px; padding:5px 8px; border-radius:5px; color:#8f3d00; background:#fff1d8; font-size:.72rem; font-weight:800; line-height:1.2; pointer-events:none; }
 @media(min-width:481px) and (max-width:900px) { .product-grid,#featured-products-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; } }
-@media(max-width:600px) { .product-grid,#featured-products-grid { grid-template-columns:minmax(0,1fr)!important; gap:12px!important; } .product-card-actions > .btn { font-size:.82rem!important; } }
+@media(max-width:600px) {
+  .product-grid,#featured-products-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:8px!important; }
+  .product-card { min-width:0; height:100%; }
+  .product-card-link { display:flex; flex:1 1 auto; flex-direction:column; min-width:0; }
+  .product-card-link > .product-image { width:100%; height:clamp(100px,31vw,145px)!important; padding:6px; object-fit:contain; }
+  .product-card .product-info { display:flex; flex:1 1 auto; flex-direction:column; min-width:0; gap:3px; padding:9px 8px 10px!important; }
+  .product-card .product-category { font-size:.6rem; line-height:1.25; }
+  .product-card .product-name { display:block; min-height:2.5em; margin:0 0 4px; overflow:visible; font-size:.78rem; line-height:1.25; overflow-wrap:anywhere; -webkit-line-clamp:unset; }
+  .product-card .product-price-row { margin-top:auto; gap:3px 6px; }
+  .product-card .product-price-row .product-price { font-size:.92rem; }
+  .product-card .product-price-row .product-mrp { font-size:.65rem; }
+  .product-discount-badge { top:6px; left:6px; padding:4px 6px; font-size:.6rem; }
+  .product-card .share-btn-card { top:6px; right:6px; width:32px; height:32px; }
+  .product-card-actions { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:5px!important; padding:0 8px 8px!important; }
+  .product-card-actions > .btn { min-height:44px!important; padding:4px 3px!important; }
+  .product-card-actions > .btn:not(.buy-now-card-btn) { flex-direction:column; gap:1px; font-size:0!important; }
+  .product-card-actions > .btn:not(.buy-now-card-btn) > i { font-size:.82rem; line-height:1; }
+  .product-card-actions > .add-to-cart-card-btn::after { content:"Cart"; font-size:.56rem; line-height:1.1; }
+  .product-card-actions > .whatsapp-card-btn::after { content:"WhatsApp"; font-size:.53rem; line-height:1.1; }
+  .product-card-actions > .buy-now-card-btn { grid-column:1/-1; font-size:.72rem!important; }
+  .product-card-actions > .buy-now-card-btn > i { font-size:.8rem; }
+}
 

@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'product-card';
             const enquiry = 'Hi City Cycle Mart, I am interested in the ' + product.name + '. Please share the price and availability.';
             card.innerHTML = `
+                <button type="button" class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product" aria-label="Share ${product.name}"><i class="fas fa-share-alt" aria-hidden="true"></i></button>
                 <a class="product-card-link" href="product-detail.html?id=${product.id}">
                     ${Number.isFinite(Number(product.mrp)) && Number(product.mrp) > Number(product.price) ? `<span class="product-discount-badge">${Math.round((Number(product.mrp) - Number(product.price)) / Number(product.mrp) * 100)}% off</span>` : ''}
                     <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
@@ -149,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </a>
                 <div class="product-card-actions">
-                    <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
-                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                    <button type="button" class="btn add-to-cart-card-btn" title="Add ${product.name} to cart" aria-label="Add ${product.name} to cart"><i class="fas fa-cart-plus" aria-hidden="true"></i><span class="card-action-full">Add to Cart</span><span class="card-action-compact" aria-hidden="true">Cart</span></button>
+                    <a class="btn whatsapp-card-btn" href="https://wa.me/917511103323?text=${encodeURIComponent(enquiry)}" target="_blank" rel="noopener" aria-label="WhatsApp ${product.name}"><i class="fab fa-whatsapp" aria-hidden="true"></i><span class="card-action-full">WhatsApp Enquiry</span><span class="card-action-compact" aria-hidden="true">WhatsApp</span></a>
                     <button type="button" class="btn buy-now-card-btn" title="Buy ${product.name} now" aria-label="Buy ${product.name} now"><i class="fas fa-bolt" aria-hidden="true"></i> Buy Now</button>
                     
                 </div>

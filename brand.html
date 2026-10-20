@@ -106,6 +106,7 @@
                         const card = document.createElement('div');
                         card.className = 'product-card';
                         card.innerHTML = `
+                            <button type="button" class="share-btn-card" onclick="Share.product(products.find(p => p.id === ${product.id}), event)" title="Share Product" aria-label="Share ${product.name}"><i class="fas fa-share-alt" aria-hidden="true"></i></button>
                                                         <a class="product-card-link" href="product-detail.html?id=${product.id}">
                                 ${Number.isFinite(Number(product.mrp)) && Number(product.mrp) > Number(product.price) ? `<span class="product-discount-badge">${Math.round((Number(product.mrp) - Number(product.price)) / Number(product.mrp) * 100)}% off</span>` : ''}
                                 <img src="${product.image}" alt="${product.name}" class="product-image">
