@@ -19,6 +19,6 @@ After setup, use **Import bundled catalog** in the admin page once. It copies th
 
 ## Editing products
 
-Use `/admin.html` to add a bicycle or accessory, edit its details/prices, upload one or more photos, or remove a product. The first gallery photo is used as the main catalog image; the product detail page shows all gallery photos in its image slider. Changes are saved directly to Supabase and appear on the storefront after its next page load; GitHub Pages does not need a new deployment for catalog edits. Use a fresh page load to see changes in an already-open storefront tab.
+Use `/admin.html` to add a bicycle or accessory, edit its details/prices, upload one or more photos, add colour options with their own photos, or remove a product. The first gallery photo is used as the main catalog image; each colour option has a separate photo slider on the product detail page. Add at least two named colour options to show the colour selector. Changes are saved directly to Supabase and appear on the storefront after its next page load; GitHub Pages does not need a new deployment for catalog edits. Use a fresh page load to see changes in an already-open storefront tab.
 
 Admin accounts are powerful: every authenticated user can edit/delete all products and manage images. Keep public sign-ups disabled and invite only trusted admins. This client-side setup intentionally uses Supabase Auth and RLS, with no server secret in the browser.
