@@ -375,7 +375,7 @@
                         </div>
                         <p id="delivery-info-text"
                             style="font-size: 0.8rem; color: #666; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
-                            * Delivery is free within 50 km of the shop. Beyond 50 km, delivery is calculated at ₹5/km.
+                            * Delivery is free up to 50 km from the shop. Only the distance beyond 50 km is charged at ₹5/km.
                         </p>
                     </div>
 
@@ -595,7 +595,8 @@
                 if (requestId !== deliveryRequestId) return;
 
                 calculatedDistance = Math.round(distance * 10) / 10;
-                deliveryCharge = distance <= FREE_DELIVERY_RADIUS_KM ? 0 : distance * CHARGE_PER_KM;
+                const chargeableDistance = Math.max(0, calculatedDistance - FREE_DELIVERY_RADIUS_KM);
+                deliveryCharge = Math.round(chargeableDistance * CHARGE_PER_KM * 100) / 100;
 
                 document.getElementById('delivery-row').style.display = 'flex';
                 document.getElementById('distance-val').textContent = calculatedDistance;
@@ -863,8 +864,9 @@
                 if (shareLocation) {
                     if (locationUrl) {
                         message += `\n*Delivery & Location*\n`;
-                        message += `Distance: ${calculatedDistance} km\n`;
-                        message += `Delivery Charge: ₹${deliveryCharge}\n`;
+                        message += `Distance from shop: ${calculatedDistance} km\n`;
+                        message += `Chargeable distance beyond 50 km: ${Math.max(0, calculatedDistance - FREE_DELIVERY_RADIUS_KM).toFixed(1)} km\n`;
+                        message += `Delivery Charge: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n`;
                         message += `Location (Map): ${locationUrl}\n`;
                     } else {
                         message += `\n*Note: Customer will share live location manually*\n`;
@@ -889,7 +891,7 @@
                         message += `*Delivery: ₹${deliveryCharge.toLocaleString('en-IN', { minimumFractionDigits: 2 })}*\n`;
                     }
                 } else if (!isAccessoryOnly && shareLocation && locationUrl) {
-                    message += `*Delivery: FREE (within 50 km)*\n`;
+                    message += `*Delivery: FREE (up to 50 km)*\n`;
                 }
                 if (Math.abs(roundOff) > 0.001) message += `*Round Off: ${(roundOff > 0 ? '+' : '')}${roundOff.toFixed(2)}*\n`;
                 message += `*TOTAL PAYABLE: ₹${finalTotal.toLocaleString('en-IN')}*\n`;

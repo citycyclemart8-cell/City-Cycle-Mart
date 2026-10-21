@@ -619,11 +619,11 @@ button, a, [role="button"] { touch-action: manipulation; }
 .pdf-ad-dots { position:static; grid-column:2; grid-row:2; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:7px; min-width:0; }
 .pdf-ad-dot { width:10px; height:10px; padding:0; border:0; border-radius:50%; background:#c4cbd3; cursor:pointer; transition:width .18s ease,background .18s ease; }
 .pdf-ad-dot.is-active { width:26px; border-radius:10px; background:#f97316; }
-@media(max-width:600px) { .pdf-ad-carousel { grid-template-columns:40px minmax(0,1fr) 40px; grid-template-rows:auto 44px; gap:7px; }.pdf-ad-arrow { width:38px; height:38px; }.pdf-ad-dots { gap:5px; }.pdf-ad-dot { width:8px; height:8px; }.pdf-ad-dot.is-active { width:18px; } }
+@media(max-width:600px) { .pdf-ad-carousel { grid-template-columns:40px minmax(0,1fr) 40px; grid-template-rows:auto minmax(44px,auto); gap:7px; }.pdf-ad-arrow { width:38px; height:38px; }.pdf-ad-dots { gap:5px; }.pdf-ad-dot { width:8px; height:8px; }.pdf-ad-dot.is-active { width:18px; } }
 @media(prefers-reduced-motion:reduce) { .pdf-ad-slide,.pdf-ad-dot { transition:none!important; } }
 
 /* Preserve clarity of the original PDF artwork on large displays */
-.pdf-ad-carousel { width:min(100%,1012px); margin-inline:auto; }
+.pdf-ad-carousel { width:100%; margin-inline:auto; }
 .pdf-ad-track { image-rendering:auto; }
 .pdf-ad-image { image-rendering:auto; }
 @media(max-width:700px) { .pdf-ad-carousel { width:100%; } }
@@ -631,3 +631,52 @@ button, a, [role="button"] { touch-action: manipulation; }
 
 /* Home featured cards keep the full Add to Cart label on mobile. */
 @media(max-width:600px){#featured-products-grid .product-card-actions > .add-to-cart-card-btn::after{content:"Add to Cart";font-size:.56rem;line-height:1.1}}
+
+@media(max-width:600px) { .shop-by-category .section-heading { margin-bottom:8px; } }
+
+@media(max-width:600px) {
+  #featured-products-grid > .product-card { flex-basis:min(60vw,210px); }
+  #featured-products-grid .product-card-link > .product-image { height:clamp(96px,28vw,120px)!important; object-fit:contain; object-position:center; }
+}
+
+/* Reference styling for the Explore More Bikes product carousel only. */
+#featured-products-grid { gap:20px; }
+#featured-products-grid > .product-card { display:flex; flex:0 0 clamp(330px,22vw,405px); flex-direction:column; min-height:440px; overflow:hidden; border:1px solid #dce4ed; border-radius:16px; box-shadow:0 8px 18px rgba(7,29,53,.045); scroll-snap-align:start; }
+#featured-products-grid > .product-card:hover { transform:translateY(-2px); }
+#featured-products-grid .product-card-link { display:flex; flex:1 1 auto; flex-direction:column; min-width:0; }
+#featured-products-grid .product-card-link > .product-image { box-sizing:border-box; display:block; width:100%; height:198px!important; flex:0 0 198px; padding:12px 16px 0; object-fit:contain; object-position:center; background:#fff; }
+#featured-products-grid .product-info { display:flex; flex:1 1 auto; flex-direction:column; gap:8px; min-width:0; padding:12px 18px 16px!important; }
+#featured-products-grid .product-category { display:none; }
+#featured-products-grid .product-name { min-height:2.4em; margin:0; color:#17314b; font-size:1.14rem; font-weight:750; line-height:1.25; }
+#featured-products-grid .product-price-row { gap:5px 10px; margin-top:auto; }
+#featured-products-grid .product-price-row .product-price { font-size:1.38rem; }
+#featured-products-grid .product-price-row .product-mrp { font-size:.88rem; }
+#featured-products-grid .product-discount-badge { top:13px; left:14px; padding:8px 10px; border-radius:7px; font-size:.85rem; }
+#featured-products-grid .product-card-actions { display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important; gap:10px!important; padding:0 15px 14px!important; }
+#featured-products-grid .product-card-actions > .btn { display:flex; grid-column:auto!important; align-items:center; justify-content:center; width:100%; min-height:66px!important; padding:8px!important; border:1px solid #d8e2ec!important; border-radius:10px; color:#102b45!important; background:#fff!important; box-shadow:none!important; font-size:0!important; }
+#featured-products-grid .product-card-actions > .btn:hover { border-color:#b7c7d8!important; background:#f9fbfd!important; transform:translateY(-1px); }
+#featured-products-grid .product-card-actions > .btn > i { font-size:1.28rem!important; }
+#featured-products-grid .product-card-actions > .whatsapp-card-btn { order:1; }
+#featured-products-grid .product-card-actions > .whatsapp-card-btn > i { color:#15965b; }
+#featured-products-grid .product-card-actions > .add-to-cart-card-btn { order:2; }
+#featured-products-grid .product-card-actions > .add-to-cart-card-btn > i { color:#e27b00; }
+#featured-products-grid .product-card-actions > .buy-now-card-btn { order:3; }
+#featured-products-grid .product-card-actions > .buy-now-card-btn > i { color:#102b45; }
+#featured-products-grid .product-card-actions .whatsapp-card-btn > span,
+#featured-products-grid .product-card-actions .card-action-full,
+#featured-products-grid .product-card-actions .card-action-compact { display:none!important; }
+#featured-products-grid .product-card-actions > .btn::after { content:none!important; }
+@media(max-width:900px) and (min-width:601px) {
+  #featured-products-grid > .product-card { flex-basis:clamp(310px,42vw,370px); }
+}
+@media(max-width:600px) {
+  #featured-products-grid { gap:12px; }
+  #featured-products-grid > .product-card { flex-basis:min(86vw,360px); min-height:410px; }
+  #featured-products-grid .product-card-link > .product-image { height:clamp(160px,48vw,190px)!important; flex-basis:clamp(160px,48vw,190px); padding:10px 12px 0; object-fit:contain; }
+  #featured-products-grid .product-info { padding:10px 14px 13px!important; }
+  #featured-products-grid .product-name { min-height:2.4em; font-size:1.02rem; }
+  #featured-products-grid .product-price-row .product-price { font-size:1.2rem; }
+  #featured-products-grid .product-card-actions { gap:8px!important; padding:0 12px 12px!important; }
+  #featured-products-grid .product-card-actions > .btn { min-height:56px!important; }
+  #featured-products-grid .product-discount-badge { top:10px; left:10px; padding:6px 8px; font-size:.76rem; }
+}

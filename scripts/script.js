@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         let activeIndex=0,autoTimer=null;
         const stopTimer=()=>{if(autoTimer!==null){window.clearInterval(autoTimer);autoTimer=null;}};
-        const startTimer=()=>{stopTimer();if(document.hidden||popularCarousel.matches(':hover')||popularCarousel.contains(document.activeElement))return;autoTimer=window.setInterval(()=>{if(!popularCarousel.isConnected){stopTimer();return;}showPdfSlide(activeIndex+1,false);},3000);};
+        const startTimer=()=>{stopTimer();if(document.hidden||popularCarousel.matches(':hover')||popularCarousel.contains(document.activeElement))return;autoTimer=window.setInterval(()=>{if(!popularCarousel.isConnected){stopTimer();return;}showPdfSlide(activeIndex+1,false);},4500);};
         function showPdfSlide(index,manual){activeIndex=(index+slides.length)%slides.length;carouselTrack.style.setProperty('--pdf-slide-ratio',pdfSlides[activeIndex].ratio);popularCarousel.style.setProperty('--pdf-ad-native-width',pdfSlides[activeIndex].width+'px');slides.forEach((slide,i)=>{const active=i===activeIndex;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',active?'false':'true');});dots.forEach((dot,i)=>{const active=i===activeIndex;dot.classList.toggle('is-active',active);dot.setAttribute('aria-pressed',active?'true':'false');});carouselTrack.setAttribute('aria-live',manual?'polite':'off');if(manual)startTimer();}
         carouselTrack.style.setProperty('--pdf-slide-ratio',pdfSlides[0].ratio);
         popularCarousel.querySelector('.pdf-ad-prev').addEventListener('click',()=>showPdfSlide(activeIndex-1,true));popularCarousel.querySelector('.pdf-ad-next').addEventListener('click',()=>showPdfSlide(activeIndex+1,true));
